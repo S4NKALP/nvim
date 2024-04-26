@@ -1,6 +1,6 @@
 <div align = "center">
 
-<h1><a href="https://2kabhishek.github.io/nvim2k">nvim2k</a></h1>
+<h1>nvim</h1>
 
 <a href="https://github.com/S4NKALP/nvim/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/S4NKALP/nvim?style=flat&color=eee&label="> </a>
@@ -12,7 +12,7 @@
 <img alt="Stars" src="https://img.shields.io/github/stars/S4NKALP/nvim?style=flat&color=98c379&label=Stars"></a>
 
 <a href="https://github.com/S4NKALP/nvim/network/members">
-<img alt="Forks" src="https://img.shields.io/github/forks/2kabhishek/nvim?style=flat&color=66a8e0&label=Forks"> </a>
+<img alt="Forks" src="https://img.shields.io/github/forks/S4NKALP/nvim?style=flat&color=66a8e0&label=Forks"> </a>
 
 <a href="https://github.com/S4NKALP/nvim/watchers">
 <img alt="Watches" src="https://img.shields.io/github/watchers/S4NKALP/nvim?style=flat&color=f5d08b&label=Watches"> </a>
