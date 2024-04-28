@@ -115,7 +115,7 @@ To use custom configs create the file `lua/user/init.lua`, you can structure you
 
 #### 🤖 Auto Install
 
-By default nvim2k will auto install a set of LSP servers and null-ls sources using mason, if you want to disable it make sure to add the following to your user module.
+By default nvim will auto install a set of LSP servers and null-ls sources using mason, if you want to disable it make sure to add the following to your user module.
 
 ```lua
 -- lua/user/init.lua
@@ -134,7 +134,7 @@ Example: `local auto_install = require('lib.util').get_user_value('auto_install'
 
 ### 🌈 Inspiration
 
-[Abhishek Keshri](https://github.com/2kabhishek) for his nvim config From where I took the good ideas from his nvim2k repo.
+I have been using vim/neovim for  years now, I wanted to share my config for everyone to use
 
 ### 💡 Challenges/Learnings
 
