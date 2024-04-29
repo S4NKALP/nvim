@@ -385,7 +385,11 @@ local plugins = {
             },
         },
     },
-
+    {
+        'okuuva/auto-save.nvim',
+        event = 'VeryLazy',
+        config = load_config('tools.auto-save'),
+    },
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
