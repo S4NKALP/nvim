@@ -2,20 +2,24 @@ local wilder = require('wilder')
 
 wilder.setup({ modes = { ':', '/', '?' } })
 
-
 wilder.set_option('pipeline', {
-  wilder.branch(
-    wilder.cmdline_pipeline({
-      fuzzy = 1,
-      set_pcre2_pattern = 1,
-    }),
-    wilder.python_search_pipeline({
-      pattern = 'fuzzy',
-    })
-  ),
+    wilder.branch(
+        wilder.python_file_finder_pipeline({
+            file_command = { 'rg', '--files', '--hidden' },
+            dir_command = { 'fd', '-td' },
+            filters = { 'fuzzy_filter', 'difflib_sorter' },
+        }),
+        wilder.cmdline_pipeline({
+            fuzzy = 2,
+        }),
+        wilder.vim_search_pipeline({
+            fuzzy = 2,
+        }),
+        wilder.python_search_pipeline()
+    ),
 })
 
-local accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#F8F8F2' } })
+local accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#00AAFF' } })
 local icons = require('lib.icons')
 
 local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
