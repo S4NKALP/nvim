@@ -4,6 +4,7 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 local opts = { noremap = true, silent = true }
+local icons = require('lib.icons')
 
 -- Space as leader
 map('n', '<Space>', '', opts)
@@ -77,4 +78,34 @@ map('i', '<M-c>', function() return vim.fn['codeium#Clear']() end, { expr = true
 
 map('n', '<leader>e', function()
 	require("oil").toggle_float()
-end)
+end, { desc = icons.documents.OpenFolder .. 'File Explorer' })
+
+map('n', '<leader>ha', function()
+    harpoon:list():append()
+end, { desc = 'Add Mark' })
+map('n', '<leader>hh', function()
+    toggle_telescope(harpoon:list())
+end, { desc = 'Telescope Marks' })
+map('n', '<leader>hm', function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = 'Open UI' })
+
+map('n', '[h', function()
+    harpoon:list():prev()
+end, { desc = 'Prev Mark' })
+map('n', ']h', function()
+    harpoon:list():next()
+end, { desc = 'Next Mark' })
+
+map('n', '<leader>hk', function()
+    harpoon:list():prev()
+end, { desc = 'Prev Mark' })
+map('n', '<leader>hj', function()
+    harpoon:list():next()
+end, { desc = 'Next Mark' })
+
+for i = 1, 9 do
+    map('n', '<leader>h' .. i, function()
+        harpoon:list():select(i)
+    end, { desc = 'Mark ' .. i })
+end
