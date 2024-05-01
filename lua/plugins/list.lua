@@ -50,14 +50,23 @@ local plugins = {
         end,
         cmd = 'Dashboard',
     },
+    --{
+    --    'gelguy/wilder.nvim',
+    --
+    --    build = function()
+    --        vim.cmd([[silent UpdateRemotePlugins]])
+    --    end,
+    --    config = load_config('ui.wilder'),
+    --    keys = { ':', '/', '?' },
+    --},
     {
-        'gelguy/wilder.nvim',
-
-        build = function()
-            vim.cmd([[silent UpdateRemotePlugins]])
-        end,
-        config = load_config('ui.wilder'),
-        keys = { ':', '/', '?' },
+        'folke/noice.nvim',
+        event = 'VimEnter',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            'rcarriga/nvim-notify',
+        },
+        config = load_config('ui.noice'),
     },
     {
         'folke/zen-mode.nvim',

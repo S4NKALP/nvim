@@ -5,7 +5,64 @@ require('luasnip/loaders/from_vscode').lazy_load()
 
 local icons = require('lib.icons')
 local kind_icons = icons.kind
-vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
+
+local max_count = 15
+      local rounded_border = true
+
+      local function border(hl_name)
+         if rounded_border then
+            return {
+               { "╭", hl_name },
+               { "─", hl_name },
+               { "╮", hl_name },
+               { "│", hl_name },
+               { "╯", hl_name },
+               { "─", hl_name },
+               { "╰", hl_name },
+               { "│", hl_name },
+            }
+         else
+            return {
+               { "┌", hl_name },
+               { "─", hl_name },
+               { "┐", hl_name },
+               { "│", hl_name },
+               { "┘", hl_name },
+               { "─", hl_name },
+               { "└", hl_name },
+               { "│", hl_name },
+            }
+         end
+      end
+
+      --   פּ ﯟ   some other good icons
+      local kind_icons = {
+         Text          = "",
+         Method        = "m",
+         Function      = "",
+         Constructor   = "",
+         Field         = "",
+         Variable      = "",
+         Class         = "",
+         Interface     = "",
+         Module        = "",
+         Property      = "",
+         Unit          = "",
+         Value         = "",
+         Enum          = "",
+         Keyword       = "",
+         Snippet       = "",
+         Color         = "",
+         File          = "",
+         Reference     = "",
+         Folder        = "",
+         EnumMember    = "",
+         Constant      = "",
+         Struct        = "",
+         Event         = "",
+         Operator      = "",
+         TypeParameter = "",
+      }
 
 cmp.setup({
     completion = {
@@ -16,6 +73,7 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end,
     },
+
     mapping = {
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -60,12 +118,6 @@ cmp.setup({
         format = function(entry, vim_item)
             -- Kind icons
             vim_item.kind = kind_icons[vim_item.kind]
-
-            if entry.source.name == 'copilot' then
-                vim_item.kind = icons.git.Octoface
-                vim_item.kind_hl_group = 'CmpItemKindCopilot'
-            end
-
             vim_item.menu = ({
                 codeium = '[Codeium]',
                 nvim_lsp = '[LSP]',
@@ -90,16 +142,102 @@ cmp.setup({
     },
     window = {
         documentation = {
-            border = 'rounded',
-            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            border = false,
+            --winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            scrollbar = false,
         },
         completion = {
-            border = 'rounded',
-            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            border = false,
+            --winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            max_height = 15,
+            scrollbar = false,
         },
-        scrollbar = true,
     },
     experimental = {
-        ghost_text = true,
-    },
+        ghost_text = true
+    }
 })
+
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({'/','?'}, {
+         formatting = {
+            fields = { "kind", "abbr" },
+            format = function(entry, vim_item)
+               -- Kind icons
+               vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+               vim_item.menu = ({
+                  buffer = "(buffer)"
+               })[entry.source.name]
+               return vim_item
+            end,
+         },
+         mapping = cmp.mapping.preset.cmdline(),
+         sources = {
+            {
+               name = 'buffer',
+               option = { max_item_count = max_count }
+            }
+         }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+         formatting = {
+            fields = { "kind", "abbr", "menu" },
+            format = function(entry, vim_item)
+               -- Kind icons
+               vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+               vim_item.menu = ({
+                  buffer = "(buffer)",
+                  path = "(path)",
+               })[entry.source.name]
+               return vim_item
+            end,
+         },
+         mapping = cmp.mapping.preset.cmdline(),
+         sources = cmp.config.sources({
+            {
+               name = 'path',
+               option = { max_item_count = 10 }
+            }
+         },
+         {
+            {
+               name = 'cmdline',
+               option = { max_item_count = 10 }
+            }
+         })
+      })
+
+      cmp.setup.filetype("lua", {
+         sources = cmp.config.sources({
+            { name = 'luasnip' }, -- For luasnip users.
+            { name = 'nvim_lsp' },
+            {
+               name = "nvim_lua",
+               option = { max_item_count = max_count }
+            },
+            {
+               name = 'buffer',
+               option = { keyword_length = 1 }
+            },
+            { name = "path" },
+            { name = "orgmode" },
+         }),
+      })
+
+      cmp.setup.filetype("norg", {
+         sources = cmp.config.sources({
+            { name = 'luasnip' }, -- For luasnip users.
+            {
+               name = 'neorg',
+               option = { max_item_count = max_count }
+            },
+            { name = 'buffer', },
+            { name = "path" },
+         })
+      })
+
+
+
+

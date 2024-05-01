@@ -121,6 +121,7 @@ local mappings = {
     Q = { '<cmd>qa!<cr>', icons.ui.Power .. 'Force Quit!' },
     w = { '<cmd>w<cr>', icons.ui.Save .. 'Save' },
     x = { '<cmd>x<cr>', icons.ui.Pencil .. 'Write and Quit' },
+    S = { '<cmd>ASToggle<cr>', icons.ui.Save .. 'AutoSave Toggle' },
     c = {
         name = icons.ui.NeoVim .. 'Config',
         c = { '<cmd>CccConvert<cr>', 'Convert Color' },
@@ -187,6 +188,7 @@ local mappings = {
         q = { '<cmd>Telescope quickfix<cr>', 'Quickfix' },
         s = { '<cmd>Telescope live_grep grep_open_files=true<cr>', 'Find in Open Files' },
         u = { '<cmd>Telescope undo<cr>', 'Undo History' },
+        U = { '<cmd>Telescope colorscheme<cr>', 'Colorscheme' },
         ['"'] = { '<cmd>Telescope registers<cr>', 'Registers' },
         ['.'] = { '<cmd>Telescope symbols<cr>', 'Emojis' },
         [','] = { '<cmd>Nerdy<cr>', 'Nerd Glyphs' },
