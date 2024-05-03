@@ -8,11 +8,11 @@ dressing.setup({
     input = {
         enabled = true,
         default_prompt = 'Input:',
-        prompt_align = 'left',
+        prompt_align = 'center',
         insert_only = true,
         start_in_insert = true,
         border = 'rounded',
-        relative = 'cursor',
+        relative = 'editor',
         prefer_width = 40,
         width = nil,
         max_width = { 140, 0.9 },
@@ -21,7 +21,7 @@ dressing.setup({
     },
     select = {
         enabled = true,
-        backend = { 'telescope', 'fzf_lua', 'fzf', 'nui', 'builtin' },
+        backend = { 'telescope', 'fzf_lua', 'fzf', 'nui', 'builtin'},
         trim_prompt = true,
     },
 })

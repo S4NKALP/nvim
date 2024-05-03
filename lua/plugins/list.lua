@@ -399,6 +399,10 @@ local plugins = {
         event = 'VeryLazy',
         config = load_config('tools.auto-save'),
     },
+    {
+        'CRAG666/code_runner.nvim',
+        config = load_config('tools.code-runner'),
+    },
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
@@ -438,7 +442,7 @@ local plugins = {
     {
         'ruifm/gitlinker.nvim',
         config = load_config('tools.gitlinker'),
-        keys = '<leader>gy',
+        keys = '<leader>yg',
     },
     {
         'lewis6991/gitsigns.nvim',
