@@ -15,6 +15,45 @@ vim.g.maplocalleader = ' '
 -- normal_mode = "n", insert_mode = "i", visual_mode = "v",
 -- visual_block_mode = "x", term_mode = "t", command_mode = "c",
 
+-- Save File
+map({
+    "i",
+    "v",
+    "n",
+    "s"
+}, "<C-s>", "<cmd>w<cr><esc>", {
+    desc = "Save file"
+})
+
+-- ctrl a to selected all text in file
+map({
+    "n",
+    "i",
+    "v"
+}, "<C-a>", "<esc>ggVG")
+
+-- Copy whole file
+map("n", "<C-y>", "<cmd>%y+<CR>", {
+    desc = "Copy whole file"
+})
+
+-- Paste
+map("n", "]p", "o<Esc>p", {
+    desc = "Paste below"
+})
+map("n", "[P", "O<Esc>p", {
+    desc = "Paste above"
+})
+map("i", "<C-v>", '<ESC>"+p<ESC>a', {
+    desc = "Paste from clipboard"
+})
+map({
+    "n",
+    "x"
+}, "<C-c>", '"+y<ESC>', {
+    desc = "Copy to clipboard"
+})
+
 -- Use jj as escape
 map('i', 'jj', '<Esc>', opts)
 map('t', 'JJ', '<C-\\><C-n>', opts)
@@ -75,37 +114,10 @@ map('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, 
 map('i', '<M-c>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 
 
-
+-- Oil Explorer
 map('n', '<leader>e', function()
 	require("oil").toggle_float()
-end, { desc = icons.documents.OpenFolder .. 'File Explorer' })
+end, { desc = icons.documents.OpenFolder .. 'Oil File Explorer' })
 
-map('n', '<leader>ha', function()
-    harpoon:list():append()
-end, { desc = 'Add Mark' })
-map('n', '<leader>hh', function()
-    toggle_telescope(harpoon:list())
-end, { desc = 'Telescope Marks' })
-map('n', '<leader>hm', function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = 'Open UI' })
 
-map('n', '[h', function()
-    harpoon:list():prev()
-end, { desc = 'Prev Mark' })
-map('n', ']h', function()
-    harpoon:list():next()
-end, { desc = 'Next Mark' })
 
-map('n', '<leader>hk', function()
-    harpoon:list():prev()
-end, { desc = 'Prev Mark' })
-map('n', '<leader>hj', function()
-    harpoon:list():next()
-end, { desc = 'Next Mark' })
-
-for i = 1, 9 do
-    map('n', '<leader>h' .. i, function()
-        harpoon:list():select(i)
-    end, { desc = 'Mark ' .. i })
-end
