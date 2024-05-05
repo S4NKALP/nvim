@@ -238,6 +238,8 @@ cmp.setup({
          })
       })
 
-
+require("luasnip.loaders.from_vscode").lazy_load()
+local snippet_path = vim.fn.stdpath("config") .. "/snippets"
+require("luasnip.loaders.from_snipmate").load({ path = { snippet_path } })
 
 

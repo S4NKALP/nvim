@@ -119,5 +119,3 @@ map('n', '<leader>e', function()
 	require("oil").toggle_float()
 end, { desc = icons.documents.OpenFolder .. 'Oil File Explorer' })
 
-
-
