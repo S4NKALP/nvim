@@ -26,7 +26,7 @@ lazy.setup({
     lockfile = vim.fn.stdpath('config') .. '/lua/plugins/lock.json',
     concurrency = 8,
     dev = { path = '~/Projects/GitHub/', patterns = {}, fallback = false },
-    install = { missing = true, colorscheme = { 'dracula' } },
+    install = { missing = true, colorscheme = { 'onedark' } },
 
     git = {
         log = { '--since=3 days ago' },

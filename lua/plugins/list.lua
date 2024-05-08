@@ -7,8 +7,8 @@ end
 local plugins = {
     -- UI
     {
-        'Mofiqul/dracula.nvim',
-        config = load_config('ui.dracula'),
+        'navarasu/onedark.nvim',
+        config = load_config('ui.onedark'),
         lazy = false,
         priority = 1000,
     },
