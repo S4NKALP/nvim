@@ -66,7 +66,12 @@ dashboard.setup({
                 key = 'q',
             },
         },
-        footer = { '', icons.ui.Heart .. ' Happiness is a state of mind. ' .. icons.ui.Heart },
+        footer = function()
+            local info = {}
+            local fortune = require("fortune").get_fortune()
+            local footer = vim.list_extend(info, fortune)
+            return footer
+        end,
     },
 })
 

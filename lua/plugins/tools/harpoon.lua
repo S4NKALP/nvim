@@ -29,7 +29,10 @@ end, { desc = 'Telescope Marks' })
 vim.keymap.set('n', '<leader>hm', function()
     harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = 'Open UI' })
-
+vim.keymap.set('n', '<leader>hd', function()
+    harpoon:list():remove(selected_entry)
+end, { desc = 'Delete Mark' }
+)
 vim.keymap.set('n', '[h', function()
     harpoon:list():prev()
 end, { desc = 'Prev Mark' })

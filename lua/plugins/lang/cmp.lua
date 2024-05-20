@@ -121,6 +121,7 @@ cmp.setup({
             vim_item.menu = ({
                 codeium = '[Codeium]',
                 nvim_lsp = '[LSP]',
+                nvim_lua = '[nvim_lua]',
                 luasnip = '[Snippet]',
                 buffer = '[Buffer]',
                 path = '[Path]',
@@ -142,14 +143,14 @@ cmp.setup({
     },
     window = {
         documentation = {
-            border = false,
-            --winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            border = 'rounded',
+            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+            max_height = 15,
             scrollbar = false,
         },
         completion = {
-            border = false,
-            --winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
-            max_height = 15,
+            border = 'rounded',
+            winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
             scrollbar = false,
         },
     },

@@ -41,6 +41,10 @@ local plugins = {
     },
     {
         'nvimdev/dashboard-nvim',
+        dependencies = {
+            "rubiin/fortune.nvim",
+             config = true,
+        },
         config = load_config('ui.dashboard'),
         -- Only load when no arguments
         event = function()
@@ -195,6 +199,7 @@ local plugins = {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-nvim-lsp',
             'L3MON4D3/LuaSnip',
             'rafamadriz/friendly-snippets',
             'saadparwaiz1/cmp_luasnip',
@@ -213,6 +218,14 @@ local plugins = {
         },
     },
     -- Tools
+    {
+        'akinsho/flutter-tools.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'stevearc/dressing.nvim',
+        },
+        config = load_config('tools.flutter-tools'),
+    },
     {
         'nvim-tree/nvim-tree.lua',
         dependencies = {

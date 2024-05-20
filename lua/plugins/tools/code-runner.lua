@@ -5,6 +5,7 @@ require('code_runner').setup({
       "javac $fileName &&",
       "java $fileNameWithoutExt"
     },
+    dart = "cd $path && dart $fn",
     python = "python3 -u",
     typescript = "deno run",
     rust = {
