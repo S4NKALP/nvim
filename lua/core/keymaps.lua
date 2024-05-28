@@ -60,6 +60,12 @@ map("i", "jk", "<ESC>")
 map("i", "kj", "<ESC>")
 map("i", "jj", "<ESC>")
 
+-- Terminal Mappings
+map("t", "jk", "<C-\\><C-n>")
+map("t", "kj", "<C-\\><C-n>")
+map("t", "<ESC>", "<C-\\><C-n>")
+
+
 -- Visual overwrite paste
 map({ 'v', 'x' }, 'p', '"_dP', opts)
 
@@ -171,6 +177,20 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = tr
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 
+-- Move with shift-arrows
+map("n", "<S-Left>", "<C-w><S-h>", {
+    desc = "Move window to the left"
+})
+map("n", "<S-Down>", "<C-w><S-j>", {
+    desc = "Move window down"
+})
+map("n", "<S-Up>", "<C-w><S-k>", {
+    desc = "Move window up"
+})
+map("n", "<S-Right>", "<C-w><S-l>", {
+    desc = "Move window to the right"
+})
+
 -- Resize window using <ctrl> arrow keys
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
@@ -195,4 +215,34 @@ map('n', '<leader>mu', function()
           require("notify").dismiss({ silent = true, pending = true })
         end, { desc = 'Dismiss All Notifications' })
 
+
+-- Tab management
+--keymap.set("n", "<leader>to", ":tabnew<CR>") -- open a new tab
+--keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
+--keymap.set("n", "<leader>tn", ":tabn<CR>") -- next tab
+--keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
+
+map("n", '<leader>jo', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').organize_imports();
+  end
+end)
+
+map("n", '<leader>ju', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').update_projects_config();
+  end
+end)
+
+map("n", '<leader>jc', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_class();
+  end
+end)
+
+map("n", '<leader>jm', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_nearest_method();
+  end
+end)
 

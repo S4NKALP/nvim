@@ -219,6 +219,16 @@ local plugins = {
     },
     -- Tools
     {
+        'sontungexpt/url-open',
+        cmd = 'URLOpenUnderCursor',
+        config = load_config('tools.url-open'),
+    },
+    {
+        'stevearc/conform.nvim',
+        event = { 'BufReadPre', 'BufNewFile' },
+        config = load_config('tools.conform'),
+    },
+    {
         'akinsho/flutter-tools.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -412,10 +422,6 @@ local plugins = {
         event = 'VeryLazy',
         config = load_config('tools.auto-save'),
     },
-    {
-        'CRAG666/code_runner.nvim',
-        config = load_config('tools.code-runner'),
-    },
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
@@ -471,6 +477,7 @@ local plugins = {
 
 local ts_parsers = {
     'bash',
+    'c',
     'css',
     'dart',
     'elixir',
@@ -480,6 +487,7 @@ local ts_parsers = {
     'java',
     'javascript',
     'json',
+    'kotlin',
     'lua',
     'markdown',
     'markdown_inline', -- markdown code blocks
@@ -500,8 +508,17 @@ local lsp_servers = {
     'bashls',
     'jsonls',
     'lua_ls',
+    'html',
+    'kotlin_language_server',
+    'sqlls',
     'typos_lsp', -- check typos
     'vimls',
+    'volar',
+    'yamlls',
+    'tailwindcss',
+    'cmake',
+    'tsserver',
+    'pylsp',
 }
 
 local util = require('lib.util')
