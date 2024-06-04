@@ -206,7 +206,7 @@ map('i', '<M-c>', function() return vim.fn['codeium#Clear']() end, { expr = true
 
 
 -- Oil Explorer
-map('n', '<leader>e', function()
+map('n', '<leader>E', function()
 	require("oil").toggle_float()
 end, { desc = icons.documents.OpenFolder .. 'Oil File Explorer' })
 

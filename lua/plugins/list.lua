@@ -165,9 +165,8 @@ local plugins = {
         event = { 'BufReadPre', 'BufNewFile' },
     },
     {
-        'folke/neodev.nvim',
-        ft = { 'lua', 'vim' },
-        config = load_config('lang.neodev'),
+        'folke/lazydev.nvim',
+        ft = 'lua',
     },
     {
         'nvimdev/lspsaga.nvim',
@@ -273,30 +272,6 @@ local plugins = {
                     require('flash').treesitter()
                 end,
                 desc = 'Flash Treesitter',
-            },
-            {
-                'r',
-                mode = 'o',
-                function()
-                    require('flash').remote()
-                end,
-                desc = 'Remote Flash',
-            },
-            {
-                'R',
-                mode = { 'o', 'x' },
-                function()
-                    require('flash').treesitter_search()
-                end,
-                desc = 'Treesitter Search',
-            },
-            {
-                '<c-s>',
-                mode = { 'c' },
-                function()
-                    require('flash').toggle()
-                end,
-                desc = 'Toggle Flash Search',
             },
         },
     },
@@ -451,6 +426,12 @@ local plugins = {
         dependencies = { 'stevearc/dressing.nvim' },
         cmd = 'Nerdy',
     },
+    {
+        -- 'chentoast/marks.nvim',
+        '2kabhishek/markit.nvim',
+        config = load_config('tools.marks'),
+        event = { 'BufReadPre', 'BufNewFile' },
+    },
 
     -- Git
     {
@@ -537,7 +518,7 @@ if util.is_present('gem') then
         keys = {
             {
                 '<leader>rc',
-                mode = { 'n', 'x', 'o' },
+                mode = { 'n' },
                 function()
                     vim.cmd('RorCommands')
                 end,

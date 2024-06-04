@@ -161,6 +161,7 @@ telescope.setup({
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('menufacture')
 require('telescope').load_extension('undo')
+telescope.load_extension('marks_nvim')
 require('telescope').load_extension('harpoon')
 require('telescope').load_extension('notify')
 require('telescope').load_extension('noice')
