@@ -25,5 +25,3 @@ onedark.setup({
 })
 onedark.load()
 
-util.set_transparent_bg()
-util.set_custom_highlights()
