@@ -207,7 +207,7 @@ map('i', '<M-c>', function() return vim.fn['codeium#Clear']() end, { expr = true
 
 -- Oil Explorer
 map('n', '<leader>E', function()
-	require("oil").toggle_float()
+require("oil").toggle_float()
 end, { desc = icons.documents.OpenFolder .. 'Oil File Explorer' })
 
 
@@ -221,28 +221,4 @@ map('n', '<leader>mu', function()
 --keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
 --keymap.set("n", "<leader>tn", ":tabn<CR>") -- next tab
 --keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
-
-map("n", '<leader>jo', function()
-  if vim.bo.filetype == 'java' then
-    require('jdtls').organize_imports();
-  end
-end)
-
-map("n", '<leader>ju', function()
-  if vim.bo.filetype == 'java' then
-    require('jdtls').update_projects_config();
-  end
-end)
-
-map("n", '<leader>jc', function()
-  if vim.bo.filetype == 'java' then
-    require('jdtls').test_class();
-  end
-end)
-
-map("n", '<leader>jm', function()
-  if vim.bo.filetype == 'java' then
-    require('jdtls').test_nearest_method();
-  end
-end)
 

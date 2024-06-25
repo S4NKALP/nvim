@@ -1,37 +1,14 @@
 local gitsigns = require('gitsigns')
+local icons = require('lib.icons')
 
 gitsigns.setup({
     signs = {
-        add = {
-            hl = 'GitSignsAdd',
-            text = '│',
-            numhl = 'GitSignsAddNr',
-            linehl = 'GitSignsAddLn',
-        },
-        change = {
-            hl = 'GitSignsChange',
-            text = '│',
-            numhl = 'GitSignsChangeNr',
-            linehl = 'GitSignsChangeLn',
-        },
-        delete = {
-            hl = 'GitSignsDelete',
-            text = '_',
-            numhl = 'GitSignsDeleteNr',
-            linehl = 'GitSignsDeleteLn',
-        },
-        topdelete = {
-            hl = 'GitSignsDelete',
-            text = '‾',
-            numhl = 'GitSignsDeleteNr',
-            linehl = 'GitSignsDeleteLn',
-        },
-        changedelete = {
-            hl = 'GitSignsChange',
-            text = '~',
-            numhl = 'GitSignsChangeNr',
-            linehl = 'GitSignsChangeLn',
-        },
+        add = { text = icons.ui.SeparatorLight },
+        change = { text = icons.ui.SeparatorLight },
+        delete = { text = icons.ui.SeparatorLight },
+        topdelete = { text = icons.ui.Topline },
+        changedelete = { text = icons.ui.SeparatorLight },
+        untracked = { text = icons.ui.SeparatorDashed },
     },
     signcolumn = true,
     numhl = false,
@@ -51,8 +28,7 @@ gitsigns.setup({
     update_debounce = 100,
     status_formatter = nil,
     max_file_length = 40000,
-    preview_config = { border = 'single', style = 'minimal', relative = 'cursor', row = 0, col = 1 },
-    yadm = { enable = false },
+    preview_config = { border = 'rounded', style = 'minimal', relative = 'cursor', row = 0, col = 1 },
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -81,10 +57,6 @@ gitsigns.setup({
             end)
             return '<Ignore>'
         end, { expr = true, desc = 'Previous Change' })
-
-        map('n', '<leader>gB', function()
-            gs.blame_line({ full = true })
-        end, { desc = 'Blame With Preview' })
 
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
     end,

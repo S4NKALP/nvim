@@ -400,7 +400,7 @@ local plugins = {
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
-        branch = 'master',
+        branch = '0.1.x',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {

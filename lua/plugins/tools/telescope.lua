@@ -1,6 +1,5 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
-local multi_open_mappings = require('plugins.tools.telescope-multiopen')
 local icons = require('lib.icons')
 
 local function flash(prompt_bufnr)
@@ -52,11 +51,8 @@ telescope.setup({
         prompt_prefix = icons.ui.Telescope .. icons.ui.ChevronRight,
         selection_caret = icons.ui.Play,
         multi_icon = icons.ui.Check,
-        path_display = {
-            filename_first = {
-                reverse_directories = false,
-            },
-        },
+        path_display = { 'smart' },
+        -- path_display = { filename_first = { reverse_directories = false } },
         sorting_strategy = 'ascending',
 
         mappings = {
@@ -128,11 +124,6 @@ telescope.setup({
                 ['?'] = actions.which_key,
             },
         },
-    },
-    pickers = {
-        find_files = { mappings = multi_open_mappings },
-        git_files = { mappings = multi_open_mappings },
-        oldfiles = { mappings = multi_open_mappings },
     },
     extensions = {
         fzf = {

@@ -2,7 +2,7 @@ local onedark = require('onedark')
 local util = require('lib.util')
 
 onedark.setup({
-    style = 'darker',
+    style = 'deep',
     transparent = true,
     term_colors = false,
     ending_tildes = false,
@@ -24,4 +24,3 @@ onedark.setup({
     diagnostics = { darker = true, undercurl = true, background = false },
 })
 onedark.load()
-

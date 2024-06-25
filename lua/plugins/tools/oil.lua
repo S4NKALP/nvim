@@ -1,4 +1,7 @@
       require("oil").setup({
+        default_file_explorer = true,
+        delete_to_trash = true,
+        skip_confirm_for_simple_edits = true,
         use_default_keymaps = false,
         keymaps = {
           ["q"] = "actions.close",
@@ -19,6 +22,10 @@
           ["h"] = "actions.toggle_hidden",
         },
         view_options = {
+          natural_order = true,
           show_hidden = false,
+        },
+        win_options = {
+          wrap = true,
         },
       })
