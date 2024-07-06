@@ -14,6 +14,23 @@ Sources:
 
 > Leader key is set to `<Space>`.
 
+### a - AI
+
+| Keybinding                         | Action         |
+| ---------------------------------- | -------------- |
+| <key>Leader</key> <key> a c </key> | Copilot Chat   |
+| <key>Leader</key> <key> a d </key> | Docs           |
+| <key>Leader</key> <key> a e </key> | Explain        |
+| <key>Leader</key> <key> a f </key> | Fix            |
+| <key>Leader</key> <key> a F </key> | Fix Diagnostic |
+| <key>Leader</key> <key> a g </key> | Commit         |
+| <key>Leader</key> <key> a G </key> | Commit Staged  |
+| <key>Leader</key> <key> a l </key> | Load Chat      |
+| <key>Leader</key> <key> a o </key> | Optimize       |
+| <key>Leader</key> <key> a r </key> | Review         |
+| <key>Leader</key> <key> a s </key> | Save Chat      |
+| <key>Leader</key> <key> a t </key> | Tests          |
+
 ### b - Debugging
 
 | Keybinding                         | Action        |
@@ -278,6 +295,7 @@ Sources:
 | <key>Leader</key> <key> q d </key> | Delete Buffer  |
 | <key>Leader</key> <key> q f </key> | Force Quit     |
 | <key>Leader</key> <key> q q </key> | Quit           |
+| <key>Leader</key> <key> q s </key> | Close Split    |
 | <key>Leader</key> <key> q w </key> | Write and Quit |
 
 ### r - Refactor
@@ -307,11 +325,14 @@ Sources:
 | Keybinding                         | Action           |
 | ---------------------------------- | ---------------- |
 | <key>Leader</key> <key> s ` </key> | Previous Window  |
-| <key>Leader</key> <key> s - </key> | Split Below      |
 | <key>Leader</key> <key> s \ </key> | Split Right      |
-| <key>Leader</key> <key> s a </key> | Vertical Split   |
+| <key>Leader</key> <key> s / </key> | Split Below      |
+| <key>Leader</key> <key> s - </key> | Decrease Width   |
+| <key>Leader</key> <key> s = </key> | Increase Width   |
+| <key>Leader</key> <key> s _ </key> | Decrease Height  |
+| <key>Leader</key> <key> s + </key> | Increase Height  |
+| <key>Leader</key> <key> s a </key> | Horizontal Split |
 | <key>Leader</key> <key> s c </key> | Close Tab        |
-| <key>Leader</key> <key> s d </key> | Close Window     |
 | <key>Leader</key> <key> s f </key> | First Tab        |
 | <key>Leader</key> <key> s h </key> | Move Left        |
 | <key>Leader</key> <key> s H </key> | Decrease Width   |
@@ -322,7 +343,8 @@ Sources:
 | <key>Leader</key> <key> s l </key> | Move Right       |
 | <key>Leader</key> <key> s L </key> | Increase Width   |
 | <key>Leader</key> <key> s p </key> | Previous Pane    |
-| <key>Leader</key> <key> s s </key> | Horizontal Split |
+| <key>Leader</key> <key> s q </key> | Close Split      |
+| <key>Leader</key> <key> s s </key> | Vertical Split   |
 
 ### t - Terminal
 
@@ -341,10 +363,10 @@ Sources:
 
 | Keybinding                         | Action           |
 | ---------------------------------- | ---------------- |
-| <key>Leader</key> <key> u F </key> | Run Current Test |
-| <key>Leader</key> <key> u f </key> | Run Test         |
+| <key>Leader</key> <key> u c </key> | Run Current Test |
+| <key>Leader</key> <key> u f </key> | Run Test File    |
 | <key>Leader</key> <key> u o </key> | Test Output      |
-| <key>Leader</key> <key> u O </key> | Test Summary     |
+| <key>Leader</key> <key> u s </key> | Test Summary     |
 
 ### v - Select
 
