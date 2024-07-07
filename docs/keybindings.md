@@ -1,6 +1,6 @@
 # nvim Keybindings
 
-Here are all the keybindings defined for nvim2k.
+Here are all the keybindings defined for nvim.
 
 Check out the source code of individual files for more info.
 
