@@ -228,14 +228,6 @@ local plugins = {
         config = load_config('tools.conform'),
     },
     {
-        'akinsho/flutter-tools.nvim',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'stevearc/dressing.nvim',
-        },
-        config = load_config('tools.flutter-tools'),
-    },
-    {
         'nvim-tree/nvim-tree.lua',
         dependencies = {
             'nvim-tree/nvim-web-devicons',
