@@ -54,15 +54,6 @@ local plugins = {
         end,
         cmd = 'Dashboard',
     },
-    --{
-    --    'gelguy/wilder.nvim',
-    --
-    --    build = function()
-    --        vim.cmd([[silent UpdateRemotePlugins]])
-    --    end,
-    --    config = load_config('ui.wilder'),
-    --    keys = { ':', '/', '?' },
-    --},
     {
         'folke/noice.nvim',
         event = 'VimEnter',
@@ -96,7 +87,8 @@ local plugins = {
         dependencies = {
             'nvim-neotest/nvim-nio',
             'olimorris/neotest-rspec',
-            'haydenmeade/neotest-jest',
+            'nvim-neotest/neotest-jest',
+            'nvim-neotest/neotest-python',
         },
         config = load_config('lang.neotest'),
         cmd = 'Neotest',
@@ -135,7 +127,10 @@ local plugins = {
         config = load_config('lang.ai'),
         event = { 'BufReadPre', 'BufNewFile' },
     },
-
+    {
+        'alvan/vim-closetag',
+        ft = { "html", "javascriptreact", "typescriptreact" },
+    },
     -- Tresitter
     {
         'nvim-treesitter/nvim-treesitter',
@@ -198,7 +193,6 @@ local plugins = {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-nvim-lsp',
             'L3MON4D3/LuaSnip',
             'rafamadriz/friendly-snippets',
             'saadparwaiz1/cmp_luasnip',
@@ -329,12 +323,6 @@ local plugins = {
         config = load_config('tools.dbee'),
         cmd = 'DBToggle',
         enabled = false,
-    },
-    {
-        'stevearc/oil.nvim',
-        opts = {},
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        config = load_config('tools.oil'),
     },
     {
         'aurum77/live-server.nvim',

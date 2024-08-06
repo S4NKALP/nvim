@@ -205,20 +205,7 @@ map('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, 
 map('i', '<M-c>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 
 
--- Oil Explorer
-map('n', '<leader>E', function()
-require("oil").toggle_float()
-end, { desc = icons.documents.OpenFolder .. 'Oil File Explorer' })
-
-
 map('n', '<leader>mu', function()
           require("notify").dismiss({ silent = true, pending = true })
         end, { desc = 'Dismiss All Notifications' })
-
-
--- Tab management
---keymap.set("n", "<leader>to", ":tabnew<CR>") -- open a new tab
---keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
---keymap.set("n", "<leader>tn", ":tabn<CR>") -- next tab
---keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 
