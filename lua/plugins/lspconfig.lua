@@ -23,6 +23,23 @@ return {
                     },
                 },
                 capabilities = capabilities,
+                handlers = handlers,
+            })
+
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+                handlers = handlers,
+            })
+            lspconfig.gdscript.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                handlers = handlers,
+            })
+             lspconfig.biome.setup({
+                capabilities = capabilities,
+                handlers = handlers,
             })
         end,
     },
