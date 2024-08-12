@@ -1,5 +1,5 @@
 local function augroup(name)
-    return vim.api.nvim_create_augroup('nvim2k_' .. name, { clear = true })
+    return vim.api.nvim_create_augroup('nvim' .. name, { clear = true })
 end
 
 -- Strip trailing spaces before write
