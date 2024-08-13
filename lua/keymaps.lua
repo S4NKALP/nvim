@@ -25,7 +25,9 @@ vim.keymap.set('n', '<leader>q', ':BufferClose<CR>')
 vim.keymap.set('n', '<leader>/', 'gcc', { remap = true })
 
 -- terminal
-vim.keymap.set('n', '<leader>tr', ':ToggleTerm<CR>')
+vim.keymap.set('n', '<leader>tv', ':Vterm<CR>')  -- Vertical terminal
+vim.keymap.set('n', '<leader>th', ':Sterm<CR>')  -- Horizontal terminal
+vim.keymap.set('n', '<leader>tf', ':Fterm<CR>')  -- Floating terminal
 
 -- File Explorer
 vim.keymap.set('n', '<leader>e', function()
