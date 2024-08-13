@@ -66,39 +66,3 @@ vim.keymap.set('n', '<leader>mu', function()
     require('notify').dismiss({ silent = true, pending = true })
 end, { desc = 'Dismiss All Notifications' })
 
--- Harpoon Keybinds
--- Open harpoon ui
-vim.keymap.set('n', '<leader>ho', function()
-    harpoon_ui.toggle_quick_menu()
-end)
-
--- Add current file to harpoon
-vim.keymap.set('n', '<leader>ha', function()
-    harpoon.mark.add_file()
-end)
-
--- Remove current file from harpoon
-vim.keymap.set('n', '<leader>hr', function()
-    harpoon.mark.rm_file()
-end)
-
--- Quickly jump to harpooned files
-vim.keymap.set('n', '<leader>1', function()
-    harpoon.ui.nav_file(1)
-end)
-
-vim.keymap.set('n', '<leader>2', function()
-    harpoon.ui.nav_file(2)
-end)
-
-vim.keymap.set('n', '<leader>3', function()
-    harpoon.ui.nav_file(3)
-end)
-
-vim.keymap.set('n', '<leader>4', function()
-    harpoon.ui.nav_file(4)
-end)
-
-vim.keymap.set('n', '<leader>5', function()
-    harpoon.ui.nav_file(5)
-end)
