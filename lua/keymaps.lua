@@ -34,14 +34,25 @@ vim.keymap.set('n', '<leader>e', function()
     require('oil').toggle_float()
 end)
 
+-- Primeagen Refactoring
+-- vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+-- vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
+-- vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
+-- vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+-- vim.keymap.set( "n", "<leader>rI", ":Refactor inline_func")
+-- vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+-- vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+
+
 -- Clear search, diff update and redraw
 vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
 
--- Move to window using the <ctrl> hjkl keys
-vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to Left Window', remap = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to Lower Window', remap = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to Upper Window', remap = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to Right Window', remap = true })
+-- Navigator
+vim.keymap.set('n', '<C-h>', '<cmd>NavigatorLeft<cr>', { desc = 'Move Left'  })
+vim.keymap.set('n', '<C-j>', '<cmd>NavigatorDown<cr>', { desc = 'Move Down' })
+vim.keymap.set('n', '<C-k>', '<cmd>NavigatorUp<cr>', { desc = 'Move Up' })
+vim.keymap.set('n', '<C-l>', '<cmd>NavigatorRight<cr>', { desc = 'Move Right' })
+vim.keymap.set('n', '<C-\\>', '<cmd>NavigatorPrevious<cr>', { desc = 'Previous Panel' })
 
 -- Move with shift-arrows
 vim.keymap.set('n', '<S-Left>', '<C-w><S-h>', {
@@ -57,12 +68,11 @@ vim.keymap.set('n', '<S-Right>', '<C-w><S-l>', {
     desc = 'Move window to the right',
 })
 
--- Navigator
-vim.keymap.set('n', '<C-h>', '<cmd>NavigatorLeft<cr>', { desc = 'Move Left'  })
-vim.keymap.set('n', '<C-j>', '<cmd>NavigatorDown<cr>', { desc = 'Move Down' })
-vim.keymap.set('n', '<C-k>', '<cmd>NavigatorUp<cr>', { desc = 'Move Up' })
-vim.keymap.set('n', '<C-l>', '<cmd>NavigatorRight<cr>', { desc = 'Move Right' })
-vim.keymap.set('n', '<C-\\>', '<cmd>NavigatorPrevious<cr>', { desc = 'Previous Panel' })
+-- Resize window using <ctrl> arrow keys
+vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
 
 -- clear notification
 vim.keymap.set('n', '<leader>mu', function()
