@@ -78,4 +78,3 @@ vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increa
 vim.keymap.set('n', '<leader>mu', function()
     require('notify').dismiss({ silent = true, pending = true })
 end, { desc = 'Dismiss All Notifications' })
-
