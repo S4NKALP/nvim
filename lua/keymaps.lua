@@ -57,11 +57,12 @@ vim.keymap.set('n', '<S-Right>', '<C-w><S-l>', {
     desc = 'Move window to the right',
 })
 
--- Resize window using <ctrl> arrow keys
-vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
-vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
-vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
-vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
+-- Navigator
+vim.keymap.set('n', '<C-h>', '<cmd>NavigatorLeft<cr>', { desc = 'Move Left'  })
+vim.keymap.set('n', '<C-j>', '<cmd>NavigatorDown<cr>', { desc = 'Move Down' })
+vim.keymap.set('n', '<C-k>', '<cmd>NavigatorUp<cr>', { desc = 'Move Up' })
+vim.keymap.set('n', '<C-l>', '<cmd>NavigatorRight<cr>', { desc = 'Move Right' })
+vim.keymap.set('n', '<C-\\>', '<cmd>NavigatorPrevious<cr>', { desc = 'Previous Panel' })
 
 -- clear notification
 vim.keymap.set('n', '<leader>mu', function()
