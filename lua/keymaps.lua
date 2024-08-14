@@ -17,9 +17,9 @@ end)
 vim.keymap.set('n', '<leader>ft', vim.lsp.buf.format, {})
 
 -- buffer
-vim.keymap.set('n', '<tab>', ':BufferNext<CR>')
-vim.keymap.set('n', '<S-tab>', ':BufferPrevious<CR>')
-vim.keymap.set('n', '<leader>q', ':BufferClose<CR>')
+vim.keymap.set("n", "<tab>", ":BufferLineCycleNext<CR>")
+vim.keymap.set("n", "<S-tab>", ":BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "<leader>q", ":BufferLinePickClose<CR>")
 
 -- comment
 vim.keymap.set('n', '<leader>/', 'gcc', { remap = true })
