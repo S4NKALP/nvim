@@ -48,6 +48,7 @@ opt.backup = false -- creates a backup file
 opt.autowrite = true
 opt.autoindent = true
 opt.ai = true
+opt.termguicolors =true
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
