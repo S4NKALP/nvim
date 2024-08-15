@@ -3,6 +3,10 @@ return {
     event = { 'BufReadPost', 'BufAdd', 'BufNewFile' },
     version = '*',
     dependencies = 'nvim-tree/nvim-web-devicons',
+    keys = {
+        { '<tab>', '<cmd>BufferLineCycleNext<CR>', desc = 'Next Buffer' },
+        { '<S-tab>', '<cmd>BufferLineCyclePrev<CR>', desc = 'Previous Buffer' },
+    },
     opts = {
         options = {
             debug = { logging = true },

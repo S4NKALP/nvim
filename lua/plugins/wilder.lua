@@ -6,9 +6,6 @@ return {
             '/',
             '?',
         },
-        dependencies = {
-            'catppuccin/nvim',
-        },
         config = function()
             local wilder = require('wilder')
 

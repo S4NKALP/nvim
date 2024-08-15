@@ -44,6 +44,7 @@ return {
                 'biome', -- js formatter
                 'stylua', -- lua formatter
                 'black', -- python formatter
+                'isort', -- python formatter
                 'clang-format', -- c/c++ formatter
                 'luacheck',
                 'pylint',

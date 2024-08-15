@@ -210,69 +210,74 @@ map('i', 'kj', '<ESC>')
 map('i', 'jj', '<ESC>')
 
 -- Terminal Mappings
-map("t", "jk", "<C-\\><C-n>")
-map("t", "kj", "<C-\\><C-n>")
-map("t", "<ESC>", "<C-\\><C-n>")
+map('t', 'jk', '<C-\\><C-n>')
+map('t', 'kj', '<C-\\><C-n>')
+map('t', '<ESC>', '<C-\\><C-n>')
 
 -- Move with shift-arrows
-map("n", "<S-Left>", "<C-w><S-h>", {
-    desc = "Move window to the left"
+map('n', '<S-Left>', '<C-w><S-h>', {
+    desc = 'Move window to the left',
 })
-map("n", "<S-Down>", "<C-w><S-j>", {
-    desc = "Move window down"
+map('n', '<S-Down>', '<C-w><S-j>', {
+    desc = 'Move window down',
 })
-map("n", "<S-Up>", "<C-w><S-k>", {
-    desc = "Move window up"
+map('n', '<S-Up>', '<C-w><S-k>', {
+    desc = 'Move window up',
 })
-map("n", "<S-Right>", "<C-w><S-l>", {
-    desc = "Move window to the right"
+map('n', '<S-Right>', '<C-w><S-l>', {
+    desc = 'Move window to the right',
 })
 
 -- Search
-map({
-    "n",
-    "x"
-}, "gw", "*N", {
-    desc = "Search word under cursor"
-})
+map(
+    {
+        'n',
+        'x',
+    },
+    'gw',
+    '*N',
+    {
+        desc = 'Search word under cursor',
+    }
+)
 
 -- Some cool remaps
-map("n", "n", "nzzzv")
-map("n", "N", "Nzzzv")
-map("n", "J", "mzJ`z")
-map("n", "}", "}zzzv")
-map("n", "{", "{zzzv")
-map("n", "g,", "g,zvzz")
-map("n", "g;", "g;zvzz")
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
-map("n", "^", "g^")
-map("n", "0", "g0")
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+map('n', 'J', 'mzJ`z')
+map('n', '}', '}zzzv')
+map('n', '{', '{zzzv')
+map('n', 'g,', 'g,zvzz')
+map('n', 'g;', 'g;zvzz')
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
+map('n', '^', 'g^')
+map('n', '0', 'g0')
 -- Do not include white space characters when using $ in visual mode,
-map("x", "$", "g_")
+map('x', '$', 'g_')
 -- Always use very magic mode for searching
-map("n", "/", [[/\v]])
+map('n', '/', [[/\v]])
 
 -- Add undo break-points
-map("i", "?", "?<c-g>u")
-map("i", "!", "!<c-g>u")
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
+map('i', '?', '?<c-g>u')
+map('i', '!', '!<c-g>u')
+map('i', ',', ',<c-g>u')
+map('i', '.', '.<c-g>u')
+map('i', ';', ';<c-g>u')
 
 -- compromised backward search when comma is being used as localleader
-map("n", "<A-,>", ",")
+map('n', '<A-,>', ',')
 
 -- Better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move text up and down
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":m '<-4<cr>gv=gv", { desc = "Move Up" })
+map('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move Down' })
+map('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move Up' })
+map('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
+map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
+map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move Down' })
+map('v', '<A-k>', ":m '<-4<cr>gv=gv", { desc = 'Move Up' })
