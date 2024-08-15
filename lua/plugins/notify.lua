@@ -1,26 +1,22 @@
 return {
-	'rcarriga/nvim-notify',
+    'rcarriga/nvim-notify',
     event = 'VeryLazy',
-	config = function()
-		vim.notify = require('notify')
-
-		require('notify')('Welcome Back!')
-		require('notify').setup({
-			background_colour = 'Normal',
-			fps = 30,
-			icons = {
-				DEBUG = ' ',
-				ERROR = ' ',
-				INFO = ' ',
-				TRACE = '✎',
-				WARN = ' ',
-			},
-			level = 2,
-			minimum_width = 40,
-			maximum_width = 40,
-			render = 'wrapped-compact',
-			stages = 'slide',
-			timeout = 2000,
-		})
-	end,
+    keys = {
+        {
+            '<leader>un',
+            function()
+                require('notify').dismiss({ silent = true, pending = true })
+            end,
+            desc = 'Dismiss All Notifications',
+        },
+    },
+    opts = {
+        level = 2,
+        minimum_width = 50,
+        stages = 'fade',
+        timeout = 3000,
+        top_down = true,
+        render = 'compact',
+        background_colour = '#000000',
+    },
 }
