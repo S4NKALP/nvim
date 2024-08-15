@@ -1,5 +1,3 @@
-local opts = { noremap = true, silent = true }
-
 -- Increment / Decrement
 vim.keymap.set('n', '+', '<C-a>')
 vim.keymap.set('n', '-', '<C-x>')
@@ -11,8 +9,14 @@ vim.keymap.set('n', '<C-a>', 'gg<S-v>G')
 vim.keymap.set('x', '<leader>p', '"_dP')
 
 -- Delete without yanking
-vim.keymap.set('n', '<leader>d', '"_d')
-vim.keymap.set('v', '<leader>d', '"_d')
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete highlighted text' })
+vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete highlighted text' })
+
+-- save file
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
+
+-- save and quit
+vim.keymap.set('n', '<leader>Q', '<cmd>wq!<CR>', { desc = 'Force save and  quit' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -25,9 +29,13 @@ vim.keymap.set('n', '<A-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increa
 
 -- Visual vim.keymap.sets
 vim.keymap.set('v', '<leader>r', '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
-vim.keymap.set('v', '<C-s>', ':sort<CR>') -- Sort highlighted text in visual mode with Control+S
+vim.keymap.set('v', '<A-s>', ':sort<CR>') -- Sort highlighted text in visual mode with Control+S
 vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv") -- Move current line up
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv") -- Move current line down
+
+-- for buffers
+vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprev<CR>', { noremap = true, silent = true })
 
 --utility vim.keymap.setpings
 vim.keymap.set('n', 'n', 'nzzzv') -- keep the cursor centered when doing 'n'
@@ -46,8 +54,8 @@ vim.keymap.set({ 'i' }, '<C-l>', '<Right>', { desc = 'Move cursor to right' })
 vim.keymap.set({ 'i' }, '<C-h>', '<Left>', { desc = 'Move cursor to right' })
 
 -- Better window management
-vim.keymap.set('n', 'hs', ':split<Return>', opts)
-vim.keymap.set('n', 'vs', ':vsplit<Return>', opts)
+vim.keymap.set('n', 'vs', ':vsp<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'hs', ':sp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left split' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to below split' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to above split' })
@@ -61,8 +69,13 @@ vim.keymap.set('n', '<A-Right>', '<cmd>vertical resize +2<CR>', { desc = 'Resize
 vim.keymap.set('v', '<', '<gv', { desc = '(V) Indent to left' })
 vim.keymap.set('v', '>', '>gv', { desc = '(V) Indent to right' })
 
+vim.keymap.set('n', '<Leader>lo', '<cmd>lopen<CR>', { desc = 'Open location list' })
+vim.keymap.set('n', '<Leader>lc', '<cmd>lclose<CR>', { desc = 'Close location list' })
+vim.keymap.set('n', '<Leader>ln', '<cmd>lnext<CR>', { desc = 'Next location list item' })
+vim.keymap.set('n', '<Leader>lp', '<cmd>lprev<CR>', { desc = 'Previous location list item' })
+
 -- insert semicolon in the end
--- vim.keymap.set('i', '<A-;>', '<Esc>miA;<Esc>`ii', { desc = 'insert semicolon in the end' })
+vim.keymap.set('i', '<A-;>', '<Esc>miA;<Esc>`ii', { desc = 'insert semicolon in the end' })
 
 -- Change text without putting it into the vim register,
 vim.keymap.set({ 'n', 'x' }, 'c', '"_c', { desc = 'Change without yanking' })
@@ -79,6 +92,3 @@ vim.keymap.set('i', 'jj', '<ESC>')
 vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 vim.keymap.set('t', 'kj', '<C-\\><C-n>')
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
-
--- save file
-vim.keymap.set({ 'i', 'v', 'n', 's' }, '<A-s>', '<cmd>wa<cr><esc>', { desc = 'Save all file' })

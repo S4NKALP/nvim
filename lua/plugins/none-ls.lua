@@ -1,6 +1,6 @@
 return {
     'nvimtools/none-ls.nvim', -- configure formatters & linters
-    event = { 'CursorHold', 'CursorHoldI' },
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
         'jay-babu/mason-null-ls.nvim',
     },

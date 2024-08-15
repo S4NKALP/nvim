@@ -1,7 +1,7 @@
 -- configure autocomplete
 return {
     'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' },
+    event = { 'InsertEnter' },
     dependencies = {
         -- autocomplete plugins
         'hrsh7th/cmp-buffer',
@@ -17,7 +17,6 @@ return {
         'onsails/lspkind.nvim',
         -- snippet plugin
         { 'L3MON4D3/LuaSnip', event = { 'BufReadPost', 'BufNewFile' } },
-        { 'rafamadriz/friendly-snippets', event = { 'BufReadPost', 'BufNewFile' } },
     },
     config = function()
         local cmp = require('cmp')
@@ -28,6 +27,10 @@ return {
             completion = {
                 keyword_length = 1,
                 completeopt = 'menu,menuone',
+            },
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
             },
             formatting = {
                 fields = { 'kind', 'abbr', 'menu' },
@@ -64,7 +67,7 @@ return {
                     { name = 'cmdline' },
                 },
             }),
-            cmp.setup.cmdline({ '/', '?' }, {
+            cmp.setup.cmdline('/', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = 'buffer' },

@@ -3,71 +3,73 @@ return {
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
         version = false,
+        lazy = true,
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-tree/nvim-web-devicons' },
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'zig' },
             { 'nvim-telescope/telescope-ui-select.nvim' },
+            { 'nvim-telescope/telescope-file-browser.nvim' },
         },
         keys = {
             {
-                '<leader>ff',
+                '<leader>sf',
                 function()
                     require('telescope.builtin').find_files()
                 end,
                 desc = 'Find File (CWD)',
             },
             {
-                '<leader>fh',
+                '<leader>sh',
                 function()
                     require('telescope.builtin').help_tags()
                 end,
                 desc = 'Find Help',
             },
             {
-                '<leader>fH',
+                '<leader>sH',
                 function()
                     require('telescope.builtin').highlights()
                 end,
                 desc = 'Find highlight groups',
             },
             {
-                '<leader>fM',
+                '<leader>sM',
                 function()
                     require('telescope.builtin').man_pages()
                 end,
                 desc = 'Map Pages',
             },
             {
-                '<leader>of',
+                '<leader>so',
                 function()
                     require('telescope.builtin').oldfiles()
                 end,
                 desc = 'Open Recent File',
             },
             {
-                '<leader>tl',
+                '<leader>sg',
                 function()
                     require('telescope.builtin').live_grep()
                 end,
                 desc = 'Live Grep',
             },
             {
-                '<leader>tw',
+                '<leader>sw',
                 function()
                     require('telescope.builtin').grep_string()
                 end,
                 desc = 'Grep String',
             },
             {
-                '<leader>km',
+                '<leader>sk',
                 function()
                     require('telescope.builtin').keymaps()
                 end,
                 desc = 'Keymaps',
             },
             {
-                '<leader>tC',
+                '<leader>sC',
                 function()
                     require('telescope.builtin').commands()
                 end,
@@ -81,22 +83,21 @@ return {
                 desc = 'Buffers',
             },
             {
-                '<leader>td',
+                '<leader>sd',
                 function()
                     require('telescope.builtin').diagnostics()
                 end,
                 desc = 'diagnostics',
             },
             {
-                '<leader>cc',
-                function()
-                    require('telescope.builtin').colorscheme({ enable_preview = true })
-                end,
-                desc = 'Colorscheme with preview',
+                '<leader>sF',
+                '<cmd>Telescope file_browser<CR>',
+                "desc = 'File Browser'",
             },
         },
         config = function()
             local telescope = require('telescope')
+            local fb_actions = require('telescope').extensions.file_browser.actions
             telescope.setup({
                 file_ignore_patterns = { '%.git/.' },
                 defaults = {
@@ -104,17 +105,30 @@ return {
                         treesitter = false,
                     },
                 },
-                -- picker = {
-                -- colorscheme = {
-                -- enable_preview = true,
-                -- },
-                -- },
                 extensions = {
                     fzf = {
                         fuzzy = true, -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
                         override_file_sorter = true, -- override the file sorter
                         case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+                    },
+                    file_browser = {
+                        theme = 'ivy',
+                        hijack_netrw = true,
+                        mapping = {
+                            ['i'] = {
+                                ['<A-c>'] = fb_actions.create,
+                                ['<A-r>'] = fb_actions.rename,
+                                ['<A-d>'] = fb_actions.remove,
+                                ['<A-h>'] = fb_actions.toggle_hidden,
+                            },
+                            ['n'] = {
+                                ['a'] = fb_actions.create,
+                                ['r'] = fb_actions.rename,
+                                ['d'] = fb_actions.remove,
+                                ['h'] = fb_actions.toggle_hidden,
+                            },
+                        },
                     },
                 },
                 borderchars = {
@@ -123,6 +137,7 @@ return {
                 },
             })
             telescope.load_extension('ui-select')
+            telescope.load_extension('file_browser')
             -- telescope.load_extension("refactoring")
             telescope.load_extension('notify')
         end,

@@ -2,7 +2,7 @@ return {
     'williamboman/mason.nvim',
     cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUpdate' },
     dependencies = {
-        'williamboman/mason-lspconfig.nvim',
+        { 'williamboman/mason-lspconfig.nvim', event = { 'BufReadPre', 'BufNewFile' } },
         'WhoIsSethDaniel/mason-tool-installer.nvim',
     },
     config = function()
@@ -29,6 +29,7 @@ return {
                 'html',
                 'cssls',
                 'tailwindcss',
+                'svelte',
                 'lua_ls',
                 'pyright',
                 'jdtls',

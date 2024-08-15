@@ -44,7 +44,7 @@ return {
         end
         dashboard.section.buttons.val = {
             dashboard.button('n', ' ' .. ' New File', '<cmd>ene<CR>'),
-            dashboard.button('spc e', ' ' .. ' File Tree', ':Neotree toggle left<CR>'),
+            dashboard.button('e', ' ' .. ' File Tree', ':Telescope file_browser <CR>'),
             dashboard.button('f', ' ' .. ' Find files', ':Telescope find_files <CR>'),
             dashboard.button('o', ' ' .. ' Recent files', ':Telescope oldfiles <CR>'),
             dashboard.button('l', '󰒲 ' .. ' Lazy', ':Lazy <CR>'),
