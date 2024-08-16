@@ -1,6 +1,6 @@
 return {
     'nvimtools/none-ls.nvim', -- configure formatters & linters
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufRead', 'FileType' },
     dependencies = {
         'jay-babu/mason-null-ls.nvim',
     },

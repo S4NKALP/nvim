@@ -1,106 +1,82 @@
+-- Header
+local function header()
+    local banner_small = {
+        '                                                    ',
+        '                                                    ',
+        '                                                    ',
+        ' ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+        ' ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+        ' ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+        ' ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+        ' ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+        ' ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+        '                                                    ',
+        '         With experience comes perspective          ',
+    }
+
+    return banner_small
+end
+-- Footer
+local function footer()
+    local version = vim.version()
+    local print_version = 'v' .. version.major .. '.' .. version.minor .. '.' .. version.patch
+    local stats = require('lazy').stats()
+    local plugins_count = stats.loaded .. '/' .. stats.count
+    local ms = math.floor(stats.startuptime + 0.5)
+    local time = vim.fn.strftime('%H:%M:%S')
+    local date = vim.fn.strftime('%d.%m.%Y')
+    local line1 = ' ' .. plugins_count .. ' plugins loaded in ' .. ms .. 'ms'
+    local line2 = '󰃭 ' .. date .. '  ' .. time
+    local line3 = ' ' .. print_version
+
+    -- Calculate padding for centering lines
+    local line1_width = vim.fn.strdisplaywidth(line1)
+    local line2_padding = math.max(0, math.floor((line1_width - vim.fn.strdisplaywidth(line2)) / 2))
+    local line3_padding = math.max(0, math.floor((line1_width - vim.fn.strdisplaywidth(line3)) / 2))
+
+    -- Apply padding to lines
+    line2 = string.rep(' ', line2_padding) .. line2
+    line3 = string.rep(' ', line3_padding) .. line3
+
+    return {
+        ' ',
+        line1,
+        line2,
+        line3,
+    }
+end
+
 return {
     'goolord/alpha-nvim',
     event = 'VimEnter',
-    opts = function()
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+        local alpha = require('alpha')
         local dashboard = require('alpha.themes.dashboard')
-        require('alpha.term')
-        local arttoggle = false
 
-        local logo = {
-            [[                                                    ]],
-            [[ ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
-            [[ ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
-            [[ ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
-            [[ ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
-            [[ ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
-            [[ ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
-            [[                                                    ]],
-        }
+        dashboard.section.header.val = header()
+        dashboard.section.footer.val = footer()
 
-        local art = {
-            -- { name, width, height }
-            { 'tohru', 62, 17 },
-        }
-
-        if arttoggle == true then
-            dashboard.opts.opts.noautocmd = true
-            dashboard.section.terminal.opts.redraw = true
-            local path = vim.fn.stdpath('config') .. '/assets/'
-            -- local random = math.random(1, #art)
-            local currentart = art[1]
-            dashboard.section.terminal.command = 'cat ' .. path .. currentart[1]
-
-            dashboard.section.terminal.width = currentart[2]
-            dashboard.section.terminal.height = currentart[3]
-
-            dashboard.opts.layout = {
-                dashboard.section.terminal,
-                { type = 'padding', val = 2 },
-                dashboard.section.buttons,
-                dashboard.section.footer,
-            }
-        else
-            dashboard.section.header.val = logo
-        end
+        -- Menu
+        -- TODO: Add projects and Frecency?
         dashboard.section.buttons.val = {
-            dashboard.button('n', ' ' .. ' New File', '<cmd>ene<CR>'),
-            dashboard.button('e', ' ' .. ' File Tree', ':Telescope file_browser <CR>'),
-            dashboard.button('f', ' ' .. ' Find files', ':Telescope find_files <CR>'),
-            dashboard.button('o', ' ' .. ' Recent files', ':Telescope oldfiles <CR>'),
-            dashboard.button('l', '󰒲 ' .. ' Lazy', ':Lazy <CR>'),
-            dashboard.button('q', ' ' .. ' Quit', ':q <CR>'),
+            dashboard.button('e', '  New file', ':ene <BAR> startinsert<CR>'),
+            dashboard.button('f', '  Find files', '<cmd>Telescope find_files<CR>'),
+            dashboard.button('t', '󰊄  Find text', '<cmd>Telescope live_grep<CR>'),
+            dashboard.button('r', '󰔠  Recent files', '<cmd>Telescope oldfiles<CR>'),
+            dashboard.button('p', '󱠏  Projects', '<cmd>Telescope projects<CR>'),
+            dashboard.button('c', '  Config', '<cmd>e $MYVIMRC<CR>'),
+            dashboard.button('l', '  Plugins', '<cmd>Lazy<CR>'),
+            dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
         }
-        for _, button in ipairs(dashboard.section.buttons.val) do
-            button.opts.hl = 'AlphaButtons'
-            button.opts.hl_shortcut = 'AlphaShortcut'
-        end
-        dashboard.section.header.opts.hl = 'Function'
-        dashboard.section.buttons.opts.hl = 'Identifier'
-        dashboard.section.footer.opts.hl = 'Function'
-        dashboard.opts.layout[1].val = 4
-        return dashboard
-    end,
-    config = function(_, dashboard)
-        if vim.o.filetype == 'lazy' then
-            vim.cmd.close()
-            vim.api.nvim_create_autocmd('User', {
-                pattern = 'AlphaReady',
-                callback = function()
-                    require('lazy').show()
-                end,
-            })
-        end
-        require('alpha').setup(dashboard.opts)
+
+        alpha.setup(dashboard.config)
+        -- Update the footer after all plugins are fully loaded
         vim.api.nvim_create_autocmd('User', {
             pattern = 'LazyVimStarted',
             callback = function()
-                local v = vim.version()
-                local dev = ''
-                if v.prerelease == 'dev' then
-                    dev = '-dev+' .. v.build
-                else
-                    dev = ''
-                end
-                local version = v.major .. '.' .. v.minor .. '.' .. v.patch .. dev
-                local stats = require('lazy').stats()
-                local plugins_count = stats.loaded .. '/' .. stats.count
-                local ms = math.floor(stats.startuptime + 0.5)
-                local time = vim.fn.strftime('%H:%M:%S')
-                local date = vim.fn.strftime('%d.%m.%Y')
-                local line1 = ' ' .. plugins_count .. ' plugins loaded in ' .. ms .. 'ms'
-                local line2 = '󰃭 ' .. date .. '  ' .. time
-                local line3 = ' ' .. version
-
-                local line1_width = vim.fn.strdisplaywidth(line1)
-                local line2Padded = string.rep(' ', (line1_width - vim.fn.strdisplaywidth(line2)) / 2) .. line2
-                local line3Padded = string.rep(' ', (line1_width - vim.fn.strdisplaywidth(line3)) / 2) .. line3
-
-                dashboard.section.footer.val = {
-                    line1,
-                    line2Padded,
-                    line3Padded,
-                }
-                pcall(vim.cmd.AlphaRedraw)
+                dashboard.section.footer.val = footer()
+                pcall(vim.cmd, 'AlphaRedraw')
             end,
         })
     end,

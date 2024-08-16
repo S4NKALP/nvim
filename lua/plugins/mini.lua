@@ -5,8 +5,6 @@ return {
         version = false,
         config = function()
             require('mini.comment').setup({})
-            require('mini.pairs').setup({})
-            require('mini.move').setup({})
             require('mini.cursorword').setup()
             -- require("mini.tabline").setup()
             local statusline = require('mini.statusline')
@@ -32,6 +30,32 @@ return {
                     find_left = 'gsF', -- Find surrounding (to the left)
                     highlight = 'gsh', -- Highlight surrounding
                     update_n_lines = 'gsn', -- Update `n_lines`
+                },
+            })
+            require('mini.pairs').setup({
+                odes = { command = true },
+                mappings = {
+                    ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+                    ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+                },
+            })
+            require('mini.move').setup({
+                keys = {
+                    { '<M-Left>', mode = { 'n', 'v' } },
+                    { '<M-Down>', mode = { 'n', 'v' } },
+                    { '<M-Up>', mode = { 'n', 'v' } },
+                    { '<M-Right>', mode = { 'n', 'v' } },
+                },
+
+                mappings = {
+                    left = '<M-Left>',
+                    line_left = '<M-Left>',
+                    right = '<M-Right>',
+                    line_right = '<M-Right>',
+                    down = '<M-Down>',
+                    line_down = '<M-Down>',
+                    up = '<M-Up>',
+                    line_up = '<M-Up>',
                 },
             })
         end,

@@ -92,7 +92,7 @@ return {
             {
                 '<leader>sF',
                 '<cmd>Telescope file_browser<CR>',
-                "desc = 'File Browser'",
+                desc = 'File Browser',
             },
         },
         config = function()
@@ -123,10 +123,10 @@ return {
                                 ['<A-h>'] = fb_actions.toggle_hidden,
                             },
                             ['n'] = {
-                                ['a'] = fb_actions.create,
-                                ['r'] = fb_actions.rename,
-                                ['d'] = fb_actions.remove,
-                                ['h'] = fb_actions.toggle_hidden,
+                                ['<A-c>'] = fb_actions.create,
+                                ['<A-r'] = fb_actions.rename,
+                                ['<A-d'] = fb_actions.remove,
+                                ['<A-h'] = fb_actions.toggle_hidden,
                             },
                         },
                     },

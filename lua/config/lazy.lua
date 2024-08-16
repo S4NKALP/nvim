@@ -19,10 +19,11 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     spec = {
         { import = 'plugins' },
+        { import = 'list' },
     },
     install = {
         missing = true,
-        colorscheme = { 'onedark' },
+        colorscheme = { 'moonfly' },
     },
     checker = {
         enabled = true,
@@ -34,10 +35,28 @@ require('lazy').setup({
     },
     ui = {
         icons = {
-            ft = '',
-            lazy = '󰂠 ',
-            loaded = '',
-            not_loaded = '',
+            cmd = ' ',
+            config = ' ',
+            event = '',
+            ft = ' ',
+            init = ' ',
+            import = ' ',
+            keys = ' ',
+            lazy = '󰒲 ',
+            loaded = '●',
+            not_loaded = '○',
+            plugin = ' ',
+            runtime = ' ',
+            require = '󰢱 ',
+            source = ' ',
+            start = '',
+            task = '✔ ',
+            list = {
+                '●',
+                '➜',
+                '★',
+                '‒',
+            },
         },
     },
     performance = {
