@@ -8,9 +8,31 @@ vim.keymap.set('n', '<C-a>', 'gg<S-v>G')
 -- Replace currently selected text with default register without yanking it
 vim.keymap.set('x', '<leader>p', '"_dP')
 
--- Delete without yanking
-vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete highlighted text' })
-vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete highlighted text' })
+-- Delete and change without yanking
+vim.keymap.set({ 'n', 'x' }, '<A-d>', '"_d', { desc = 'Delete Without Yanking' })
+vim.keymap.set({ 'n', 'x' }, '<A-c>', '"_c', { desc = 'Change Without Yanking' })
+
+-- Deleting without yanking empty line
+vim.keymap.set('n', 'dd', function()
+    local is_empty_line = vim.api.nvim_get_current_line():match('^%s*$')
+    if is_empty_line then
+        return '"_dd'
+    else
+        return 'dd'
+    end
+end, { noremap = true, expr = true, desc = "Don't Yank Empty Line to Clipboard" })
+
+-- Search inside visually highlighted text
+vim.keymap.set('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search Inside Visual Selection' })
+
+-- Search visually selected text (slightly better than builtins in Neovim>=0.8)
+vim.keymap.set('x', '*', [[y/\V<C-R>=escape(@", '/\')<CR><CR>]], { desc = 'Search Selected Text', silent = true })
+vim.keymap.set(
+    'x',
+    '#',
+    [[y?\V<C-R>=escape(@", '?\')<CR><CR>]],
+    { desc = 'Search Selected Text (Backwards)', silent = true }
+)
 
 -- save file
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
@@ -20,12 +42,6 @@ vim.keymap.set('n', '<leader>Q', '<cmd>wq!<CR>', { desc = 'Force save and  quit'
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Resize window using <ctrl> arrow keys
-vim.keymap.set('n', '<A-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
-vim.keymap.set('n', '<A-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
-vim.keymap.set('n', '<A-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
-vim.keymap.set('n', '<A-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
 
 -- Visual vim.keymap.sets
 vim.keymap.set('v', '<leader>r', '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words

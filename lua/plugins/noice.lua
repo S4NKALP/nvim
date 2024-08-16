@@ -1,8 +1,7 @@
 -- override nvim ui
 return {
     'folke/noice.nvim',
-    event = 'VeryLazy',
-    enabled = true,
+    event = 'UIEnter',
     dependencies = {
         'nvim-treesitter/nvim-treesitter',
         'MunifTanjim/nui.nvim',

@@ -4,6 +4,7 @@ return {
     dependencies = {
         { 'williamboman/mason-lspconfig.nvim', event = { 'BufReadPre', 'BufNewFile' } },
         'WhoIsSethDaniel/mason-tool-installer.nvim',
+        { 'zapling/mason-lock.nvim', cmd = { 'MasonLock', 'MasonLockRestore' }, opts = {} },
     },
     config = function()
         local mason = require('mason')
