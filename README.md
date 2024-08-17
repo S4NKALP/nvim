@@ -66,7 +66,7 @@ rm -rf ~/.local/share/nvim
 Clone the repository to ~/.config
 
 ```bash
-git clone --filter=blob:none https://github.com/amanhex/nvim.git ~/.config/nvim
+git clone --filter=blob:none https://github.com/S4NKALP/nvim.git ~/.config/nvim
 ```
 
 Run neovim to complete the setup
