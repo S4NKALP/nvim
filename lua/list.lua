@@ -44,10 +44,8 @@ return {
         },
         cond = vim.env.KITTY_SCROLLBACK_NVIM == nil,
         opts = {
-            save_path = (os.getenv('HOME') .. '/Pictures/screenshots/code'),
+            save_path = (os.getenv('HOME') .. '/Pictures/screenshots/'),
             title = 'CodeSnap.nvim',
-            code_font_family = 'JetBrainsMono Nerd Font',
-            watermark_font_family = 'JetBrainsMono Nerd Font',
             watermark = '',
             bg_theme = 'summer',
         },

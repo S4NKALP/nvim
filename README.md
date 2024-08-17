@@ -40,22 +40,39 @@
 
 <br>
 
-## Overview
+## System dependencies
 
-nvim has a easy to understand config structure that promotes personalization, so go ahead, bring your keybindings, functions and plugins over, and truly make nvim: Your Personalized Development Environment!
+Important system dependencies:
+
+- **Nerd fonts** ([information source](https://gist.github.com/matthewjberger/7dd7e079f282f8138a9dc3b045ebefa0)):
+
+  - Download a [Nerd Font](https://www.nerdfonts.com/) (good choice is "JetBrainsMono Nerd Font").
+  - Unzip and copy to '~/.local/share/fonts'.
+  - Run the command `fc-cache -fv` to manually rebuild the font cache.
+
+- **Tools for finding stuff**:
+  - [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
 
 ## Installation
 
-To install `nvim` clone the repo and setup the symlink
+Delete old nvim configuration
 
 ```bash
-git clone https://github.com/S4NKALP/nvim
+rm -rf ~/.config/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.local/share/nvim
 ```
 
-On Linux and Mac
+Clone the repository to ~/.config
 
 ```bash
-ln -sfnv $PWD/nvim $HOME/.config/nvim
+git clone --filter=blob:none https://github.com/amanhex/nvim.git ~/.config/nvim
+```
+
+Run neovim to complete the setup
+
+```bash
+nvim
 ```
 
 ### 🧰 Tools Used
