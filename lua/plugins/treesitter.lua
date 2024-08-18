@@ -7,7 +7,7 @@ return {
         cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSModuleInfo' },
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'windwp/nvim-ts-autotag',
+            { 'windwp/nvim-ts-autotag', event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' } },
         },
         config = function()
             require('nvim-ts-autotag').setup()
@@ -46,7 +46,6 @@ return {
                 textobjects = {
                     select = {
                         enable = true,
-                        -- Automatically jump forward to textobj, similar to targets.vim
                         lookahead = true,
                         keymaps = {
                             ['af'] = { query = '@function.outer', desc = 'Select outer part of a function region' },
@@ -72,19 +71,12 @@ return {
         end,
     },
     {
-        'nvim-treesitter/nvim-treesitter-context',
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        config = function()
-            require('treesitter-context').setup({ enable = false })
-        end,
-        cmd = 'TSContextToggle',
-        init = function()
-            vim.keymap.set('n', '[c', function()
-                require('treesitter-context').go_to_context()
-            end, { silent = true, desc = 'Go to TS context' })
-            vim.keymap.set('n', '<leader>tc', function()
-                require('treesitter-context').toggle()
-            end, { silent = true, desc = 'Toggle TS Context' })
-        end,
+        {
+            'nvim-treesitter/nvim-treesitter-context',
+            event = 'VeryLazy',
+            config = function(_, opts)
+                require('treesitter-context').setup({ mode = 'cursor', max_lines = 3 })
+            end,
+        },
     },
 }

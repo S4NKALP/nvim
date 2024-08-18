@@ -45,39 +45,32 @@ local function footer()
         line3,
     }
 end
+local alpha = require('alpha')
+local dashboard = require('alpha.themes.dashboard')
 
-return {
-    'goolord/alpha-nvim',
-    event = 'VimEnter',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-        local alpha = require('alpha')
-        local dashboard = require('alpha.themes.dashboard')
+dashboard.section.header.val = header()
+dashboard.section.footer.val = footer()
 
-        dashboard.section.header.val = header()
-        dashboard.section.footer.val = footer()
-
-        -- Menu
-        -- TODO: Add projects and Frecency?
-        dashboard.section.buttons.val = {
-            dashboard.button('e', '  New file', ':ene <BAR> startinsert<CR>'),
-            dashboard.button('f', '  Find files', '<cmd>Telescope find_files<CR>'),
-            dashboard.button('t', '󰊄  Find text', '<cmd>Telescope live_grep<CR>'),
-            dashboard.button('r', '󰔠  Recent files', '<cmd>Telescope oldfiles<CR>'),
-            dashboard.button('p', '󱠏  Projects', '<cmd>Telescope projects<CR>'),
-            dashboard.button('c', '  Config', '<cmd>e $MYVIMRC<CR>'),
-            dashboard.button('l', '  Plugins', '<cmd>Lazy<CR>'),
-            dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
-        }
-
-        alpha.setup(dashboard.config)
-        -- Update the footer after all plugins are fully loaded
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'LazyVimStarted',
-            callback = function()
-                dashboard.section.footer.val = footer()
-                pcall(vim.cmd, 'AlphaRedraw')
-            end,
-        })
-    end,
+-- Menu
+-- TODO: Add projects and Frecency?
+dashboard.section.buttons.val = {
+    dashboard.button('e', '  New file', ':ene <BAR> startinsert<CR>'),
+    dashboard.button('f', '  Find files', '<cmd>Telescope find_files<CR>'),
+    dashboard.button('t', '󰊄  Find text', '<cmd>Telescope live_grep<CR>'),
+    dashboard.button('F', '  File browser', '<cmd>Telescope file_browser<CR>'),
+    dashboard.button('r', '󰔠  Recent files', '<cmd>Telescope oldfiles<CR>'),
+    dashboard.button('s', '  Open last session', ':lua require("persistence").load({ last = true })<CR>'),
+    dashboard.button('c', '  Config', '<cmd>e $MYVIMRC<CR>'),
+    dashboard.button('l', '  Plugins', '<cmd>Lazy<CR>'),
+    dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
 }
+
+alpha.setup(dashboard.config)
+-- Update the footer after all plugins are fully loaded
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'LazyVimStarted',
+    callback = function()
+        dashboard.section.footer.val = footer()
+        pcall(vim.cmd, 'AlphaRedraw')
+    end,
+})
