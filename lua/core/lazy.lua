@@ -19,7 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     spec = {
         { import = 'plugins' },
-        { import = 'list' },
     },
     install = {
         missing = true,
@@ -59,6 +58,7 @@ require('lazy').setup({
             },
         },
     },
+    lockfile = vim.fn.stdpath('config') .. '/lua/lock.json',
     performance = {
         rtp = {
             disabled_plugins = {

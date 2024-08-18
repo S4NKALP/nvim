@@ -5,15 +5,9 @@ return {
         version = false,
         config = function()
             require('mini.comment').setup({})
+            require('mini.ai').setup({})
             require('mini.cursorword').setup()
             -- require("mini.tabline").setup()
-            local statusline = require('mini.statusline')
-            statusline.setup({ use_icons = true })
-            ---@diagnostic disable-next-line: duplicate-set-field
-            statusline.section_location = function()
-                return '%2l:%-2v'
-            end
-
             require('mini.bracketed').setup({
                 file = { suffix = '' },
                 window = { suffix = '' },
@@ -30,6 +24,9 @@ return {
                     find_left = 'gsF', -- Find surrounding (to the left)
                     highlight = 'gsh', -- Highlight surrounding
                     update_n_lines = 'gsn', -- Update `n_lines`
+                },
+                keys = {
+                    { 'gz', '', desc = '+surround' },
                 },
             })
             require('mini.pairs').setup({
