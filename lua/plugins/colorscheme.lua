@@ -1,14 +1,35 @@
 return {
-    {
-        'bluz71/vim-moonfly-colors',
-        name = 'moonfly',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require('moonfly').custom_colors({
-                bg = '#000000',
-            })
-            vim.cmd([[colorscheme moonfly]])
-        end,
-    },
+	{
+		"navarasu/onedark.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			local onedark = require("onedark")
+			local util = require("lib.util")
+
+			onedark.setup({
+				style = "deep",
+				transparent = true,
+				term_colors = false,
+				ending_tildes = false,
+				cmp_itemkind_reverse = false,
+
+				toggle_style_key = "<leader>mt",
+				toggle_style_list = { "dark", "darker", "cool", "warm", "warmer", "deep", "light" },
+
+				-- Options are italic, bold, underline, none and combos 'italic,bold'
+				code_style = {
+					comments = "italic",
+					keywords = "none",
+					functions = "none",
+					strings = "none",
+					variables = "none",
+				},
+
+				lualine = { transparent = true },
+				diagnostics = { darker = true, undercurl = true, background = false },
+			})
+			onedark.load()
+		end,
+	},
 }

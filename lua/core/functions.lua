@@ -30,7 +30,7 @@ end, {})
 
 -- Switch to git root or file parent dir
 vim.api.nvim_create_user_command('RootDir', function()
-    local root = require('core.util').get_root_dir()
+    local root = require('lib.util').get_root_dir()
 
     if root == '' then
         return
