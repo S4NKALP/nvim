@@ -1,13 +1,17 @@
+local icons = require("lib.icons")
 return {
 	"folke/which-key.nvim",
 	event = "UIEnter",
 	opts = {
 		preset = "helix",
 		icons = {
-			breadcrumb = " ",
-			separator = " ",
+			breadcrumb = icons.ui.ArrowOpen,
+			separator = icons.ui.Arrow,
 			group = "",
-			rules = false,
+			keys = {
+				Space = icons.ui.Rocket,
+			},
+			rules = false, -- enable auto icon rules
 		},
 		triggers = {
 			{ "<auto>", mode = "nixsotc" },
@@ -30,6 +34,7 @@ return {
 			{ "<leader>m", group = "󰠠  Misc" },
 			{ "<leader>n", group = "  Notes" },
 			{ "<leader>q", group = "  Quit" },
+			{ "<leader>r", group = "  Run" },
 			{ "<leader>s", group = "  Split" },
 			{ "<leader>t", group = "  Terminal" },
 			{ "<leader>u", group = "  Test" },
@@ -51,7 +56,7 @@ return {
 		{ "<leader>cR", "<cmd>ReloadConfig<cr>", desc = "Reload Configs" },
 		{ "<leader>cd", "<cmd>RootDir<cr>", desc = "Root Directory" },
 		{ "<leader>cc", "<cmd>:g/^\\s*$/d<cr>", desc = "Clean Empty Lines" },
-		{ "<leader>co", "<cmd>Alpha<cr>", desc = "Alpha" },
+		{ "<leader>co", "<cmd>Dashboard<cr>", desc = "Dashboard" },
 		{ "<leader>cr", "<cmd>Telescope reloader<cr>", desc = "Reload Module" },
 		--edit
 		{ "<leader>ea", "<cmd>b#<cr>", desc = "Alternate File" },
