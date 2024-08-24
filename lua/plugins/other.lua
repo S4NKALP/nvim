@@ -142,6 +142,7 @@ return {
 	},
 	{
 		"wakatime/vim-wakatime",
+		event = { "VimEnter" },
 		lazy = false,
 	},
 	{
