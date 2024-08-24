@@ -12,6 +12,7 @@ mason_null_ls.setup({
 		"stylua", -- lua formatter
 		"black", -- python formatter
 		"pylint", -- python linter
+		"google-java-format", -- java formatter
 		-- "eslint_d", -- js linter
 	},
 })
@@ -32,6 +33,7 @@ null_ls.setup({
 		formatting.isort,
 		formatting.black,
 		formatting.clang_format,
+		formatting.google_java_format,
 		diagnostics.pylint,
 		-- diagnostics.eslint_d.with({ -- js/ts linter
 		--   condition = function(utils)
