@@ -15,6 +15,64 @@ return {
 		},
 	},
 	{
+		"mg979/vim-visual-multi",
+		event = "BufReadPre",
+		keys = {
+			{
+				"<C-S-Down>",
+				":call vm#commands#add_cursor_down(0, v:count1)<cr>",
+				desc = "Add Cursor Down",
+				mode = { "n" },
+				noremap = true,
+				silent = true,
+			},
+			{
+				"<C-S-Up>",
+				":call vm#commands#add_cursor_up(0, v:count1)<cr>",
+				desc = "Add Cursor Up",
+				mode = { "n" },
+				noremap = true,
+				silent = true,
+			},
+			{
+				"<M-S-j>",
+				":call vm#commands#add_cursor_down(0, v:count1)<cr>",
+				desc = "Add Cursor Down",
+				mode = { "n" },
+				noremap = true,
+				silent = true,
+			},
+			{
+				"<M-S-k>",
+				":call vm#commands#add_cursor_up(0, v:count1)<cr>",
+				desc = "Add Cursor Down",
+				mode = { "n" },
+				noremap = true,
+				silent = true,
+			},
+			{
+				"<M-d>",
+				":call vm#commands#ctrln(v:count1)<cr>",
+				desc = "Multi Edit Next",
+				mode = { "n" },
+				noremap = true,
+				silent = true,
+			},
+		},
+		config = function()
+			vim.g.VM_default_mappings = 0
+			vim.g.VM_silent_exit = 1
+			vim.g.VM_set_statusline = 0
+			vim.g.VM_maps = {
+				["Find Under"] = "",
+			}
+
+			vim.g.VM_maps["I BS"] = ""
+			vim.g.VM_maps["I CtrlC"] = ""
+			vim.g.VM_maps["I CtrlN"] = ""
+		end,
+	},
+	{
 		"CRAG666/code_runner.nvim",
 		config = true,
 		vim.keymap.set("n", "<leader>rc", "<cmd>RunCode<CR>", { desc = "Run Code " }),
@@ -65,23 +123,18 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter" },
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
-			-- autocomplete plugins
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer", -- source for text in buffer
+			"hrsh7th/cmp-path", -- source for file system paths
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
-			"saadparwaiz1/cmp_luasnip",
-			-- "hrsh7th/cmp-nvim-lsp-signature-help",
-			-- "hrsh7th/cmp-calc",
-
-			-- vscode like icons to autocomplete list
-			"onsails/lspkind.nvim",
-			-- snippet plugin
-			{ "L3MON4D3/LuaSnip", event = { "BufReadPost", "BufNewFile" } },
-			{ "rafamadriz/friendly-snippets", event = { "BufReadPost", "BufNewFile" } },
+			"saadparwaiz1/cmp_luasnip", --for autocomplete
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"onsails/lspkind.nvim", -- vs-code like pictograms
+			"L3MON4D3/LuaSnip", -- snippets
+			"rafamadriz/friendly-snippets", -- useful snippets
 		},
 		config = function()
 			require("configs.cmp")

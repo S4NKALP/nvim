@@ -37,6 +37,7 @@ return {
                     'scss',
                     'lua',
                     'python',
+                    'liquid',
                 },
                 auto_install = true,
                 playground = {
@@ -74,7 +75,7 @@ return {
         {
             'nvim-treesitter/nvim-treesitter-context',
             event = 'VeryLazy',
-            config = function(_, opts)
+            config = function()
                 require('treesitter-context').setup({ mode = 'cursor', max_lines = 3 })
             end,
         },
