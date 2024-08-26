@@ -25,7 +25,7 @@ return {
         })
 
         lint.linters_by_ft = {
-            lua = { 'selene' },
+            -- lua = { 'selene' },
             cpp = { 'cpplint' },
             c = { 'cpplint' },
             javascript = { 'eslint_d' },
