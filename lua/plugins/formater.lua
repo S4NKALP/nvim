@@ -1,10 +1,27 @@
+-- Define conform.nvim formatting servers here
+local formatting_servers = {
+    'prettier',
+    'isort',
+    'clang-format',
+    'black',
+    'stylua',
+    'shfmt',
+    'php-cs-fixer',
+    'google-java-formatter',
+    'codespell',
+}
+
 return {
     'stevearc/conform.nvim',
-    enabled = true,
+    dependencies = { 'zapling/mason-conform.nvim' },
     event = { 'BufReadPre', 'BufNewFile' },
+    cmd = { 'ConformInfo' },
     config = function()
         local conform = require('conform')
-
+        require('mason-conform').setup({
+            ensure_installed = formatting_servers,
+            automatic_installation = true,
+        })
         conform.setup({
             formatters_by_ft = {
                 cpp = { 'clang-format' },
@@ -17,7 +34,7 @@ return {
                 html = { 'prettier' },
                 json = { 'prettier' },
                 yaml = { 'prettier' },
-                markdown = { 'prettier' },
+                markdown = { 'prettier', 'markdownlint' },
                 lua = { 'stylua' },
                 python = { 'isort', 'black' },
                 php = { 'php-cs-fixer' },
@@ -26,6 +43,8 @@ return {
                 liquid = { 'prettier' },
                 bash = { 'shfmt' },
                 sh = { 'shfmt' },
+                ['*'] = { 'codespell' },
+                ['_'] = { 'trim_whitespace' },
             },
             format_on_save = function(bufnr)
                 -- Disable with a global or buffer-local variable

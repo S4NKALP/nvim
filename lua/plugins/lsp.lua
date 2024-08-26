@@ -5,6 +5,7 @@ return {
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             { 'antosha417/nvim-lsp-file-operations', config = true },
+            'williamboman/mason-lspconfig.nvim',
         },
         config = function()
             require('configs.lsp')
@@ -13,12 +14,20 @@ return {
     {
         'williamboman/mason.nvim',
         cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUpdate' },
-        dependencies = {
-            'williamboman/mason-lspconfig.nvim',
-            'WhoIsSethDaniel/mason-tool-installer.nvim',
-        },
         config = function()
-            require('mason').setup()
+            -- import mason
+            local mason = require('mason')
+
+            -- enable mason and configure icons
+            mason.setup({
+                ui = {
+                    icons = {
+                        package_installed = '✓',
+                        package_pending = '➜',
+                        package_uninstalled = '✗',
+                    },
+                },
+            })
         end,
     },
     -- {

@@ -16,6 +16,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
+    automatic_installation = true,
     -- list of servers for mason to install
     ensure_installed = {
         'tsserver',
@@ -23,12 +24,12 @@ mason_lspconfig.setup({
         'basedpyright',
         'jdtls',
         'bashls',
-        'jsonls',
         'clangd',
     },
 })
 
 mason_tool_installer.setup({
+    run_on_start = true,
     ensure_installed = {
         'prettier', -- prettier formatter
         'stylua', -- lua formatter
@@ -38,5 +39,6 @@ mason_tool_installer.setup({
         'ruff', -- python linter
         'mypy', -- type checking
         'eslint_d', --js linter
+        'shfmt', -- shell formatter
     },
 })

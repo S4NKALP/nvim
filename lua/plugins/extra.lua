@@ -21,7 +21,11 @@ return {
     {
         'zapling/mason-lock.nvim',
         cmd = { 'MasonLock', 'MasonLockRestore' },
-        opts = {},
+        config = function()
+            require('mason-lock').setup({
+                lockfile_path = vim.fn.stdpath('config') .. '/lua/mason-lock.json', -- (default)
+            })
+        end,
     },
     {
         '2kabhishek/nerdy.nvim',

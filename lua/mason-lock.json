@@ -1,0 +1,28 @@
+{
+  "basedpyright": "1.17.0",
+  "bash-language-server": "5.4.0",
+  "black": "24.8.0",
+  "clang-format": "18.1.8",
+  "clangd": "18.1.3",
+  "codespell": "2.3.0",
+  "cpplint": "1.6.1",
+  "cspell": "8.14.2",
+  "emmet-ls": "0.4.2",
+  "eslint_d": "14.0.3",
+  "isort": "5.13.2",
+  "jdtls": "v1.38.0",
+  "lua-language-server": "3.10.5",
+  "markdownlint": "0.41.0",
+  "mypy": "1.11.2",
+  "phpcs": "3.10.2",
+  "prettier": "3.3.3",
+  "pylint": "3.2.6",
+  "ruff": "0.6.2",
+  "selene": "0.27.1",
+  "shfmt": "v3.9.0",
+  "stylua": "v0.20.0",
+  "tailwindcss-language-server": "0.0.23",
+  "trivy": "v0.54.1",
+  "typescript-language-server": "4.3.3"
+}
+

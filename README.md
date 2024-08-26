@@ -26,9 +26,9 @@
 </p>
 
 <p align="center">
-  <strong>Personalized Dev Env ❤️👨‍💻</strong>
+  <strong>Welcome to my personalized Neovim setup 👨‍💻</strong>
   <br>
-    Handcrafted Neovim setup for the ultimate CLI dev experience.
+    Optimized for a smooth and efficient coding experience.
   <br>
   <br>
   <a href="https://github.com/S4NKALP/nvim/wiki">Documentation</a>
@@ -39,6 +39,13 @@
 </p>
 
 <br>
+
+## Highlights:
+
+- **Modular Structure**: Organized Lua scripts for readability and easy customization.
+- **Language Support**: Automated setup for various languages using Mason.nvim.
+- **Keybindings**: Streamlined shortcuts for productivity, detailed in `lua/core/keymaps.lua`.
+- **Plugins**: Handpicked plugins managed via Lazy.nvim for enhanced functionality.
 
 ## System dependencies
 
@@ -52,6 +59,7 @@ Important system dependencies:
 
 - **Tools for finding stuff**:
   - [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
+  - [zig](https://ziglang.org/)
 
 ## Installation
 
@@ -74,6 +82,10 @@ Run neovim to complete the setup
 ```bash
 nvim
 ```
+
+### Customization:
+
+Feel free to modify and adapt my configuration to your own needs!
 
 ### 🧰 Tools Used
 
