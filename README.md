@@ -7,22 +7,22 @@
 <p align="center">
 
   <a href="https://github.com/S4NKALP/nvim/blob/main/LICENSE">
-<img alt="License" src="https://img.shields.io/github/license/your-username/repos?style=flat&color=eee&label="> </a>
+<img alt="License" src="https://img.shields.io/github/license/S4NKALP/nvim?style=flat&color=eee&label="> </a>
 
 <a href="https://github.com/S4NKALP/nvim/graphs/contributors">
-<img alt="People" src="https://img.shields.io/github/contributors/your-username/repos?style=flat&color=ffaaf2&label=People"> </a>
+<img alt="People" src="https://img.shields.io/github/contributors/S4NKALP/nvim?style=flat&color=ffaaf2&label=People"> </a>
 
 <a href="https://github.com/S4NKALP/nvim/stargazers">
-<img alt="Stars" src="https://img.shields.io/github/stars/your-username/repos?style=flat&color=98c379&label=Stars"></a>
+<img alt="Stars" src="https://img.shields.io/github/stars/S4NKALP/nvim?style=flat&color=98c379&label=Stars"></a>
 
 <a href="https://github.com/S4NKALP/nvim/network/members">
-<img alt="Forks" src="https://img.shields.io/github/forks/your-username/repos?style=flat&color=66a8e0&label=Forks"> </a>
+<img alt="Forks" src="https://img.shields.io/github/forks/S4NKALP/nvim?style=flat&color=66a8e0&label=Forks"> </a>
 
 <a href="https://github.com/S4NKALP/nvim/watchers">
-<img alt="Watches" src="https://img.shields.io/github/watchers/your-username/repos?style=flat&color=f5d08b&label=Watches"> </a>
+<img alt="Watches" src="https://img.shields.io/github/watchers/S4NKALP/nvim?style=flat&color=f5d08b&label=Watches"> </a>
 
 <a href="https://github.com/S4NKALP/nvim/pulse">
-<img alt="Last Updated" src="https://img.shields.io/github/last-commit/your-username/repos?style=flat&color=e06c75&label="> </a>
+<img alt="Last Updated" src="https://img.shields.io/github/last-commit/S4NKALP/nvim?style=flat&color=e06c75&label="> </a>
 </p>
 
 <p align="center">
@@ -40,7 +40,7 @@
 
 <br>
 
-## Highlights:
+## Highlights
 
 - **Modular Structure**: Organized Lua scripts for readability and easy customization.
 - **Language Support**: Automated setup for various languages using Mason.nvim.
@@ -83,7 +83,7 @@ Run neovim to complete the setup
 nvim
 ```
 
-### Customization:
+### Customization
 
 Feel free to modify and adapt my configuration to your own needs!
 
