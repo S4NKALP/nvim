@@ -44,7 +44,7 @@
 
 - **Modular Structure**: Organized Lua scripts for readability and easy customization.
 - **Language Support**: Automated setup for various languages using Mason.nvim.
-- **Keybindings**: Streamlined shortcuts for productivity, detailed in `lua/core/keymaps.lua`.
+- **Keybindings**: Streamlined shortcuts for productivity, detailed in `lua/plugins/configs/whichkey.lua`.
 - **Plugins**: Handpicked plugins managed via Lazy.nvim for enhanced functionality.
 
 ## System dependencies
@@ -59,7 +59,6 @@ Important system dependencies:
 
 - **Tools for finding stuff**:
   - [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
-  - [zig](https://ziglang.org/)
 
 ## Installation
 
