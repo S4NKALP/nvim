@@ -5,16 +5,6 @@ return {
             'kristijanhusak/vim-dadbod-ui',
             'kristijanhusak/vim-dadbod-completion',
         },
-        keys = {
-            { '<leader>du', ':DBUIToggle<cr>', desc = 'Toggle DB UI' },
-            { '<leader>db', ':DBUIFindBuffer<cr>', desc = 'DB Find buffer' },
-            {
-                '<leader>dr',
-                ':DBUIRenameBuffer<cr>',
-                desc = 'DB Rename buffer',
-            },
-            { '<leader>dl', ':DBUILastQueryInfo<cr>', desc = 'DB Last query' },
-        },
         config = function()
             local function db_completion()
                 require('plugins.completion.cmp').setup.buffer({

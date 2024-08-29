@@ -5,18 +5,6 @@ return {
             'rcarriga/nvim-dap-ui',
         },
         cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
-        keys = {
-            { '<leader>bO', '<cmd>DapStepOut<cr>', desc = 'Out' },
-            { '<leader>bR', '<cmd>DapRestartFrame<cr>', desc = 'Restart Frame' },
-            { '<leader>bb', '<cmd>DapToggleBreakpoint<cr>', desc = 'Breakpoint' },
-            { '<leader>bc', '<cmd>DapContinue<cr>', desc = 'Continue' },
-            { '<leader>bi', '<cmd>DapStepInto<cr>', desc = 'Into' },
-            { '<leader>bl', "<cmd>lua require'dap'.run_last()<cr>", desc = 'Last' },
-            { '<leader>bo', '<cmd>DapStepOver<cr>', desc = 'Over' },
-            { '<leader>br', '<cmd>DapToggleRepl<cr>', desc = 'Repl' },
-            { '<leader>bt', '<cmd>DapUIToggle<cr>', desc = 'Debugger' },
-            { '<leader>bx', '<cmd>DapTerminate<cr>', desc = 'Exit' },
-        },
         config = function()
             local dap = require('dap')
             local dapui = require('dapui')

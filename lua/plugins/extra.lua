@@ -2,20 +2,36 @@ return {
     {
         'ThePrimeagen/refactoring.nvim',
         config = function()
-            require('refactoring').setup()
-            -- vim.keymap.set("x", "<leader>re", ":Refactor extract ")
-            -- vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
-            -- vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
-            -- vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
-            -- vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
-            -- vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
-            -- vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
-            -- load refactoring Telescope extension
-            require('telescope').load_extension('refactoring')
+            require('refactoring').setup({
+                prompt_func_return_type = {
+                    go = false,
+                    java = false,
+                    cpp = false,
+                    c = false,
+                    h = false,
+                    hpp = false,
+                    cxx = false,
+                },
+                prompt_func_param_type = {
+                    go = false,
+                    java = false,
 
-            vim.keymap.set({ 'n', 'x' }, '<leader>rr', function()
-                require('telescope').extensions.refactoring.refactors()
-            end, { desc = 'Refactor' })
+                    cpp = false,
+                    c = false,
+                    h = false,
+                    hpp = false,
+                    cxx = false,
+                },
+                printf_statements = {},
+                print_var_statements = {},
+            })
+        end,
+    },
+    {
+        'folke/which-key.nvim',
+        event = 'VeryLazy',
+        config = function()
+            require('plugins.configs.whichkey')
         end,
     },
     {
@@ -28,6 +44,22 @@ return {
         end,
     },
     {
+        'uga-rosa/ccc.nvim',
+        cmd = { 'CccHighlighterToggle', 'CccConvert', 'CccPick' },
+        config = function()
+            vim.opt.termguicolors = true
+
+            local ccc = require('ccc')
+
+            ccc.setup({
+                highlighter = {
+                    auto_enable = true,
+                    lsp = true,
+                },
+            })
+        end,
+    },
+    {
         '2kabhishek/nerdy.nvim',
         dependencies = { 'stevearc/dressing.nvim' },
         cmd = 'Nerdy',
@@ -36,29 +68,6 @@ return {
         'folke/persistence.nvim',
         event = 'BufReadPre',
         opts = { options = vim.opt.sessionoptions:get() },
-        keys = {
-            {
-                '<leader>ms',
-                function()
-                    require('persistence').load()
-                end,
-                desc = 'Restore Session',
-            },
-            {
-                '<leader>ml',
-                function()
-                    require('persistence').load({ last = true })
-                end,
-                desc = 'Restore Last Session',
-            },
-            {
-                '<leader>md',
-                function()
-                    require('persistence').stop()
-                end,
-                desc = "Don't Save Current Session",
-            },
-        },
     },
     {
         'nvim-lua/plenary.nvim',
@@ -68,43 +77,23 @@ return {
         'iamcco/markdown-preview.nvim',
         build = 'cd app && yarn install',
         ft = { 'markdown' },
-        keys = {
-            {
-                '<leader>cm',
-                '<cmd>MarkdownPreviewToggle<CR>',
-                desc = 'toggle markdown preview',
-            },
-        },
     },
     {
         'nvim-pack/nvim-spectre',
-        build = false,
         cmd = 'Spectre',
-        opts = { open_cmd = 'noswapfile vnew' },
-        keys = {
-            {
-                '<leader>mr',
-                function()
-                    require('spectre').open()
-                end,
-                desc = 'Replace in Files (Spectre)',
-            },
-        },
-    },
-    {
-        'szw/vim-maximizer',
-
-        keys = {
-            { '<leader>mm', '<cmd>MaximizerToggle<CR>', desc = 'Maximize/minimize a split' },
-        },
+        config = function()
+            require('plugins.configs.spectre')
+        end,
     },
     {
         'folke/zen-mode.nvim',
-        cmd = { 'ZenMode' },
-        opts = {},
-        keys = {
-            { '<leader>wz', '<cmd>ZenMode<cr>', desc = 'Toggle zen mode' },
+        dependencies = {
+            'folke/twilight.nvim',
         },
+        config = function()
+            require('plugins.configs.zen&twilight')
+        end,
+        cmd = { 'ZenMode', 'Twilight' },
     },
     {
         'creativenull/dotfyle-metadata.nvim',
@@ -171,8 +160,5 @@ return {
             require('hardtime').setup({ enabled = true })
         end,
         cmd = 'Hardtime',
-        init = function()
-            vim.keymap.set('n', '<leader>ch', '<cmd>HardtimeToggle<cr>', { desc = 'Toggle Hardtime' })
-        end,
     },
 }

@@ -1,6 +1,5 @@
 -- Define nvim-lint linters here
 local linting_servers = {
-    'cpplint',
     'eslint_d',
     'cspell',
     'ruff',
@@ -26,8 +25,6 @@ return {
 
         lint.linters_by_ft = {
             -- lua = { 'selene' },
-            cpp = { 'cpplint' },
-            c = { 'cpplint' },
             javascript = { 'eslint_d' },
             typescript = { 'eslint_d' },
             javascriptreact = { 'eslint_d' },
@@ -46,7 +43,7 @@ return {
             end,
         })
 
-        vim.keymap.set('n', '<leader>cl', function()
+        vim.keymap.set('n', '<leader>cL', function()
             lint.try_lint()
         end, { desc = 'Trigger linting for current file' })
     end,
