@@ -173,7 +173,7 @@ lualine.setup({
         -- section_separators = '',
         theme = 'onedark',
         disabled_filetypes = {
-            'dashboard',
+            statusline = { 'neo-tree', 'alpha', 'dashboard', 'lspsagaoutline' },
         },
     },
     -- extensions = { 'quickfix', 'man', 'mason', 'lazy', 'toggleterm', 'nvim-tree' },

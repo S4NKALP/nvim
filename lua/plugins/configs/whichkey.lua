@@ -53,6 +53,7 @@ local n_mappings = {
     { '<leader>bx', '<cmd>DapTerminate<cr>', desc = 'Exit' },
 
     { '<leader>c', group = ' Code' },
+    { '<leader>a', '<cmd>Alternate<cr>', desc = 'Toggle Alternate' },
     { '<leader>cF', '<cmd>retab<cr>', desc = 'Fix Tabs' },
     { '<leader>cP', '<cmd>CccConvert<cr>', desc = 'Convert Color' },
     { '<leader>cR', '<cmd>ReloadConfig<cr>', desc = 'Reload Configs' },
@@ -217,6 +218,17 @@ local n_mappings = {
     { '<leader>on', '<cmd>set relativenumber!<cr>', desc = 'Relative Numbers' },
     { '<leader>oo', '<cmd>Telescope vim_options<cr>', desc = 'All Options' },
 
+    { '<leader>p', group = ' ScreenShot' },
+    { '<leader>py', '<cmd>CodeSnap<cr>', mode = 'x', desc = 'Save selected code snapshot into clipboard' },
+    { '<leader>ps', '<cmd>CodeSnapSave<cr>', mode = 'x', desc = 'Save selected code snapshot in ~/Pictures' },
+    {
+        '<leaderp>h',
+        '<cmd>CodeSnapHighlight<cr>',
+        mode = 'x',
+        desc = 'Highlight and snapshot selected code into clipboard',
+    },
+    { '<leader>pi', '<cmd>CodeSnapASCII<cr>', mode = 'x', desc = 'Save ASCII code snapshot into clipboard' },
+
     { '<leader>q', group = ' Quit' },
     { '<leader>qa', '<cmd>qall<cr>', desc = 'Quit All' },
     { '<leader>qc', '<cmd>bw<cr>', desc = 'Close Buffer' },
@@ -228,6 +240,30 @@ local n_mappings = {
     { '<leader>qw', '<cmd>wq<cr>', desc = 'Write and Quit' },
 
     { '<leader>r', group = ' Refactor' },
+    {
+        '<leader>rc',
+        function()
+            local file_name = vim.api.nvim_buf_get_name(0)
+            local file_type = vim.bo.filetype
+
+            if file_type == 'c' then
+                vim.cmd(':terminal gcc ' .. file_name .. '; ./a.out ')
+            elseif file_type == 'python' then
+                vim.cmd(':terminal python ' .. file_name)
+            elseif file_type == 'java' then
+                vim.cmd(':terminal javac ' .. file_name .. '; java ' .. file_name)
+            elseif file_type == 'lua' then
+                vim.cmd(':terminal lua ' .. file_name)
+                -- elseif file_type == 'js' then
+                --     vim.cmd(':terminal node ' .. file_name)
+                -- elseif file_type == 'rust' then
+                --     vim.cmd(':terminal rustc ' .. file_name .. '; ./a.out ')
+                -- elseif file_type == 'ts' then
+                --     vim.cmd(':terminal tsc ' .. file_name .. '; node ' .. file_name)
+            end
+        end,
+        desc = 'Code Runner',
+    },
     {
         '<leader>rR',
         "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",

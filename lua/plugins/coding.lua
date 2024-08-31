@@ -141,6 +141,11 @@ return {
             vim.keymap.set('n', '<leader>cI', '<cmd>CodeiumToggle<cr>', { desc = 'Toggle IA (Codeium)' })
         end,
     },
+    { -- Alternate
+        'ton/vim-alternate',
+        lazy = true,
+        ft = { 'cpp', 'h', 'hpp', 'c' },
+    },
     {
         'nacro90/numb.nvim',
         event = 'CmdlineEnter',

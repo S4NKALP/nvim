@@ -14,7 +14,6 @@ dashboard.setup({
     config = {
         week_header = {
             enable = true,
-            append = { '', icons.ui.Circle .. ' Learn, Make, Explore! ' .. icons.ui.Circle },
         },
         packages = { enable = true },
         project = { enable = true, limit = 8 },

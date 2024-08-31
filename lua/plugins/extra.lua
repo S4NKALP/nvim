@@ -113,6 +113,21 @@ return {
         event = { 'VimEnter' },
         lazy = false,
     },
+    { -- Codesnap
+        'mistricky/codesnap.nvim',
+        lazy = true,
+        build = 'make',
+        opts = {
+            save_path = '~/Pictures/screenshots/code',
+            has_breadcrumbs = false,
+            show_workspace = false,
+            bg_theme = 'default',
+            watermark = 'S4NKALP',
+            code_font_family = 'Iosevka NF',
+            code_font_size = 12,
+        },
+        cmd = { 'CodeSnap', 'CodeSnapSave', 'CodeSnapHighlight', 'CodeSnapASCII' },
+    },
     {
         'mvllow/modes.nvim',
         event = { 'BufReadPost', 'BufNewFile' },

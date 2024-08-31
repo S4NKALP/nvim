@@ -18,7 +18,7 @@ local cmp_nvim_lsp = require('cmp_nvim_lsp')
 -- import mason_lspconfig plugin
 local mason_lspconfig = require('mason-lspconfig')
 
-local keymap = vim.keymap -- for conciseness
+-- local keymap = vim.keymap -- for conciseness
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -102,9 +102,14 @@ mason_lspconfig.setup({
                         diagnostics = {
                             globals = { 'vim' },
                         },
-                        hint = { enable = true },
                         completion = {
                             callSnippet = 'Replace',
+                        },
+                        workspace = {
+                            library = {
+                                [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                                [vim.fn.stdpath('config') .. '/lua'] = true,
+                            },
                         },
                     },
                 },
