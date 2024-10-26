@@ -86,7 +86,7 @@ local n_mappings = {
     { '<leader>ea', '<cmd>b#<cr>', desc = 'Alternate File' },
     { '<leader>ec', '<cmd>e $MYVIMRC<cr>', desc = 'Config' },
     {
-        '<leader>ed',
+        '<leader>eC',
         '<cmd>lua require("telescope.builtin").find_files({cwd = vim.fn.stdpath("config")})<cr>',
         desc = 'Config Dir',
     },
@@ -95,6 +95,10 @@ local n_mappings = {
     { '<leader>ef', '<cmd>Telescope file_browser<cr>', desc = 'File Browser' },
     { '<leader>em', '<cmd>e README.md<cr>', desc = 'Readme' },
     { '<leader>en', '<cmd>new<cr>', desc = 'New File' },
+    { '<leader>ex', '<Cmd>!chmod +x %<CR>', desc = 'Make Current File Executable' },
+    { '<leader>es', '<Cmd>w<CR>', desc = 'Save File' },
+    { '<leader>ed', '<Cmd>!rm %<CR>', desc = 'Delete File' },
+    { '<leader>eD', '<Cmd>!rm %<CR><Cmd>bdelete<CR>', desc = 'Delete File and Buffer' },
 
     { '<leader>f', group = ' Find' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find Files (CWD)' },
@@ -318,6 +322,7 @@ local n_mappings = {
     { '<leader>t2', '<cmd>2ToggleTerm<cr>', desc = 'Toggle Terminal' },
     { '<leader>th', '<cmd>Sterm<cr>', desc = 'Horizontal Terminal' },
     { '<leader>tv', '<cmd>Vterm<cr>', desc = 'Vertical Terminal' },
+    { '<leader>tc', '<Cmd>close<CR>', desc = 'Hide Terminal' },
 
     { '<leader>u', group = ' Test' },
     { '<leader>uc', '<cmd>lua require("neotest").run.run()<cr>', desc = 'Run Current Test' },

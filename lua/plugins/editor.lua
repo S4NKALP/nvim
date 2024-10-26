@@ -1,5 +1,9 @@
 return {
     {
+        'lambdalisue/suda.vim',
+        cmd = { 'SudaRead', 'SudaWrite' },
+    },
+    {
         'nvim-neo-tree/neo-tree.nvim',
         cmd = { 'Neotree' },
         opts = {

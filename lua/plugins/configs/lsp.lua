@@ -1,13 +1,17 @@
 -- Define nvim-lspconfig LSP servers here
 local lsp_servers = {
-    'basedpyright',
+    -- 'basedpyright',
+    'pyright',
+    'pylsp',
     'lua_ls',
-    'tsserver',
+    'ts_ls',
     'tailwindcss',
     'emmet_ls',
     'bashls',
     'jdtls',
     'clangd',
+    'html',
+    'cssls',
 }
 
 local lspconfig = require('lspconfig')
@@ -115,20 +119,54 @@ mason_lspconfig.setup({
                 },
             })
         end,
-        ['basedpyright'] = function()
+        ['pyright'] = function()
             -- configure pyright server (with special settings)
-            lspconfig['basedpyright'].setup({
+            lspconfig['pyright'].setup({
                 capabilities = capabilities,
                 settings = {
                     python = {
                         hint = { enable = true },
+                        analysis = {
+                            ignore = { '*' },
+                            autoImportCompletions = false,
+                        },
                     },
+                    -- pyright = {
+                    --     -- Using Ruff's import organizer
+                    --     disableOrganizeImports = true,
+                    -- },
                 },
                 handlers = {
                     ['textDocument/publishDiagnostics'] = function() end,
                 },
             })
         end,
+        -- ['pylsp'] = function()
+        --     lspconfig['pylsp'].setup({
+        --         capabilities = capabilities,
+        --         settings = {
+        --             pylsp = {
+        --                 plugins = {
+        --                     autopep8 = {
+        --                         enabled = true,
+        --                     },
+        --                     pycodestyle = {
+        --                         enabled = true,
+        --                         ignore = { 'E501', 'E231', 'W503' },
+        --                         maxLineLength = 79,
+        --                     },
+        --                     pylint = {
+        --                         enabled = true,
+        --                         executable = 'pylint',
+        --                         args = {
+        --                             '--enable=W0611,W0614',
+        --                         },
+        --                     },
+        --                 },
+        --             },
+        --         },
+        --     })
+        -- end,
         ['emmet_ls'] = function()
             -- configure emmet language server
             lspconfig['emmet_ls'].setup({
@@ -141,6 +179,25 @@ mason_lspconfig.setup({
                     'typescriptreact',
                     'css',
                     'less',
+                },
+            })
+        end,
+        ['cssls'] = function()
+            lspconfig.cssls.setup({
+                capabilities = capabilities,
+                settings = {
+                    css = {
+                        validate = true,
+                        lint = {
+                            unknownAtRules = 'ignore',
+                        },
+                    },
+                    scss = {
+                        validate = true,
+                        lint = {
+                            unknownAtRules = 'ignore',
+                        },
+                    },
                 },
             })
         end,

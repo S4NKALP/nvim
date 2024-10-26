@@ -7,6 +7,7 @@ local linting_servers = {
     'trivy',
     'phpcs',
     'markdownlint',
+    'pylint',
 }
 
 return {

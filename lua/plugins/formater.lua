@@ -9,6 +9,8 @@ local formatting_servers = {
     'php-cs-fixer',
     'google-java-formatter',
     'codespell',
+    'autoflake',
+    'djlint',
 }
 
 return {
@@ -38,6 +40,7 @@ return {
                 lua = { 'stylua' },
                 python = { 'isort', 'black' },
                 php = { 'php-cs-fixer' },
+                htmldjango = { 'djlint' },
                 java = { 'google-java-formatter' },
                 graphql = { 'prettier' },
                 liquid = { 'prettier' },
@@ -45,6 +48,23 @@ return {
                 sh = { 'shfmt' },
                 ['*'] = { 'codespell' },
                 ['_'] = { 'trim_whitespace' },
+            },
+            formatters = {
+                prettier = {
+                    javascript = {
+                        args = { '--single-quote' },
+                    },
+                },
+                isort = {
+                    python = {
+                        args = { '--profile', 'black' },
+                    },
+                },
+                black = {
+                    python = {
+                        args = { '--fast', '--line-length', '80' },
+                    },
+                },
             },
             format_on_save = function(bufnr)
                 -- Disable with a global or buffer-local variable
@@ -54,7 +74,7 @@ return {
                 return {
                     lsp_fallback = true,
                     async = false,
-                    timeout_ms = 500,
+                    timeout_ms = 2500,
                 }
             end,
         })
@@ -63,7 +83,7 @@ return {
             conform.format({
                 lsp_fallback = true,
                 async = true,
-                timeout_ms = 1000,
+                timeout_ms = 2500,
             })
         end, { desc = 'Format file or range (in visual mode)' })
 

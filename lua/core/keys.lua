@@ -22,7 +22,14 @@ map('n', '<C-a>', 'gg<S-v>G')
 
 -- Use jj as escape
 map('i', 'jj', '<Esc>', opts)
+map('i', 'jk', '<Esc>', opts)
+map('i', 'kj', '<Esc>', opts)
 map('t', 'JJ', '<C-\\><C-n>', opts)
+
+-- Terminal Mappings
+map('t', 'jk', '<C-\\><C-n>')
+map('t', 'kj', '<C-\\><C-n>')
+map('t', '<ESC>', '<C-\\><C-n>')
 
 -- Visual overwrite paste
 map({ 'v', 'x' }, 'p', '"_dP', opts)
