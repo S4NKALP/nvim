@@ -7,6 +7,60 @@ return {
         end,
     },
     {
+        'cvigilv/esqueleto.nvim',
+        event = 'VeryLazy',
+        opts = {
+            directories = {
+                vim.fn.stdpath('config') .. '/templates',
+            },
+            patterns = {
+                -- File
+                'README',
+                'LICENSE',
+                -- Filetype
+                'sh',
+                'markdown',
+                'python',
+                'lua',
+                'html',
+                'vue',
+            },
+        },
+    },
+    {
+        'kawre/leetcode.nvim',
+        cmd = 'Leet',
+        build = ':TSUpdate html',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+            'nvim-lua/plenary.nvim', -- required by telescope
+            'MunifTanjim/nui.nvim',
+
+            -- optional
+            'nvim-treesitter/nvim-treesitter',
+            'rcarriga/nvim-notify',
+            'nvim-tree/nvim-web-devicons',
+        },
+        opts = {},
+    },
+    {
+        'epwalsh/pomo.nvim',
+        cmd = { 'TimerStart', 'TimerStop', 'TimerRepeat' },
+        dependencies = {
+            'rcarriga/nvim-notify',
+        },
+        opts = {
+            notifiers = {
+                {
+                    name = 'Default',
+                    opts = {
+                        sticky = false,
+                    },
+                },
+            },
+        },
+    },
+    {
         'ThePrimeagen/refactoring.nvim',
         config = function()
             require('refactoring').setup({

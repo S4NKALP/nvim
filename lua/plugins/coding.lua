@@ -1,7 +1,5 @@
 --Coding related
-
 return {
-
     {
         'max397574/better-escape.nvim',
         event = 'InsertEnter',
@@ -27,7 +25,6 @@ return {
             vim.g.VM_maps = {
                 ['Find Under'] = '',
             }
-
             vim.g.VM_maps['I BS'] = ''
             vim.g.VM_maps['I CtrlC'] = ''
             vim.g.VM_maps['I CtrlN'] = ''
@@ -46,7 +43,6 @@ return {
                     terminal_width = 45,
                     notification_timeout = 5,
                 },
-
                 inline_messages = 0,
                 borders = 'single',
             })
@@ -108,37 +104,29 @@ return {
                 vim.g.codeium_manual = false
                 vim.fn['codeium#Complete']()
             end)
-
             vim.g.codeium_filetypes = {
                 TelescopePrompt = false,
                 DressingInput = false,
                 ['neo-tree-popup'] = false,
                 ['dap-repl'] = false,
             }
-
             local opts = { expr = true, silent = true }
             vim.g.codeium_disable_bindings = 1
-
             vim.keymap.set('i', '<M-CR>', function()
                 return vim.fn['codeium#Accept']()
             end, opts)
-
             -- vim.keymap.set('n', '<leader>ch', function()
             --     return vim.fn['codeium#Chat']()
             -- end, { desc = 'Chat with IA (Codeium)' })
-
             vim.keymap.set('i', '<M-]>', function()
                 return vim.fn['codeium#CycleCompletions'](1)
             end, opts)
-
             vim.keymap.set('i', '<M-[>', function()
                 return vim.fn['codeium#CycleCompletions'](-1)
             end, opts)
-
             vim.keymap.set('i', '<M-c>', function()
                 return vim.fn['codeium#Clear']()
             end, opts)
-
             vim.keymap.set('n', '<leader>cI', '<cmd>CodeiumToggle<cr>', { desc = 'Toggle IA (Codeium)' })
         end,
     },
@@ -146,6 +134,18 @@ return {
         'ton/vim-alternate',
         lazy = true,
         ft = { 'cpp', 'h', 'hpp', 'c' },
+    },
+    {
+        'linux-cultist/venv-selector.nvim',
+        branch = 'regexp',
+        cmd = { 'VenvSelect', 'VenvSelectCached' },
+        init = function()
+            vim.keymap.set('n', '<leader>cv', '<cmd>VenvSelect<cr>', { desc = 'Venv Selector | Select Python venv' })
+        end,
+        opts = {},
+        config = function(_, opts)
+            require('venv-selector').setup(opts)
+        end,
     },
     {
         'nacro90/numb.nvim',
@@ -161,27 +161,14 @@ return {
         end,
     },
     {
-        'NStefan002/screenkey.nvim',
-        cmd = 'Screenkey',
-        version = '*',
-        config = function()
-            require('screenkey').setup({
-                win_opts = {
-                    relative = 'editor',
-                    anchor = 'SE',
-                    width = 40,
-                    height = 1,
-                    border = 'single',
-                },
-                compress_after = 3,
-                clear_after = 3,
-                disable = {
-                    filetypes = {}, -- for example: "toggleterm"
-                    buftypes = {}, -- for example: "terminal"
-                },
-            })
-        end,
+        'nvchad/showkeys',
+        cmd = 'ShowkeysToggle',
+        opts = {
+            timeout = 1,
+            maxkeys = 8,
+        },
     },
+    -- { 'rachartier/tiny-inline-diagnostic.nvim', event = 'BufReadPost', opts = {} },
     {
         'gbprod/yanky.nvim',
         event = 'BufReadPost',

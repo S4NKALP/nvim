@@ -2,7 +2,10 @@ return {
     {
         'mfussenegger/nvim-dap',
         dependencies = {
+            -- Creates a beautiful debugger UI
             'rcarriga/nvim-dap-ui',
+            -- Required dependency for nvim-dap-ui
+            'nvim-neotest/nvim-nio',
         },
         cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
         config = function()
@@ -94,27 +97,51 @@ return {
                     end,
                 },
             }
+            -- local dap_utils = require 'user.plugins.configs.dap.utils'
+            local BASH_DEBUG_ADAPTER_BIN = vim.fn.stdpath('data')
+                .. '/mason/packages/bash-debug-adapter/bash-debug-adapter'
+            local BASHDB_DIR = vim.fn.stdpath('data') .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir'
 
-            -- dap.adapters.ruby = {
-            --     type = 'executable',
-            --     command = 'bundle',
-            --     args = { 'exec', 'readapt', 'stdio' },
-            -- }
-
-            -- dap.configurations.ruby = {
-            --     {
-            --         type = 'ruby',
-            --         request = 'launch',
-            --         name = 'Rails',
-            --         program = 'bundle',
-            --         programArgs = { 'exec', 'rails', 's' },
-            --         useBundler = true,
-            --     },
-            -- }
+            dap.adapters.sh = {
+                type = 'executable',
+                command = BASH_DEBUG_ADAPTER_BIN,
+            }
+            dap.configurations.sh = {
+                {
+                    name = 'Launch Bash debugger',
+                    type = 'sh',
+                    request = 'launch',
+                    program = '${file}',
+                    cwd = '${fileDirname}',
+                    pathBashdb = BASHDB_DIR .. '/bashdb',
+                    pathBashdbLib = BASHDB_DIR,
+                    pathBash = 'bash',
+                    pathCat = 'cat',
+                    pathMkfifo = 'mkfifo',
+                    pathPkill = 'pkill',
+                    env = {},
+                    args = {},
+                    -- showDebugOutput = true,
+                    -- trace = true,
+                },
+            }
 
             vim.api.nvim_create_user_command('DapUIToggle', function()
                 require('dapui').toggle()
             end, {})
+        end,
+    },
+    {
+        'mfussenegger/nvim-dap-python',
+        ft = 'python',
+        dependencies = {
+            'mfussenegger/nvim-dap',
+            'rcarriga/nvim-dap-ui',
+            'nvim-neotest/nvim-nio',
+        },
+        config = function(_, _)
+            local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+            require('dap-python').setup(path)
         end,
     },
 }

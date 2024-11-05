@@ -144,6 +144,7 @@ return {
             })
         end,
     },
+    {},
     {
         'nvim-lualine/lualine.nvim',
         event = { 'BufReadPost', 'BufNewFile' },

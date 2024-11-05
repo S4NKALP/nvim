@@ -135,6 +135,48 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+vim.api.nvim_create_autocmd('BufReadPost', {
+    callback = function()
+        if vim.fn.line('\'"') > 1 and vim.fn.line('\'"') <= vim.fn.line('$') then
+            vim.cmd('normal! g`"')
+        end
+    end,
+    group = augroup('General'),
+    desc = 'Go To The Last Cursor Position',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'c', 'cpp', 'py', 'java', 'cs' },
+    callback = function()
+        vim.bo.shiftwidth = 4
+    end,
+    group = augroup('General'),
+    desc = 'Set shiftwidth to 4 in these filetypes',
+})
+
+-- Toggle between relative/absolute line numbers
+local numbertoggle = augroup('numbertoggle')
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'CmdlineLeave', 'WinEnter' }, {
+    pattern = '*',
+    group = numbertoggle,
+    callback = function()
+        if vim.o.nu and vim.api.nvim_get_mode().mode ~= 'i' then
+            vim.opt.relativenumber = true
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEnter', 'WinLeave' }, {
+    pattern = '*',
+    group = numbertoggle,
+    callback = function()
+        if vim.o.nu then
+            vim.opt.relativenumber = false
+            vim.cmd.redraw()
+        end
+    end,
+})
+
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                    VIM-VISUAL-MULTI                     │
 -- ╰─────────────────────────────────────────────────────────╯

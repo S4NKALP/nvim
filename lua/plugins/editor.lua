@@ -30,6 +30,7 @@ return {
     },
     {
         'folke/flash.nvim',
+        enabled = false,
         keys = {
             {
                 's',
@@ -71,7 +72,13 @@ return {
         lazy = true,
         dependencies = {
             { 'nvim-tree/nvim-web-devicons' },
-            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'zig' },
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+                cond = function()
+                    return vim.fn.executable('make') == 1
+                end,
+            },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-symbols.nvim' },
             { 'nvim-telescope/telescope-file-browser.nvim' },
