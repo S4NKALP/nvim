@@ -211,6 +211,13 @@ return {
         end,
     },
     {
+        'mbbill/undotree',
+
+        keys = {
+            { '<leader>mu', '<cmd>UndotreeToggle<CR>', desc = 'Undotree' },
+        },
+    },
+    {
         'LunarVim/bigfile.nvim',
         event = { 'BufEnter', 'WinEnter' },
         opts = {
@@ -229,12 +236,5 @@ return {
                 return false
             end,
         },
-    },
-    {
-        'm4xshen/hardtime.nvim',
-        config = function()
-            require('hardtime').setup({ enabled = true })
-        end,
-        cmd = 'Hardtime',
     },
 }

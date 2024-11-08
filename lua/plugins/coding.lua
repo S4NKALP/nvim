@@ -161,14 +161,18 @@ return {
         end,
     },
     {
-        'nvchad/showkeys',
-        cmd = 'ShowkeysToggle',
+        'rachartier/tiny-code-action.nvim',
+        enabled = false,
+        -- dev = true,
+        event = 'LspAttach',
         opts = {
-            timeout = 1,
-            maxkeys = 8,
+            backend = 'delta',
         },
+
+        config = function(_, opts)
+            require('tiny-code-action').setup(opts)
+        end,
     },
-    -- { 'rachartier/tiny-inline-diagnostic.nvim', event = 'BufReadPost', opts = {} },
     {
         'gbprod/yanky.nvim',
         event = 'BufReadPost',
