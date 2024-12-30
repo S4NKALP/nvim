@@ -1,18 +1,27 @@
 {
+  "actionlint": "v1.7.5",
   "bash-language-server": "5.4.2",
   "eslint-lsp": "4.10.0",
+  "golangci-lint": "v1.62.2",
   "gopls": "v0.17.1",
   "hadolint": "v2.12.0",
   "jdtls": "v1.43.0",
   "json-lsp": "4.10.0",
   "lua-language-server": "3.13.5",
+  "prettier": "3.4.2",
+  "proselint": "0.14.0",
   "pyright": "1.1.391",
   "rubocop": "1.69.2",
   "ruff": "0.8.4",
   "rust-analyzer": "2024-12-30",
   "shellcheck": "v0.10.0",
+  "shfmt": "v3.10.0",
   "solargraph": "0.50.0",
+  "stylua": "v2.0.2",
+  "tailwindcss-language-server": "0.0.27",
   "typescript-language-server": "4.3.3",
   "typos-lsp": "v0.1.32",
-  "vim-language-server": "2.3.1"
+  "vim-language-server": "2.3.1",
+  "vint": "0.3.21",
+  "write-good": "1.0.8"
 }

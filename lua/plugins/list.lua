@@ -395,7 +395,7 @@ local plugins = {
         'ThePrimeagen/vim-be-good',
         cmd = 'VimBeGood',
     },
-    { "tweekmonster/django-plus.vim" },
+    { 'tweekmonster/django-plus.vim' },
 
     -- Telescope
     {
@@ -478,7 +478,7 @@ local lsp_servers = {
     'lua_ls',
     'typos_lsp', -- check typos
     'vimls',
-
+    'tailwindcss',
 }
 
 local util = require('lib.util')
