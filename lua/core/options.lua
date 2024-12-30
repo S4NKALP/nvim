@@ -20,12 +20,11 @@ local options = {
     ignorecase = true, -- ignore case in search patterns
     inccommand = 'split', -- preview incremental substitute
     laststatus = 3,
-    title = true, -- title for context
-    list = false,
-    -- listchars = { trail = "", tab = "", nbsp = "_", extends = ">", precedes = "<" }, -- highlight
+    list = true,
+    -- listchars = { trail = '', tab = '', nbsp = '_', extends = '>', precedes = '<' }, -- highlight
     mouse = 'a', -- allow the mouse to be used in neovim
     number = true, -- set numbered lines
-    numberwidth = 4, -- set number column width to 3 {default 4}
+    numberwidth = 4, -- set number column width to 2 {default 4}
     pumblend = 10, -- Popup blen
     pumheight = 10, -- pop up menu height
     relativenumber = true, -- set relative numbered lines
@@ -48,6 +47,7 @@ local options = {
     tabstop = 4, -- insert 2 spaces for a tab
     termguicolors = true, -- set term gui colors (most terminals support this)
     timeoutlen = 300, -- time to wait for a mapped sequence to complete (in milliseconds)
+    title = true, -- window titles
     undofile = true, -- enable persistent undo
     undolevels = 10000,
     updatetime = 50, -- faster completion (4000ms default)

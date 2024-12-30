@@ -1,11 +1,8 @@
 local function augroup(name)
-    return vim.api.nvim_create_augroup('nvim' .. name, { clear = true })
+    return vim.api.nvim_create_augroup('nvim2k_' .. name, { clear = true })
 end
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │                Strip trailing spaces before write                 │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- Strip trailing spaces before write
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     group = augroup('strip_space'),
     pattern = { '*' },
@@ -14,19 +11,13 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │        Check if we need to reload the file when it changed        │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
     group = augroup('checktime'),
     command = 'checktime',
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │                         Highlight on yank                         │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = augroup('highlight_yank'),
     callback = function()
@@ -34,10 +25,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │                resize splits if window got resized                │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- resize splits if window got resized
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
     group = augroup('resize_splits'),
     callback = function()
@@ -45,10 +33,7 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │               go to last loc when opening a buffer                │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
     group = augroup('last_loc'),
     callback = function()
@@ -60,10 +45,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │                   close some filetypes with <q>                   │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
     group = augroup('close_with_q'),
     pattern = {
@@ -71,6 +53,7 @@ vim.api.nvim_create_autocmd('FileType', {
         'Jaq',
         'PlenaryTestPopup',
         'fugitive',
+        'git',
         'help',
         'lir',
         'lspinfo',
@@ -87,10 +70,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │            wrap and check for spell in text filetypes             │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd('FileType', {
     group = augroup('wrap_spell'),
     pattern = { 'gitcommit', 'markdown' },
@@ -100,11 +80,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │   Auto create dir when saving a file, in case some intermediate   │
---     │                     directory does not exist                      │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     group = augroup('auto_create_dir'),
     callback = function(event)
@@ -113,20 +89,14 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     end,
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │                         Set arb filetype                          │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- Set arb filetype
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
     group = augroup('set_file_type'),
     pattern = { '*.arb' },
     command = require('lib.util').get_file_type_cmd('arb'),
 })
 
---     ╭───────────────────────────────────────────────────────────────────╮
---     │                      Disable format options                       │
---     ╰───────────────────────────────────────────────────────────────────╯
-
+-- Disable format options
 vim.api.nvim_create_autocmd('FileType', {
     group = augroup('disable_formatoptions'),
     pattern = '*',
@@ -135,77 +105,22 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
-    callback = function()
-        if vim.fn.line('\'"') > 1 and vim.fn.line('\'"') <= vim.fn.line('$') then
-            vim.cmd('normal! g`"')
-        end
-    end,
-    group = augroup('General'),
-    desc = 'Go To The Last Cursor Position',
-})
+local function enable_autoformat()
+    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+        group = augroup('autoformat'),
+        pattern = { '*' },
+        callback = function()
+            vim.lsp.buf.format()
+        end,
+    })
+end
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'c', 'cpp', 'py', 'java', 'cs' },
-    callback = function()
-        vim.bo.shiftwidth = 4
-    end,
-    group = augroup('General'),
-    desc = 'Set shiftwidth to 4 in these filetypes',
-})
+enable_autoformat()
 
--- Toggle between relative/absolute line numbers
-local numbertoggle = augroup('numbertoggle')
-vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'CmdlineLeave', 'WinEnter' }, {
-    pattern = '*',
-    group = numbertoggle,
-    callback = function()
-        if vim.o.nu and vim.api.nvim_get_mode().mode ~= 'i' then
-            vim.opt.relativenumber = true
-        end
-    end,
-})
-
-vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEnter', 'WinLeave' }, {
-    pattern = '*',
-    group = numbertoggle,
-    callback = function()
-        if vim.o.nu then
-            vim.opt.relativenumber = false
-            vim.cmd.redraw()
-        end
-    end,
-})
-
--- ╭─────────────────────────────────────────────────────────╮
--- │                    VIM-VISUAL-MULTI                     │
--- ╰─────────────────────────────────────────────────────────╯
-local visual_multi_group = vim.api.nvim_create_augroup('VisualMulti', { clear = true })
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'visual_multi_start',
-    callback = function()
-        -- vim.cmd('NoiceDisable')
-        vim.lsp.inlay_hint.enable(false)
-    end,
-    group = visual_multi_group,
-})
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'visual_multi_exit',
-    callback = function()
-        -- vim.cmd('NoiceEnable')
-        vim.lsp.inlay_hint.enable(true)
-    end,
-    group = visual_multi_group,
-})
-
--- ╭─────────────────────────────────────────────────────────╮
--- │               MESSAGE IF MACRO IS STOPPED               │
--- ╰─────────────────────────────────────────────────────────╯
-local macro_group = vim.api.nvim_create_augroup('MacroRecording', { clear = true })
-vim.api.nvim_create_autocmd('RecordingLeave', {
-    group = macro_group,
-    callback = function()
-        -- Display a message when macro recording stops
-        print('Macro recording stopped')
-    end,
-})
+vim.api.nvim_create_user_command('WriteNoFormat', function()
+    -- Temporarily disable the autoformat autocmd
+    vim.api.nvim_del_augroup_by_name('nvim2k_autoformat')
+    vim.cmd('write')
+    -- Re-enable the autoformat autocmd
+    enable_autoformat()
+end, {})

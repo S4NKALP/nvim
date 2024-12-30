@@ -44,7 +44,7 @@
 
 - **Modular Structure**: Organized Lua scripts for readability and easy customization.
 - **Language Support**: Automated setup for various languages using Mason.nvim.
-- **Keybindings**: Streamlined shortcuts for productivity, detailed in `lua/plugins/configs/whichkey.lua`.
+- **Keybindings**: Streamlined shortcuts for productivity, detailed in `lua/plugins/tools/whichkey.lua`.
 - **Plugins**: Handpicked plugins managed via Lazy.nvim for enhanced functionality.
 
 ## System dependencies
