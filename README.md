@@ -6,10 +6,7 @@
 
 <p align="center">
 
-  <a href="https://github.com/S4NKALP/nvim/blob/main/LICENSE">
-<img alt="License" src="https://img.shields.io/github/license/S4NKALP/nvim?style=flat&color=eee&label="> </a>
-
-<a href="https://github.com/S4NKALP/nvim/graphs/contributors">
+ <a href="https://github.com/S4NKALP/nvim/graphs/contributors">
 <img alt="People" src="https://img.shields.io/github/contributors/S4NKALP/nvim?style=flat&color=ffaaf2&label=People"> </a>
 
 <a href="https://github.com/S4NKALP/nvim/stargazers">
