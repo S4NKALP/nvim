@@ -2,7 +2,7 @@
   <img src="assets/screenshot.png" alt="screenshot">
 </p>
 
-<h1 align="center">NEOVIM</h1>
+<h1 align="center">NVIM</h1>
 
 <p align="center">
 
