@@ -48,7 +48,7 @@
 
 Important system dependencies:
 
-- **Nerd fonts** ([information source](https://gist.github.com/matthewjberger/7dd7e079f282f8138a9dc3b045ebefa0)):
+- **Nerd fonts**
 
   - Download a [Nerd Font](https://www.nerdfonts.com/) (good choice is "JetBrainsMono Nerd Font").
   - Unzip and copy to '~/.local/share/fonts'.
