@@ -31,6 +31,8 @@ null_ls.setup({
         diag.write_good, -- english writing style
         format.mix, -- elixir formatter
         format.prettier, -- js, md, css, etc formatter
+        format.prettierd,
+        format.djlint, -- django, jinja formatter
         -- format.rubocop, -- ruby formatter
         format.shfmt, -- shell formatter
         format.stylua, -- lua formatter

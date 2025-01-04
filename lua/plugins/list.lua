@@ -478,6 +478,7 @@ local lsp_servers = {
     'lua_ls',
     'typos_lsp', -- check typos
     'vimls',
+    'jinja_lsp',
     'tailwindcss',
 }
 

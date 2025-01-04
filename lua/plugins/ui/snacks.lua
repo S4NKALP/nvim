@@ -11,7 +11,7 @@ Snacks.setup({
     bigfile = {
         enabled = true,
         notify = true,
-        size = 100 * 1024, -- 100 KB
+        size = 1.5 * 1024 * 1024, -- 1.5MB
     },
     bufdelete = { enabled = true },
     dashboard = {
