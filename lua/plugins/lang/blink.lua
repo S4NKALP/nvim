@@ -10,7 +10,7 @@ blink.setup({
     },
     -- 'preselect', 'manual', 'auto_insert'
     completion = {
-        list = { selection = 'auto_insert' },
+        list = { selection = { preselect = false, auto_insert = true } },
         menu = { border = 'rounded' },
         documentation = { window = { border = 'rounded' } },
     },
