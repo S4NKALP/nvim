@@ -510,7 +510,8 @@ local no_leader_mappings = {
     { '<C-k>', '<C-w>k', desc = 'Move Up' },
     { '<C-l>', '<C-w>l', desc = 'Move Right' },
     { '<C-\\>', '<C-w>p', desc = 'Previous Pane' },
-
+    { '<S-tab>', '<cmd>bprevious<cr>', desc = 'Previous Buffer' },
+    { '<tab>', '<cmd>bnext<cr>', desc = 'Next Buffer' },
     { '<S-h>', '<cmd>bprevious<cr>', desc = 'Previous Buffer' },
     { '<S-l>', '<cmd>bnext<cr>', desc = 'Next Buffer' },
 
