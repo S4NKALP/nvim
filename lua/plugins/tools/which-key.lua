@@ -39,19 +39,6 @@ local setup = {
 
 local normal_mappings = {
     mode = 'n',
-    { '<leader>a', group = ' AI' },
-    { '<leader>aF', '<cmd>CopilotChatFixDiagnostic<cr>', desc = 'Fix Diagnostic' },
-    { '<leader>aG', '<cmd>CopilotChatCommitStaged<cr>', desc = 'Commit Staged' },
-    { '<leader>ac', '<cmd>CopilotChatToggle<cr>', desc = 'Copilot Chat' },
-    { '<leader>ad', '<cmd>CopilotChatDocs<cr>', desc = 'Docs' },
-    { '<leader>ae', '<cmd>CopilotChatExplain<cr>', desc = 'Explain' },
-    { '<leader>af', '<cmd>CopilotChatFix<cr>', desc = 'Fix' },
-    { '<leader>ag', '<cmd>CopilotChatCommit<cr>', desc = 'Commit' },
-    { '<leader>al', '<cmd>CopilotChatLoad<cr>', desc = 'Load Chat' },
-    { '<leader>ao', '<cmd>CopilotChatOptimize<cr>', desc = 'Optimize' },
-    { '<leader>ar', '<cmd>CopilotChatReview<cr>', desc = 'Review' },
-    { '<leader>as', '<cmd>CopilotChatSave<cr>', desc = 'Save Chat' },
-    { '<leader>at', '<cmd>CopilotChatTests<cr>', desc = 'Tests' },
 
     { '<leader>b', group = ' Debug' },
     { '<leader>bO', '<cmd>DapStepOut<cr>', desc = 'Out' },
@@ -73,7 +60,6 @@ local normal_mappings = {
     { '<leader>cd', '<cmd>RootDir<cr>', desc = 'Root Directory' },
     { '<leader>ce', '<cmd>%SnipRun<cr>', desc = 'Execute File' },
     { '<leader>cf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', desc = 'Format File' },
-    { '<leader>ch', '<cmd>Hardtime toggle<cr>', desc = 'Hardtime' },
     { '<leader>cl', '<cmd>:g/^\\s*$/d<cr>', desc = 'Clean Empty Lines' },
     { '<leader>cm', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' },
     { '<leader>cn', '<cmd>lua require("snacks").notifier.show_history()<cr>', desc = 'Notifications' },
@@ -118,10 +104,6 @@ local normal_mappings = {
     { '<leader>ecn', '<cmd>e $MYVIMRC<cr>', desc = 'Neovim Init' },
     { '<leader>ecp', '<cmd>e ~/dotfiles/nvim/lua/plugins/list.lua<cr>', desc = 'Plugin List' },
     { '<leader>ect', '<cmd>e ~/dotfiles/tmux/tmux.conf<cr>', desc = 'Tmux Config' },
-
-    { '<leader>ee', ':Neotree toggle float<CR>', silent = true, desc = 'Float File Explorer' },
-    { '<leader>eE', ':Neotree toggle left<CR>', silent = true, desc = 'Left File Explorer' },
-    { '<leader>ef', '<cmd>Telescope file_browser<cr>', desc = 'File Browser' },
     { '<leader>eF', 'gf', desc = 'File Under Cursor' },
     { '<leader>em', '<cmd>e README.md<cr>', desc = 'Readme' },
     { '<leader>en', '<cmd>enew<cr>', desc = 'New File' },
@@ -428,17 +410,6 @@ end
 
 local visual_mappings = {
     mode = 'v',
-    { '<leader>a', group = ' AI' },
-    { '<leader>aF', '<cmd>CopilotChatFixDiagnostic<cr>', desc = 'Fix Diagnostic' },
-    { '<leader>aG', '<cmd>CopilotChatCommitStaged<cr>', desc = 'Commit Staged' },
-    { '<leader>ac', '<cmd>CopilotChatToggle<cr>', desc = 'Copilot Chat' },
-    { '<leader>ad', '<cmd>CopilotChatDocs<cr>', desc = 'Docs' },
-    { '<leader>ae', '<cmd>CopilotChatExplain<cr>', desc = 'Explain' },
-    { '<leader>af', '<cmd>CopilotChatFix<cr>', desc = 'Fix' },
-    { '<leader>ag', '<cmd>CopilotChatCommit<cr>', desc = 'Commit' },
-    { '<leader>ao', '<cmd>CopilotChatOptimize<cr>', desc = 'Optimize' },
-    { '<leader>ar', '<cmd>CopilotChatReview<cr>', desc = 'Review' },
-    { '<leader>at', '<cmd>CopilotChatTests<cr>', desc = 'Tests' },
 
     { '<leader>c', group = ' Code' },
     { '<leader>ce', "<esc><cmd>'<,'>SnipRun<cr>", desc = 'Execute Selection' },
@@ -540,43 +511,30 @@ local no_leader_mappings = {
     { '<C-l>', '<C-w>l', desc = 'Move Right' },
     { '<C-\\>', '<C-w>p', desc = 'Previous Pane' },
 
-    { '<S-tab>', '<cmd>bprevious<cr>', desc = 'Previous Buffer' },
-    { '<tab>', '<cmd>bnext<cr>', desc = 'Next Buffer' },
+    { '<S-h>', '<cmd>bprevious<cr>', desc = 'Previous Buffer' },
+    { '<S-l>', '<cmd>bnext<cr>', desc = 'Next Buffer' },
 
     { 'K', '<cmd>Lspsaga hover_doc<cr>', desc = 'LSP Hover' },
     { 'Q', '<cmd>qall!<cr>', desc = 'Force Quit!' },
     { 'U', '<cmd>redo<cr>', desc = 'Redo' },
 
     { '[', group = ' Previous' },
-    { '[B', '<cmd>bfirst<cr>', desc = 'First Buffer' },
-    { '[b', '<cmd>bprevious<cr>', desc = 'Buffer' },
-    { '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', desc = 'Diagnostic' },
     { '[g', '<cmd>Gitsigns prev_hunk<cr>', desc = 'Git Hunk' },
-    { '[j', '<C-o>', desc = 'Jump' },
-    { '[q', '<cmd>cprev<cr>', desc = 'Quickfix' },
+    { '[o', group = 'Textobjects' },
 
     { ']', group = ' Next' },
-    { ']B', '<cmd>blast<cr>', desc = 'Buffer' },
-    { ']b', '<cmd>bnext<cr>', desc = 'Buffer' },
-    { ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', desc = 'Diagnostic' },
     { ']g', '<cmd>Gitsigns next_hunk<cr>', desc = 'Git Hunk' },
-    { ']j', '<C-i>', desc = 'Jump' },
-    { ']q', '<cmd>cnext<cr>', desc = 'Quickfix' },
+    { ']o', group = 'Textobjects' },
 }
 
-local tmux_mappings = {
-    { '<C-h>', '<cmd>NavigatorLeft<cr>', desc = 'Move Left' },
-    { '<C-j>', '<cmd>NavigatorDown<cr>', desc = 'Move Down' },
-    { '<C-k>', '<cmd>NavigatorUp<cr>', desc = 'Move Up' },
-    { '<C-l>', '<cmd>NavigatorRight<cr>', desc = 'Move Right' },
-    { '<C-\\>', '<cmd>NavigatorPrevious<cr>', desc = 'Previous Pane' },
-}
+if vim.fn.exists('$TMUX') == 1 then
+    vim.tbl_extend('force', no_leader_mappings, tmux_mappings)
+end
+
+local user_keybindings = require('lib.util').get_user_config('user_keybindings', {})
 
 which_key.setup(setup)
 which_key.add(normal_mappings)
 which_key.add(visual_mappings)
 which_key.add(no_leader_mappings)
-
-if vim.fn.exists('$TMUX') == 1 then
-    which_key.add(tmux_mappings)
-end
+which_key.add(user_keybindings)

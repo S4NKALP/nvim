@@ -102,3 +102,13 @@ map('n', 'd', '"_d', { desc = 'Delete without replacing clipboard' })
 map('n', 'x', '"_x', { desc = 'Cut without replacing clipboard' })
 map('n', 'c', '"_c', { desc = 'Change without replacing clipboard' })
 map('v', 'p', '"_dP', { desc = 'Paste without replacing clipboard' })
+
+-- Toggle relative numbers off or on (for code presentation)
+map({ 'n', 'v' }, '<leader>tn', '<cmd>set rnu!<cr>', {})
+
+--insert the following characters around the visual selection
+map('v', '<leader>(', 's()<esc>Pll', { desc = 'wrap selection with parens' })
+map('v', '<leader>[', 's[]<esc>Pll', { desc = 'wrap selection with square braces' })
+map('v', '<leader>{', 's{}<esc>Pll', { desc = 'wrap selection with curly braces' })
+map('v', "<leader>'", "s''<esc>Pll", { desc = 'wrap selection with single quotes' })
+map('v', '<leader>"', 's""<esc>Pll', { desc = 'wrap selection with double quotes' })

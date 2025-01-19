@@ -52,51 +52,51 @@ local textobjects = {
         enable = true,
         swap_next = {
             ['<leader>rna'] = '@parameter.inner', -- swap object property with next
-            ['<leader>rn:'] = '@property.outer', -- swap parameters/argument with next
-            ['<leader>rnm'] = '@function.outer', -- swap function with next
+            ['<leader>rn:'] = '@property.outer',  -- swap parameters/argument with next
+            ['<leader>rnm'] = '@function.outer',  -- swap function with next
         },
         swap_previous = {
             ['<leader>rpa'] = '@parameter.inner', -- swap parameters/argument with prev
-            ['<leader>rp:'] = '@property.outer', -- swap object property with prev
-            ['<leader>rpm'] = '@function.outer', -- swap function with previous
+            ['<leader>rp:'] = '@property.outer',  -- swap object property with prev
+            ['<leader>rpm'] = '@function.outer',  -- swap function with previous
         },
     },
     move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-            [']c'] = { query = '@class.outer', desc = 'Next class start' },
-            [']f'] = { query = '@call.outer', desc = 'Next function call start' },
-            [']i'] = { query = '@conditional.outer', desc = 'Next conditional start' },
-            [']l'] = { query = '@loop.outer', desc = 'Next loop start' },
-            [']m'] = { query = '@function.outer', desc = 'Next method/function def start' },
-            [']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
+        goto_previous_start = {
+            ['[oc'] = { query = '@class.outer', desc = 'Prev class start' },
+            ['[of'] = { query = '@call.outer', desc = 'Prev function call start' },
+            ['[oi'] = { query = '@conditional.outer', desc = 'Prev conditional start' },
+            ['[ol'] = { query = '@loop.outer', desc = 'Prev loop start' },
+            ['[om'] = { query = '@function.outer', desc = 'Prev method def start' },
+            ['[z'] = { query = '@fold', query_group = 'folds', desc = 'Prev fold' },
             -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
             -- Above example nvim-treesitter's folds.scm`. They also provide locals.scm, highlights.scm and indent.scm.
         },
-        goto_next_end = {
-            [']C'] = { query = '@class.outer', desc = 'Next class end' },
-            [']F'] = { query = '@call.outer', desc = 'Next function call end' },
-            [']I'] = { query = '@conditional.outer', desc = 'Next conditional end' },
-            [']L'] = { query = '@loop.outer', desc = 'Next loop end' },
-            [']M'] = { query = '@function.outer', desc = 'Next method/function def end' },
-            [']Z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold end' },
-        },
-        goto_previous_start = {
-            ['[c'] = { query = '@class.outer', desc = 'Prev class start' },
-            ['[f'] = { query = '@call.outer', desc = 'Prev function call start' },
-            ['[i'] = { query = '@conditional.outer', desc = 'Prev conditional start' },
-            ['[l'] = { query = '@loop.outer', desc = 'Prev loop start' },
-            ['[m'] = { query = '@function.outer', desc = 'Prev method/function def start' },
-            ['[z'] = { query = '@fold', query_group = 'folds', desc = 'Prev fold' },
-        },
         goto_previous_end = {
-            ['[C'] = { query = '@class.outer', desc = 'Prev class end' },
-            ['[F'] = { query = '@call.outer', desc = 'Prev function call end' },
-            ['[I'] = { query = '@conditional.outer', desc = 'Prev conditional end' },
-            ['[L'] = { query = '@loop.outer', desc = 'Prev loop end' },
-            ['[M'] = { query = '@function.outer', desc = 'Prev method/function def end' },
+            ['[oC'] = { query = '@class.outer', desc = 'Prev class end' },
+            ['[oF'] = { query = '@call.outer', desc = 'Prev function call end' },
+            ['[oI'] = { query = '@conditional.outer', desc = 'Prev conditional end' },
+            ['[oL'] = { query = '@loop.outer', desc = 'Prev loop end' },
+            ['[oM'] = { query = '@function.outer', desc = 'Prev method def end' },
             ['[Z'] = { query = '@fold', query_group = 'folds', desc = 'Prev fold end' },
+        },
+        goto_next_start = {
+            [']oc'] = { query = '@class.outer', desc = 'Next class start' },
+            [']of'] = { query = '@call.outer', desc = 'Next function call start' },
+            [']oi'] = { query = '@conditional.outer', desc = 'Next conditional start' },
+            [']ol'] = { query = '@loop.outer', desc = 'Next loop start' },
+            [']om'] = { query = '@function.outer', desc = 'Next method def start' },
+            [']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
+        },
+        goto_next_end = {
+            [']oC'] = { query = '@class.outer', desc = 'Next class end' },
+            [']oF'] = { query = '@call.outer', desc = 'Next function call end' },
+            [']oI'] = { query = '@conditional.outer', desc = 'Next conditional end' },
+            [']oL'] = { query = '@loop.outer', desc = 'Next loop end' },
+            [']oM'] = { query = '@function.outer', desc = 'Next method def end' },
+            [']Z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold end' },
         },
     },
 }
@@ -114,3 +114,4 @@ vim.keymap.set({ 'n', 'x', 'o' }, 't', ts_repeat_move.builtin_t)
 vim.keymap.set({ 'n', 'x', 'o' }, 'T', ts_repeat_move.builtin_T)
 
 return textobjects
+

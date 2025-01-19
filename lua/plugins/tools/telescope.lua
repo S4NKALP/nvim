@@ -115,18 +115,6 @@ telescope.setup({
             override_file_sorter = true,
             case_mode = 'smart_case',
         },
-        file_browser = {
-            theme = 'ivy',
-            hijack_netrw = true,
-            mappings = {
-                ['i'] = {
-                    -- your custom insert mode mappings
-                },
-                ['n'] = {
-                    -- your custom normal mode mappings
-                },
-            },
-        },
         undo = {
             use_delta = true,
             use_custom_command = nil,
@@ -156,4 +144,3 @@ telescope.load_extension('fzf')
 telescope.load_extension('undo')
 telescope.load_extension('marks_nvim')
 telescope.load_extension('refactoring')
-telescope.load_extension('file_browser')

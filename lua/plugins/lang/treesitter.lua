@@ -14,9 +14,6 @@ treesitter.setup({
     auto_install = true,
 
     textobjects = textobjects,
-    autopairs = { enable = true },
-    endwise = { enable = true },
-    autotag = { enable = true },
     matchup = { enable = true },
     indent = { enable = true },
 
@@ -82,3 +79,4 @@ treesitter.setup({
         },
     },
 })
+
