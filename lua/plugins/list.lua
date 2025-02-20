@@ -147,7 +147,7 @@ local plugins = {
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {
             {
-                '<leader>eM',
+                '<leader>ee',
                 function()
                     require('mini.files').open(util.get_file_path(), true)
                 end,
@@ -338,7 +338,7 @@ local plugins = {
     {
         -- 'chentoast/marks.nvim',
         '2kabhishek/markit.nvim',
-        config = load_config('tools.marks'),
+        config = load_config('tools.markit'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
     {
