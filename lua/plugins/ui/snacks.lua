@@ -1,6 +1,54 @@
 local Snacks = require('snacks')
 local icons = require('lib.icons')
 
+local function files_layout(preview_width, height, width)
+    preview_width = preview_width or 0.6
+    height = height or 0.8
+    width = width or 0.9
+    return {
+        layout = {
+            box = 'horizontal',
+            width = width,
+            min_width = 120,
+            height = height,
+            {
+                box = 'vertical',
+                border = 'rounded',
+                title = '{title} {live} {flags}',
+                { win = 'input', height = 1, border = 'bottom' },
+                { win = 'list', border = 'none' },
+            },
+            { win = 'preview', title = '{preview}', border = 'rounded', width = preview_width },
+        },
+    }
+end
+
+local function palette_layout(height, width)
+    height = height or 0.4
+    width = width or 0.6
+    return {
+        preview = false,
+        layout = {
+            backdrop = false,
+            row = 1,
+            width = width,
+            min_width = 80,
+            height = height,
+            border = 'rounded',
+            box = 'vertical',
+            {
+                win = 'input',
+                height = 1,
+                border = 'rounded',
+                title = '{title} {live} {flags}',
+                title_pos = 'center',
+            },
+            { win = 'list', border = 'hpad' },
+            { win = 'preview', title = '{preview}', border = 'rounded' },
+        },
+    }
+end
+
 Snacks.setup({
     animate = {
         enabled = true,
@@ -11,7 +59,7 @@ Snacks.setup({
     bigfile = {
         enabled = true,
         notify = true,
-        size = 1.5 * 1024 * 1024, -- 1.5MB
+        size = 100 * 1024, -- 100 KB
     },
     bufdelete = { enabled = true },
     dashboard = {
@@ -51,8 +99,10 @@ Snacks.setup({
             siblings = true,
         },
     },
+    explorer = { enabled = false },
     git = { enabled = true },
     gitbrowse = { enabled = true },
+    image = { enabled = true },
     indent = {
         enabled = true,
         priority = 1,
@@ -79,6 +129,7 @@ Snacks.setup({
         win = { style = 'input' },
         expand = true,
     },
+    layout = { enabled = true },
     lazygit = { enabled = true },
     notifier = {
         enabled = true,
@@ -103,6 +154,40 @@ Snacks.setup({
         refresh = 50,
     },
     notify = { enabled = true },
+    picker = {
+        enabled = true,
+        icon = icons.ui.Search,
+        icon_hl = 'SnacksPickerIcon',
+        icon_pos = 'left',
+        prompt_pos = 'title',
+        win = { style = 'picker' },
+        expand = true,
+        sources = {
+            -- layout options: dropdown, horizontal, vertical, vscode, ivy, ivy_split, telescope, top, left, right, bottom, sidebar
+            buffers = { layout = files_layout() },
+            commands = { layout = palette_layout() },
+            command_history = { layout = palette_layout() },
+            files = {
+                hidden = true,
+                layout = files_layout(),
+            },
+            icons = {
+                icon_sources = { 'nerd_fonts', 'emoji' },
+                layout = palette_layout(),
+            },
+            git_files = { layout = files_layout() },
+            git_branches = { layout = { preset = 'vertical' } },
+            git_status = { layout = files_layout() },
+            help = { layout = { preset = 'ivy_split' } },
+            man = { layout = { preset = 'ivy_split' } },
+            projects = { layout = files_layout(0.8) },
+            recent = { layout = files_layout() },
+            search_history = { layout = palette_layout() },
+            smart = { layout = files_layout() },
+            undo = { layout = { preset = 'ivy' } },
+            zoxide = { layout = files_layout(0.7) },
+        },
+    },
     profiler = { enabled = true },
     quickfile = { enabled = true },
     rename = { enabled = true },

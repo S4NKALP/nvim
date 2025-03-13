@@ -15,8 +15,8 @@ vim.g.maplocalleader = ' '
 -- visual_block_mode = "x", term_mode = "t", command_mode = "c",
 
 -- Comment
-map({ 'n', 'v' }, '<leader>/', 'gcc', { desc = 'Comment toggle', remap = true })
-map({ 'v', 'x' }, '<leader>/', 'gc', { desc = 'Comment toggle', remap = true })
+-- map({ 'n', 'v' }, '<leader>;', 'gcc', { desc = 'Comment toggle', remap = true })
+-- map({ 'v', 'x' }, '<leader>;', 'gc', { desc = 'Comment toggle', remap = true })
 
 -- Able to use semicolon in normal mode
 map('n', ';', ':', { desc = '; Command mode' })
@@ -61,8 +61,8 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move text up and down
-map({ 'v', 'x' }, 'J', ":move '>+1<CR>gv-gv", opts)
-map({ 'v', 'x' }, 'K', ":move '<-2<CR>gv-gv", opts)
+map({ 'v', 'x' }, 'J', ":move '>+1<cr>gv-gv", opts)
+map({ 'v', 'x' }, 'K', ":move '<-2<cr>gv-gv", opts)
 
 -- Clear search, diff update and redraw
 map({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
