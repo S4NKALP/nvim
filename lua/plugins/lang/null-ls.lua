@@ -14,7 +14,6 @@ null_ls.setup({
     diagnostics_format = '#{c} #{m} (#{s})',
     sources = {
         action.proselint, -- markdown actions
-        action.refactoring,
         -- action.ts_node_action, -- treesitter node actions, buggy, causes repeated notifications
         comp.spell, -- spell completion
         comp.tags, -- tags completion
@@ -31,8 +30,6 @@ null_ls.setup({
         diag.write_good, -- english writing style
         format.mix, -- elixir formatter
         format.prettier, -- js, md, css, etc formatter
-        format.prettierd,
-        format.djlint, -- django, jinja formatter
         -- format.rubocop, -- ruby formatter
         format.shfmt, -- shell formatter
         format.stylua, -- lua formatter

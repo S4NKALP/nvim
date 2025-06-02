@@ -7,40 +7,49 @@ if auto_install then
     installed_servers = require('plugins.list').lsp_servers
 end
 
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 local default_setup = function(server)
-    lspconfig[server].setup({
-        capabilities = require('blink.cmp').get_lsp_capabilities(),
-    })
-end
-
-local signs = { Error = icons.Error, Warn = icons.Warning, Hint = icons.Hint, Info = icons.Information }
-for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    if server == 'tailwindcss' then
+        lspconfig[server].setup({
+            capabilities = capabilities,
+            filetypes = { 
+                'html', 'css', 'scss', 'javascript', 'javascriptreact', 
+                'typescript', 'typescriptreact', 'vue', 'svelte'
+            },
+            init_options = {
+                userLanguages = {
+                    ['javascript'] = 'javascript',
+                    ['javascriptreact'] = 'javascript',
+                    ['typescript'] = 'typescript',
+                    ['typescriptreact'] = 'typescript',
+                },
+            },
+        })
+    else
+        lspconfig[server].setup({
+            capabilities = capabilities,
+        })
+    end
 end
 
 require('mason-lspconfig').setup({
     ensure_installed = installed_servers,
-    handlers = {
-        default_setup,
-        lua_ls = function()
-            lspconfig.lua_ls.setup({
-                settings = {
-                    Lua = {
-                        runtime = { version = 'LuaJIT' },
-                        diagnostics = { globals = { 'vim' } },
-                        workspace = { library = { vim.env.VIMRUNTIME } },
-                        format = {
-                            enable = true,
-                            defaultConfig = {
-                                align_continuous_assign_statement = false,
-                                align_continuous_rect_table_field = false,
-                                align_array_table = false,
-                            },
-                        },
-                    },
-                },
-            })
-        end,
+    handlers = { default_setup },
+})
+
+local signs = { Error = icons.Error, Warn = icons.Warning, Hint = icons.Hint, Info = icons.Information }
+vim.diagnostic.config({
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+    virtual_text = true,
+    float = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = signs.Error,
+            [vim.diagnostic.severity.WARN] = signs.Warn,
+            [vim.diagnostic.severity.INFO] = signs.Info,
+            [vim.diagnostic.severity.HINT] = signs.Hint,
+        },
     },
 })

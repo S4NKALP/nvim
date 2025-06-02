@@ -2,7 +2,7 @@ local lualine = require('lualine')
 local icons = require('lib.icons')
 
 local colors = {
-    bg = '#202328',
+    bg = '#000000',
     fg = '#bbc2cf',
     yellow = '#ECBE7B',
     cyan = '#008080',
@@ -57,6 +57,7 @@ local conditions = {
         return gitdir and #gitdir > 0 and #gitdir < #filepath
     end,
 }
+
 local searchcount = { 'searchcount', color = { fg = colors.fg, gui = 'bold' } }
 local selectioncount = { 'selectioncount', color = { fg = colors.fg, gui = 'bold' } }
 local progress = { 'progress', color = { fg = colors.fg, gui = 'bold' } }
@@ -75,11 +76,16 @@ local buffers = {
     mode = 2,
     cond = conditions.buffer_not_scratch,
     filetype_names = {
+        NvimTree = icons.documents.OpenFolder .. 'Files',
         TelescopePrompt = icons.ui.Telescope .. 'Telescope',
+        Avante = icons.ui.Copilot .. 'Avante',
+        AvanteInput = icons.ui.Pencil .. 'Avante',
+        AvanteSelectedFiles = icons.documents.File .. 'Avante',
         dashboard = icons.ui.Dashboard .. 'Dashboard',
         lazy = icons.ui.Sleep .. 'Lazy',
         mason = icons.ui.Package .. 'Mason',
-        NvimTree = icons.documents.OpenFolder .. 'Files',
+        minifiles = icons.documents.OpenFolder .. 'Files',
+        snacks_picker_input = icons.ui.Telescope .. 'Picker',
         spectre_panel = icons.ui.Search .. 'Spectre',
     },
     use_mode_colors = true,
@@ -125,13 +131,13 @@ local diagnostics = {
 local lsp = {
     function()
         local msg = 'No LSP'
-        local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-        local clients = vim.lsp.get_active_clients()
+        local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+        local clients = vim.lsp.get_clients()
         if next(clients) == nil then
             return msg
         end
         for _, client in ipairs(clients) do
-            local filetypes = client.config.filetypes
+            local filetypes = client.config and client.config.filetypes or nil
             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
                 return client.name
             end
@@ -149,16 +155,6 @@ local encoding = {
     color = { fg = colors.green, gui = 'bold' },
 }
 
-local separator = {
-    function()
-        return icons.ui.Separator
-    end,
-    color = function()
-        return { fg = mode_color[vim.fn.mode()] }
-    end,
-    padding = { left = 0, right = 0 },
-}
-
 local function mode(icon)
     icon = icon or icons.ui.Neovim
     return {
@@ -172,11 +168,14 @@ local function mode(icon)
     }
 end
 
+local custom_onedark = require('lualine.themes.onedark')
+custom_onedark.normal.c.bg = colors.bg
+
 lualine.setup({
     options = {
         component_separators = '',
         -- section_separators = '',
-        theme = 'onedark',
+        theme = custom_onedark,
         disabled_filetypes = {
             'dashboard',
         },
@@ -193,8 +192,8 @@ lualine.setup({
     sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { separator, mode(icons.ui.Heart), 'location', progress, filename },
-        lualine_x = { diagnostics, lsp, filetype, filesize, fileformat, encoding, separator },
+        lualine_c = { mode(icons.ui.Heart), 'location', progress, filename },
+        lualine_x = { diagnostics, lsp, filetype, filesize, fileformat, encoding },
         lualine_y = {},
         lualine_z = {},
     },

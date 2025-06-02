@@ -1,10 +1,10 @@
 local which_key = require('which-key')
 local icons = require('lib.icons')
-local Snacks = require('snacks')
 local util = require('lib.util')
+local prompts = require('lib.prompts')
 
 local setup = {
-    preset = 'helix',
+    preset = 'modern',
     plugins = {
         marks = true,
         registers = true,
@@ -31,21 +31,48 @@ local setup = {
         },
         rules = false, -- enable auto icon rules
     },
+    win = {
+        no_overlap = true,
+        border = 'rounded',
+        width = 0.8,
+        height = { min = 5, max = 25 },
+        padding = { 1, 2 },
+        title = true,
+        title_pos = 'center',
+        zindex = 1000,
+        wo = {
+            winblend = 10,
+        },
+    },
+    layout = {
+        width = { min = 20 },
+        spacing = 6,
+        align = 'center',
+    },
     show_help = false,
     show_keys = true,
     triggers = {
-        { '<auto>', mode = 'nixsotc' },
+        { '<auto>', mode = 'nvisoct' },
         { '<leader>', mode = { 'n', 'v' } },
     },
 }
 
 local normal_mappings = {
     mode = 'n',
-    { '<leader><space>', ':lua Snacks.picker.smart()<cr>', desc = 'Smart Find Files' },
-    { '<leader>,', ':lua Snacks.picker.buffers()<cr>', desc = 'Buffers' },
-    { '<leader>/', ':lua Snacks.picker.search_history()<cr>', desc = 'Search History' },
-    { '<leader>:', ':lua Snacks.picker.command_history()<cr>', desc = 'Command History' },
     { '<leader>x', ':x<cr>', desc = ' Save and Quit' },
+
+    { '<leader>a', group = ' AI' },
+    { '<leader>aC', ':AvanteClear<cr>', desc = 'avante: clear' },
+    { '<leader>am', ':MCPHub<cr>', desc = 'MCPHub' },
+    { '<leader>an', ':AvanteChatNew<cr>', desc = 'avante: new' },
+    { '<leader>ap', group = 'Insert Prompt' },
+    { '<leader>apd', prompts.add_prompt('docs'), desc = 'Docs' },
+    { '<leader>ape', prompts.add_prompt('explain'), desc = 'Explain' },
+    { '<leader>apf', prompts.add_prompt('fix'), desc = 'Fix' },
+    { '<leader>apg', prompts.add_prompt('commit'), desc = 'Commit' },
+    { '<leader>apo', prompts.add_prompt('optimize'), desc = 'Optimize' },
+    { '<leader>apr', prompts.add_prompt('review'), desc = 'Review' },
+    { '<leader>apt', prompts.add_prompt('tests'), desc = 'Tests' },
 
     { '<leader>c', group = ' Code' },
     { '<leader>cF', ':retab<cr>', desc = 'Fix Tabs' },
@@ -72,39 +99,19 @@ local normal_mappings = {
     { '<leader>e', group = ' Edit' },
     { '<leader>ea', ':b#<cr>', desc = 'Alternate File' },
     { '<leader>ec', group = 'Edit Configs' },
-    { '<leader>ecc', ':lua Snacks.picker.files({ cwd = vim.fn.stdpath("config") })<cr>', desc = 'Neovim Configs' },
     { '<leader>ecg', ':e ~/.gitconfig<cr>', desc = 'Git Config' },
-    { '<leader>eck', ':e ~/dotfiles/kitty/kitty.conf<cr>', desc = 'Kitty Config' },
+    { '<leader>eck', ':e ~/.config/kitty/kitty.conf<cr>', desc = 'Kitty Config' },
     { '<leader>ecn', ':e $MYVIMRC<cr>', desc = 'Neovim Init' },
-    { '<leader>ecp', ':e ~/dotfiles/nvim/lua/plugins/list.lua<cr>', desc = 'Plugin List' },
-    { '<leader>ect', ':e ~/dotfiles/tmux/tmux.conf<cr>', desc = 'Tmux Config' },
-    { '<leader>ecv', ':e ~/.vimrc<cr>', desc = 'Vim Config' },
-    { '<leader>ecz', ':e $ZDOTDIR/.zshrc<cr>', desc = 'Zsh Config' },
-    { '<leader>ecZ', ':e $ZDOTDIR/prompt/init.zsh<cr>', desc = 'Zsh Prompt Config' },
-    { '<leader>ee', ':lua MiniFiles.open()<cr>', desc = 'Explore Tree' },
+    { '<leader>ecp', ':e ~/.config/nvim/lua/plugins/list.lua<cr>', desc = 'Plugin List' },
+    { '<leader>ect', ':e ~/.config/tmux/tmux.conf<cr>', desc = 'Tmux Config' },
     { '<leader>eE', ':lua Snacks.explorer()<cr>', desc = 'File Explorer' },
+    { '<leader>et', ':lua MiniFiles.open()<cr>', desc = 'Explore Tree' },
     { '<leader>ef', 'gf', desc = 'File Under Cursor' },
     { '<leader>em', ':e README.md<cr>', desc = 'Readme' },
     { '<leader>en', ':enew<cr>', desc = 'New File' },
 
     { '<leader>f', group = ' Find' },
-    { '<leader>fa', ':lua Snacks.picker.files()<cr>', desc = 'Find Files' },
-    { '<leader>fb', ':lua Snacks.picker.buffers()<cr>', desc = 'Buffers' },
-    { '<leader>fc', ':lua Snacks.picker.git_log_file()<cr>', desc = 'File Commits' },
-    { '<leader>fd', ':lua Snacks.picker.projects()<cr>', desc = 'Project Dirs' },
-    { '<leader>ff', ':lua Snacks.picker.git_files()<cr>', desc = 'Find Git Files' },
-    { '<leader>fg', ':lua Snacks.picker.grep()<cr>', desc = 'Grep' },
-    { '<leader>fl', ':lua Snacks.picker.loclist()<cr>', desc = 'Location List' },
-    { '<leader>fm', ':lua Snacks.picker.git_status()<cr>', desc = 'Modified Files' },
-    { '<leader>fo', ':lua Snacks.picker.grep_buffers()<cr>', desc = 'Grep Open Buffers' },
-    { '<leader>fp', ':lua Snacks.picker.resume()<cr>', desc = 'Previous Picker' },
-    { '<leader>fq', ':lua Snacks.picker.qflist()<cr>', desc = 'Quickfix List' },
-    { '<leader>fr', ':lua Snacks.picker.recent()<cr>', desc = 'Recent' },
-    { '<leader>fs', ':lua Snacks.picker.lines()<cr>', desc = 'Buffer Lines' },
-    { '<leader>ft', ':lua Snacks.picker.pickers()<cr>', desc = 'All Pickers' },
-    { '<leader>fu', ':lua Snacks.picker.undo()<cr>', desc = 'Undo History' },
-    { '<leader>fw', ':lua Snacks.picker.grep_word()<cr>', desc = 'Word Grep' },
-    { '<leader>fz', ':lua Snacks.picker.zoxide()<cr>', desc = 'Zoxide' },
+    { '<leader>fx', ':%bd|e#|bd#<cr>', desc = 'Close except current' },
 
     { '<leader>g', group = ' Git' },
     { '<leader>gA', ':Gitsigns stage_buffer<cr>', desc = 'Stage Buffer' },
@@ -113,6 +120,7 @@ local normal_mappings = {
     { '<leader>gR', ':Gitsigns reset_buffer<cr>', desc = 'Reset Buffer' },
     { '<leader>ga', ':Gitsigns stage_hunk<cr>', desc = 'Stage Hunk' },
     { '<leader>gb', ":lua require('gitsigns').blame_line({full = true})<cr>", desc = 'Blame' },
+    { '<leader>gc', ':Git commit<cr>', desc = 'Commit Staged' },
     { '<leader>gB', ":lua require('snacks').git.blame_line()<cr>", desc = 'Detailed Blame' },
     { '<leader>gd', ':Gitsigns diffthis HEAD<cr>', desc = 'Git Diff' },
     { '<leader>gF', ':Git<cr>', desc = 'Fugitive Panel' },
@@ -120,13 +128,9 @@ local normal_mappings = {
     { '<leader>gi', ':Gitsigns preview_hunk<cr>', desc = 'Hunk Info' },
     { '<leader>gj', ':Gitsigns next_hunk<cr>', desc = 'Next Hunk' },
     { '<leader>gk', ':Gitsigns prev_hunk<cr>', desc = 'Prev Hunk' },
-    { '<leader>gl', ':lua Snacks.picker.git_log_line()<cr>', desc = 'Git Log Line' },
-    { '<leader>gL', ':lua Snacks.picker.git_log()<cr>', desc = 'Git Log' },
     { '<leader>go', group = 'Octohub' },
     { '<leader>gp', ':Git pull<cr>', desc = 'Pull' },
     { '<leader>gr', ':Gitsigns reset_hunk<cr>', desc = 'Reset Hunk' },
-    { '<leader>gs', ':lua Snacks.picker.git_branches()<cr>', desc = 'Git Branches' },
-    { '<leader>gS', ':lua Snacks.picker.git_stash()<cr>', desc = 'Git Stash' },
     { '<leader>gt', group = 'Toggle' },
     { '<leader>gtb', ':Gitsigns toggle_current_line_blame<cr>', desc = 'Blame' },
     { '<leader>gtd', ':Gitsigns toggle_deleted<cr>', desc = 'Deleted' },
@@ -141,18 +145,14 @@ local normal_mappings = {
     { '<leader>i', group = ' Insert' },
     { '<leader>id', ":put =strftime('## %a, %d %b, %Y, %r')<cr>", desc = 'Date' },
     { '<leader>if', ":put =expand('%:t')<cr>", desc = 'File Name' },
-    { '<leader>ii', ':lua Snacks.picker.icons()<cr>', desc = 'Icons' },
     { '<leader>in', ':Nerdy<cr>', desc = 'Nerd Glyphs' },
     { '<leader>ip', ':put %<cr>', desc = 'Relative Path' },
     { '<leader>iP', ':put %:p<cr>', desc = 'Absolute Path' },
-    { '<leader>ir', ':lua Snacks.picker.registers()<cr>', desc = 'Registers' },
     { '<leader>it', ":put =strftime('## %r')<cr>", desc = 'Time' },
-    { '<leader>iv', ':lua Snacks.picker.cliphist()<cr>', desc = 'Clipboard' },
 
     { '<leader>j', group = ' Jump' },
     { '<leader>jc', '*', desc = 'Word' },
     { '<leader>jd', ':FlashDiagnostics<cr>', desc = 'Diagnostics' },
-    { '<leader>jf', ':lua Snacks.picker.jumps()<cr>', desc = 'Jumps' },
     { '<leader>jh', '<C-o>', desc = 'Backward' },
     { '<leader>jj', ":lua require('flash').remote()<cr>", desc = 'Remote' },
     { '<leader>jk', ":lua require('flash').treesitter()<cr>", desc = 'Treesitter' },
@@ -179,24 +179,17 @@ local normal_mappings = {
     { '<leader>l', group = ' LSP' },
     { '<leader>la', ':Lspsaga code_action<cr>', desc = 'Code Action' },
     { '<leader>ld', ':Lspsaga goto_definition<cr>', desc = 'Goto Definition' },
-    { '<leader>lD', ':Lspsaga peek_definition<cr>', desc = 'Peek Definition' },
     { '<leader>lf', ':Lspsaga finder<cr>', desc = 'Finder' },
-    { '<leader>lF', ':lua Snacks.picker.lsp_references()<cr>', desc = 'References' },
     { '<leader>lh', ':Lspsaga hover_doc<cr>', desc = 'Hover' },
-    { '<leader>li', ':lua Snacks.picker.lsp_implementations()<cr>', desc = 'Goto Implementation' },
     { '<leader>lI', ':LspInfo<cr>', desc = 'LSP Info' },
     { '<leader>lj', ':Lspsaga diagnostic_jump_next<cr>', desc = 'Next Diagnostic' },
-    { '<leader>ll', ':lua Snacks.picker.diagnostics_buffer()<cr>', desc = 'Buffer Diagnostics' },
-    { '<leader>lL', ':lua Snacks.picker.diagnostics()<cr>', desc = 'Diagnostics' },
     { '<leader>lk', ':Lspsaga diagnostic_jump_prev<cr>', desc = 'Prev Diagnostic' },
     { '<leader>lo', ':Lspsaga outline<cr>', desc = 'Outline' },
-    { '<leader>lp', ':lua Snacks.picker.lsp_declarations()<cr>', desc = 'Goto Definition' },
+    { '<leader>lp', ':Lspsaga peek_definition<cr>', desc = 'Peek Definition' },
     { '<leader>lq', ':LspStop<cr>', desc = 'Stop LSP' },
     { '<leader>lQ', ':LspRestart<cr>', desc = 'Restart LSP' },
     { '<leader>lr', ':Lspsaga rename<cr>', desc = 'Rename' },
     { '<leader>lR', ':Lspsaga project_replace<cr>', desc = 'Replace' },
-    { '<leader>ls', ':lua Snacks.picker.lsp_symbols()<cr>', desc = 'Symbols' },
-    { '<leader>lS', ':lua Snacks.picker.lsp_workspace_symbols()<cr>', desc = 'Workspace Symbols' },
     { '<leader>lt', ':Lspsaga goto_type_definition<cr>', desc = 'Goto Type Definition' },
     { '<leader>lT', ':Lspsaga peek_type_definition<cr>', desc = 'Peek Type Definition' },
 
@@ -219,8 +212,6 @@ local normal_mappings = {
     { '<leader>mj', ":lua require('markit').next()<cr>", desc = 'Next' },
     { '<leader>mk', ":lua require('markit').prev()<cr>", desc = 'Previous' },
     { '<leader>ml', ":lua require('markit').next_bookmark()<cr>", desc = 'Next Bookmark' },
-    --   { '<leader>mm', ':Telescope markit<cr>', desc = 'All Marks' },
-    { '<leader>mm', ':lua Snacks.picker.marks()<cr>', desc = 'Marks' },
     { '<leader>mn', group = 'Next Bookmark In Group' },
     { '<leader>mp', group = 'Previous Bookmark In Group' },
     { '<leader>mP', ":lua require('markit').preview()<cr>", desc = 'Preview' },
@@ -228,19 +219,11 @@ local normal_mappings = {
     { '<leader>mt', ":lua require('markit').toggle()<cr>", desc = 'Toggle' },
     { '<leader>mx', ":lua require('markit').delete_bookmark()<cr>", desc = 'Delete Bookmark' },
 
+
     { '<leader>o', group = ' Options' },
-    { '<leader>oa', ':lua Snacks.picker.autocmds()<cr>', desc = 'Autocmds' },
-    { '<leader>oc', ':lua Snacks.picker.command_history()<cr>', desc = 'Command History' },
-    { '<leader>od', ':lua Snacks.picker.help()<cr>', desc = 'Docs' },
-    { '<leader>og', ':lua Snacks.picker.commands()<cr>', desc = 'Commands' },
-    { '<leader>oh', ':lua Snacks.picker.highlights()<cr>', desc = 'Highlights' },
     { '<leader>oi', 'vim.show_pos', desc = 'Inspect Position' },
-    { '<leader>ok', ':lua Snacks.picker.keymaps()<cr>', desc = 'Keymaps' },
-    { '<leader>om', ':lua Snacks.picker.man()<cr>', desc = 'Man Pages' },
-    { '<leader>on', ':lua Snacks.picker.notifications()<cr>', desc = 'Notification History' },
+    { '<leader>oN', ':lua Snacks.notifier.show_history()<cr>', desc = 'Notification History' },
     { '<leader>or', ':set relativenumber!<cr>', desc = 'Relative Numbers' },
-    { '<leader>os', ':lua Snacks.picker.search_history()<cr>', desc = 'Search History' },
-    { '<leader>ot', ':lua Snacks.picker.colorschemes()<cr>', desc = 'Colorschemes' },
 
     { '<leader>p', group = ' Packages' },
     { '<leader>pc', ':Lazy check<cr>', desc = 'Check' },
@@ -257,7 +240,6 @@ local normal_mappings = {
     { '<leader>pt', ':lua require("snacks").profiler.toggle()<cr>', desc = 'Profiler Toggle' },
     { '<leader>pu', ':Lazy update<cr>', desc = 'Update' },
     { '<leader>px', ':Lazy clean<cr>', desc = 'Clean' },
-    { '<leader>pS', ':lua Snacks.picker.lazy()<cr>', desc = 'Search for Plugin Spec' },
 
     { '<leader>q', group = ' Quit' },
     { '<leader>qa', ':qall<cr>', desc = 'Quit All' },
@@ -270,14 +252,8 @@ local normal_mappings = {
     { '<leader>qw', ':wq<cr>', desc = 'Write and Quit' },
 
     { '<leader>r', group = ' Refactor' },
+    { '<leader>ra', ":lua require('spectre').open()<cr>", desc = 'Replace All' },
     { '<leader>rb', ":lua require('spectre').open_file_search()<cr>", desc = 'Replace Buffer' },
-    { '<leader>re', ":lua require('refactoring').refactor('Extract Block')<cr>", desc = 'Extract Block' },
-    { '<leader>ri', ":lua require('refactoring').refactor('Inline Variable')<cr>", desc = 'Inline Variable' },
-    { '<leader>rs', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Replace Word' },
-    { '<leader>rS', ":lua require('spectre').open()<cr>", desc = 'Replace' },
-    { '<leader>rt', ':lua Snacks.picker.treesitter()<cr>', desc = 'Treesitter Find' },
-    { '<leader>rv', ":lua require('refactoring').refactor('Extract Variable')<cr>", desc = 'Extract Variable' },
-    { '<leader>rw', ":lua require('spectre').open_visual({select_word=true})<cr>", desc = 'Replace Word' },
     { '<leader>rd', '', desc = 'Go To Definition' }, -- treesitter navigation
     { '<leader>rh', '', desc = 'List Definition Head' },
     { '<leader>rj', '', desc = 'Next Usage' },
@@ -286,11 +262,8 @@ local normal_mappings = {
     { '<leader>rn', '', desc = 'Swap Next' },
     { '<leader>rp', '', desc = 'Swap Previous' },
     { '<leader>rr', '', desc = 'Smart Rename' },
-    {
-        '<leader>rf',
-        ":lua require('refactoring').refactor('Extract Block To File')<cr>",
-        desc = 'Extract To File',
-    },
+    { '<leader>rs', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Replace Word Buffer' },
+    { '<leader>rw', ":lua require('spectre').open_visual({select_word=true})<cr>", desc = 'Replace Word Everywhere' },
 
     { '<leader>s', group = ' Split' },
     { '<leader>s+', ':resize +10<cr>', desc = 'Increase window height' },
@@ -330,7 +303,6 @@ local normal_mappings = {
     { '<leader>wj', ']s', desc = 'Next Misspell' },
     { '<leader>wk', '[s', desc = 'Prev Misspell' },
     { '<leader>wn', ':WriteNoFormat<cr>', desc = 'Write Without Formatting' },
-    { '<leader>ws', ':lua Snacks.picker.spelling()<cr>', desc = 'Spell Suggestions' },
     { '<leader>wq', ':wq<cr>', desc = 'Write and Quit' },
     { '<leader>ww', ':w<cr>', desc = 'Write' },
     { '<leader>wz', ':lua require("snacks").zen.zen()<cr>', desc = 'Zen' },
@@ -347,54 +319,53 @@ local normal_mappings = {
 }
 
 -- Numerical mappings
-
 for i = 1, 9 do
     table.insert(normal_mappings, {
         string.format('<leader>n%d', i),
-        string.format('<cmd>Tdo %d<cr>', i),
+        string.format(':Tdo %d<cr>', i),
         desc = string.format('Todo %d Days In Future', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>np%d', i),
-        string.format('<cmd>Tdo -%d<cr>', i),
+        string.format(':Tdo -%d<cr>', i),
         desc = string.format('Todo %d Days From Past', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>f%d', i),
-        string.format('<cmd>LualineBuffersJump%d<cr>', i),
+        string.format(':LualineBuffersJump%d<cr>', i),
         desc = string.format('File %d', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>m%d', i),
-        string.format('<cmd>lua require("markit").toggle_bookmark%d()<cr>', i),
+        string.format(':lua require("markit").toggle_bookmark%d()<cr>', i),
         desc = string.format('Toggle Group %d Bookmark', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>mp%d', i),
-        string.format('<cmd>lua require("markit").prev_bookmark%d()<cr>', i),
+        string.format(':lua require("markit").prev_bookmark%d()<cr>', i),
         desc = string.format('Previous Group %d Bookmarks', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>mn%d', i),
-        string.format('<cmd>lua require("markit").next_bookmark%d()<cr>', i),
+        string.format(':lua require("markit").next_bookmark%d()<cr>', i),
         desc = string.format('Next Group %d Bookmarks', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>mg%d', i),
-        string.format('<cmd>lua require("telescope").extensions.markit.bookmarks_list_all({group = %d})<cr>', i),
+        string.format(':lua require("telescope").extensions.markit.bookmarks_list_all({group = %d})<cr>', i),
         desc = string.format('Group %d Bookmarks', i),
     })
 
     table.insert(normal_mappings, {
         string.format('<leader>mG%d', i),
         string.format(
-            '<cmd>lua require("telescope").extensions.markit.bookmarks_list_all({group = %d, project_only = true})<cr>',
+            ':lua require("telescope").extensions.markit.bookmarks_list_all({group = %d, project_only = true})<cr>',
             i
         ),
         desc = string.format('Group %d Bookmarks In Project', i),
@@ -403,9 +374,10 @@ end
 
 local visual_mappings = {
     mode = 'v',
+    { '<leader>a', group = ' AI' },
 
     { '<leader>c', group = ' Code' },
-    { '<leader>ce', "<esc><cmd>'<,'>SnipRun<cr>", desc = 'Execute Selection' },
+    { '<leader>ce', "<esc>:'<,'>SnipRun<cr>", desc = 'Execute Selection' },
     { '<leader>cS', ':sort!<cr>', desc = 'Sort Desc' },
     { '<leader>ci', ':sort i<cr>', desc = 'Sort Case Insensitive' },
     { '<leader>cs', ':sort<cr>', desc = 'Sort Asc' },
@@ -449,7 +421,7 @@ local visual_mappings = {
     },
 
     { '<leader>l', group = ' LSP' },
-    { '<leader>la', desc = '<cmd><C-U>Lspsaga range_code_action<CR>' },
+    { '<leader>la', ':<C-U>Lspsaga range_code_action<cr>', desc = 'Code Action' },
 
     { '<leader>p', group = ' ScreenShot' },
     { '<leader>py', '<cmd>CodeSnap<cr>', mode = 'x', desc = 'Save selected code snapshot into clipboard' },
@@ -462,85 +434,66 @@ local visual_mappings = {
     },
     { '<leader>pi', '<cmd>CodeSnapASCII<cr>', mode = 'x', desc = 'Save ASCII code snapshot into clipboard' },
 
-    { '<leader>r', group = ' Refactor' },
-    {
-        '<leader>re',
-        "<esc>:lua require('refactoring').refactor('Extract Function')<cr>",
-        desc = 'Extract Function',
-    },
-    {
-        '<leader>rf',
-        "<esc>:lua require('refactoring').refactor('Extract Function To File')<cr>",
-        desc = 'Extract To File',
-    },
-    { '<leader>ri', "<esc>:lua require('refactoring').refactor('Inline Variable')<cr>", desc = 'Inline Variable' },
-    {
-        '<leader>rv',
-        "<esc>:lua require('refactoring').refactor('Extract Variable')<cr>",
-        desc = 'Extract Variable',
-    },
+
 
     { '<leader>y', group = ' Yank' },
-    { '<leader>yg', '<cmd>lua require"gitlinker".get_buf_range_url("v")<cr>', desc = 'Copy Git URL' },
+    { '<leader>yg', ':lua require"gitlinker".get_buf_range_url("v")<cr>', desc = 'Copy Git URL' },
 }
 
 local no_leader_mappings = {
     mode = 'n',
-    { '<C-Down>', '<cmd>resize -10<cr>', desc = 'Decrease window height' },
-    { '<C-Left>', '<cmd>vertical resize -10<cr>', desc = 'Decrease window width' },
-    { '<C-Right>', '<cmd>vertical resize +10<cr>', desc = 'Increase window width' },
-    { '<C-Up>', '<cmd>resize +10<cr>', desc = 'Increase window height' },
-    { '<C-f>', '<cmd>Telescope find_files<cr>', desc = 'Find Files' },
-    { '<C-g>', '<cmd>Fterm lazygit<cr>', desc = 'Lazygit' },
+    { '<C-Down>', ':resize -10<cr>', desc = 'Decrease window height' },
+    { '<C-Left>', ':vertical resize -10<cr>', desc = 'Decrease window width' },
+    { '<C-Right>', ':vertical resize +10<cr>', desc = 'Increase window width' },
+    { '<C-Up>', ':resize +10<cr>', desc = 'Increase window height' },
+    { '<C-g>', ':Fterm lazygit<cr>', desc = 'Lazygit' },
 
-    { '<C-h>', '<C-w>h', desc = 'Move Left' },
-    { '<C-j>', '<C-w>j', desc = 'Move Down' },
-    { '<C-k>', '<C-w>k', desc = 'Move Up' },
-    { '<C-l>', '<C-w>l', desc = 'Move Right' },
-    { '<C-\\>', '<C-w>p', desc = 'Previous Pane' },
-    { '<S-tab>', '<cmd>bprevious<cr>', desc = 'Previous Buffer' },
-    { '<tab>', '<cmd>bnext<cr>', desc = 'Next Buffer' },
-    { '<S-h>', '<cmd>bprevious<cr>', desc = 'Previous Buffer' },
-    { '<S-l>', '<cmd>bnext<cr>', desc = 'Next Buffer' },
-
-    { 'K', '<cmd>Lspsaga hover_doc<cr>', desc = 'LSP Hover' },
-    { 'Q', '<cmd>qall!<cr>', desc = 'Force Quit!' },
-    { 'U', '<cmd>redo<cr>', desc = 'Redo' },
-
-    { '[', group = ' Previous' },
-    { '[g', '<cmd>Gitsigns prev_hunk<cr>', desc = 'Git Hunk' },
-    { '[o', group = 'Textobjects' },
-
-    { ']', group = ' Next' },
-    { ']g', '<cmd>Gitsigns next_hunk<cr>', desc = 'Git Hunk' },
-    { ']o', group = 'Textobjects' },
-}
-
-local tmux_mappings = {
     { '<C-h>', ':NavigatorLeft<cr>', desc = 'Move Left' },
     { '<C-j>', ':NavigatorDown<cr>', desc = 'Move Down' },
     { '<C-k>', ':NavigatorUp<cr>', desc = 'Move Up' },
     { '<C-l>', ':NavigatorRight<cr>', desc = 'Move Right' },
     { '<C-\\>', ':NavigatorPrevious<cr>', desc = 'Previous Pane' },
+
+    { '<S-h>', ':bprevious<cr>', desc = 'Previous Buffer' },
+    { '<S-l>', ':bnext<cr>', desc = 'Next Buffer' },
+    { '<Tab>', ':bprevious<cr>', desc = 'Previous Buffer' },
+    { '<S-Tab>', ':bnext<cr>', desc = 'Next Buffer' },
+
+    { 'K', ':Lspsaga hover_doc<cr>', desc = 'LSP Hover' },
+    { 'Q', ':qall!<cr>', desc = 'Force Quit!' },
+    { 'U', ':redo<cr>', desc = 'Redo' },
+
+    { '[', group = ' Previous' },
+    { '[g', ':Gitsigns prev_hunk<cr>', desc = 'Git Hunk' },
+    { '[o', group = 'Textobjects' },
+
+    { ']', group = ' Next' },
+    { ']g', ':Gitsigns next_hunk<cr>', desc = 'Git Hunk' },
+    { ']o', group = 'Textobjects' },
+
+    { 'gd', ':Lspsaga goto_definition<cr>', desc = 'Goto Definition' },
 }
 
-if vim.fn.exists('$TMUX') == 1 then
-    vim.tbl_extend('force', no_leader_mappings, tmux_mappings)
-end
+which_key.setup(setup)
+which_key.add(normal_mappings)
+which_key.add(visual_mappings)
+which_key.add(no_leader_mappings)
 
 if util.get_user_config('enable_test_runner', false) then
     local test_runner_bindings = {
+        mode = 'n',
         { '<leader>u', group = ' Test' },
         { '<leader>uc', ':lua require("neotest").run.run()<cr>', desc = 'Run Current Test' },
         { '<leader>uf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', desc = 'Run Test File' },
         { '<leader>uo', ':Neotest output-panel<cr>', desc = 'Test Output' },
         { '<leader>us', ':Neotest summary<cr>', desc = 'Test Summary' },
     }
-    vim.tbl_extend('force', normal_mappings, test_runner_bindings)
+    which_key.add(test_runner_bindings)
 end
 
 if util.get_user_config('enable_db_explorer', false) then
     local db_explorer_bindings = {
+        mode = 'n',
         { '<leader>d', group = ' Database' },
         { '<leader>dS', ':lua require("dbee").store("json", "buffer", { extra_arg = 0 })<cr>', desc = 'To JSON' },
         { '<leader>db', ':DBToggle<cr>', desc = 'DB Explorer' },
@@ -549,11 +502,12 @@ if util.get_user_config('enable_db_explorer', false) then
         { '<leader>ds', ':lua require("dbee").store("csv", "buffer", { extra_arg = 0 })<cr>', desc = 'To CSV' },
         { '<leader>dt', ':lua require("dbee").store("table", "buffer", { extra_arg = 0 })<cr>', desc = 'To Table' },
     }
-    vim.tbl_extend('force', normal_mappings, db_explorer_bindings)
+    which_key.add(db_explorer_bindings)
 end
 
 if util.get_user_config('enable_debugger', false) then
     local debugger_bindings = {
+        mode = 'n',
         { '<leader>b', group = ' Debug' },
         { '<leader>bO', ':DapStepOut<cr>', desc = 'Out' },
         { '<leader>bR', ':DapRestartFrame<cr>', desc = 'Restart Frame' },
@@ -566,13 +520,8 @@ if util.get_user_config('enable_debugger', false) then
         { '<leader>bt', ':DapUIToggle<cr>', desc = 'Debugger' },
         { '<leader>bx', ':DapTerminate<cr>', desc = 'Exit' },
     }
-    vim.tbl_extend('force', normal_mappings, debugger_bindings)
+    which_key.add(debugger_bindings)
 end
 
 local user_keybindings = require('lib.util').get_user_config('user_keybindings', {})
-
-which_key.setup(setup)
-which_key.add(normal_mappings)
-which_key.add(visual_mappings)
-which_key.add(no_leader_mappings)
 which_key.add(user_keybindings)
