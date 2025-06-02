@@ -4,6 +4,12 @@
 
 <h3>Your Personalized Dev Env ❤️👨‍💻</h3>
 
+<figure>
+  <img src= "assets/screenshot.png" alt="keycodex Demo">
+  <br/>
+  <figcaption>keycodex screenshot</figcaption>
+</figure>
+
 </div>
 
 Handcrafted Neovim setup for the ultimate CLI dev experience.
