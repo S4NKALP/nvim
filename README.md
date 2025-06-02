@@ -1,93 +1,123 @@
-<p align="center">
-  <img src="assets/screenshot.png" alt="screenshot">
-</p>
+<div align = "center">
 
-<h1 align="center">NEOVIM</h1>
+<h1><a href="https://S4NKALP.github.io/keycodex">keycodex</a></h1>
 
-<p align="center">
+<h3>Your Personalized Dev Env ❤️👨‍💻</h3>
 
- <a href="https://github.com/S4NKALP/nvim/graphs/contributors">
-<img alt="People" src="https://img.shields.io/github/contributors/S4NKALP/nvim?style=flat&color=ffaaf2&label=People"> </a>
-
-<a href="https://github.com/S4NKALP/nvim/stargazers">
-<img alt="Stars" src="https://img.shields.io/github/stars/S4NKALP/nvim?style=flat&color=98c379&label=Stars"></a>
-
-<a href="https://github.com/S4NKALP/nvim/network/members">
-<img alt="Forks" src="https://img.shields.io/github/forks/S4NKALP/nvim?style=flat&color=66a8e0&label=Forks"> </a>
-
-<a href="https://github.com/S4NKALP/nvim/watchers">
-<img alt="Watches" src="https://img.shields.io/github/watchers/S4NKALP/nvim?style=flat&color=f5d08b&label=Watches"> </a>
-
-<a href="https://github.com/S4NKALP/nvim/pulse">
-<img alt="Last Updated" src="https://img.shields.io/github/last-commit/S4NKALP/nvim?style=flat&color=e06c75&label="> </a>
-</p>
-
-<p align="center">
-  <strong>Welcome to my personalized Neovim setup 👨‍💻</strong>
-  <br>
-    Optimized for a smooth and efficient coding experience.
-  <br>
-  <br>
-  <a href="https://github.com/S4NKALP/nvim/wiki">Documentation</a>
-  ·
-  <a href="https://github.com/S4NKALP/nvim/issues">Report a Bug</a>
-  ·
-  <a href="https://github.com/S4NKALP/nvim/issues">Request a Feature</a>
-</p>
-
-<br>
-
-## Highlights
-
-- **Modular Structure**: Organized Lua scripts for readability and easy customization.
-- **Language Support**: Automated setup for various languages using Mason.nvim.
-- **Keybindings**: Streamlined shortcuts for productivity, detailed in `lua/plugins/tools/whichkey.lua`.
-- **Plugins**: Handpicked plugins managed via Lazy.nvim for enhanced functionality.
-
-## System dependencies
-
-Important system dependencies:
-
-- **Nerd fonts**
-
-  - Download a [Nerd Font](https://www.nerdfonts.com/) (good choice is "JetBrainsMono Nerd Font").
-  - Unzip and copy to '~/.local/share/fonts'.
-  - Run the command `fc-cache -fv` to manually rebuild the font cache.
-
-- **Tools for finding stuff**:
-  - [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
-
-## Installation
-
-Delete old nvim configuration
-
-```bash
-rm -rf ~/.config/nvim
-rm -rf ~/.local/state/nvim
-rm -rf ~/.local/share/nvim
-```
-
-Clone the repository to ~/.config
-
-```bash
-git clone --filter=blob:none https://github.com/S4NKALP/nvim.git ~/.config/nvim
-```
-
-Run neovim to complete the setup
-
-```bash
-nvim
-```
-
-### Customization
-
-Feel free to modify and adapt my configuration to your own needs!
-
-### 🧰 Tools Used
-
-- [dots](https://github.com/S4NKALP/hyprland) — Dev Environment
-- [nvim](https://github.com/S4NKALP/nvim) — Personalized Editor
-
-<div align="center">
-    <strong>⭐ hit the star button if you found this useful ⭐</strong><br>
 </div>
+
+Handcrafted Neovim setup for the ultimate CLI dev experience.
+
+## ✨ Features
+
+- **Fully configured LSP**: Out of the box LSP and completions, including Copilot (optional)
+- **Awesome keybindings**: Intuitive and well documented keybindings with which-key
+- **Blazingly fast**: Starts up in less than 30ms thanks to extensive lazy loading
+- **Batteries included**: Has all the necessary plugins included out of the box
+- **Git in there**: Powerful git integrations thanks to lazygit, fugitive, gitsigns and more
+- **Pretty colors**: Comes with treesitter and onedark preconfigured with full transparency support
+- **Tmux integration**: Works with your tmux configurations out of the box
+- **Dev tools**: Comes with debugging, testing, database and REPL support, pick and choose
+- **Auto install**: All necessary LSPs, Null LS sources, Treesitter Parsers etc. are auto installed
+- **User module**: Configure keycodex according to your needs by using the `user` module!
+- and some more
+
+Most importantly:
+
+**Built for extending**: keycodex has a easy to understand config structure that promotes personalization, so go ahead, bring your keybindings, functions and plugins over, and truly make **keycodex: Your Personalized Development Environment!**
+
+## ⚡ Setup
+
+### ⚙️ Requirements
+
+Before you begin, ensure you have met the following requirements:
+
+- You have installed the latest version of `neovim`
+- Some command line tools: fd, ripgrep
+
+### 💻 Installation
+
+To install `keycodex` clone the repo and setup the symlink
+
+```bash
+git clone https://github.com/S4NKALP/keycodex
+```
+
+On Linux and Mac
+
+```bash
+ln -sfnv $PWD/keycodex $HOME/.config/nvim
+```
+
+On Windows Powershell
+
+```powershell
+New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$PWD\keycodex" -Force
+```
+
+## 🚀 Usage
+
+### 🎨 User Configs
+
+`keycodex` supports a user module where you can store your custom configs and override any default configs.
+
+To use custom configs create the file `lua/user/init.lua` in keycodex, with the following structure:
+
+```lua
+-- lua/user/init.lua
+local user = {
+    auto_install = true, -- enable auto install of LSPs, Treesitter parsers etc.
+    user_lsp_servers = {
+        -- Auto installed LSPs defined by user
+    },
+    user_null_ls_sources = {
+        -- Auto installed Null LS sources defined by user
+    },
+    user_treesitter_parsers = {
+        -- Auto installed Treesitter parsers defined by user
+    },
+
+    enable_db_explorer = false, -- enable dbee.nvim support
+    enable_debugger = false, -- enable dap.nvim support
+    enable_test_runner = false, -- enable neotest.nvim support
+    enable_trainer = false, -- enable hardtime.nvim support
+    user_plugins = {
+        -- Add your lazy plugin spec here
+    },
+
+    user_keybindings = {
+        -- Add your which-key bindings here
+    }
+}
+
+return user
+```
+
+You can add and `require` any other custom modules and configurations you want in this file.
+
+`user` module is not part of the repo, you can set up `user` module as a separate git repository while continuing to receive `keycodex` updates.
+
+### Core
+
+Files in [lua/core](./lua/core/) control the core of neovim:
+
+- [options](./lua/core/options.lua),
+- [functions](./lua/core/functions.lua)
+- [autocmds](./lua/core/autocmd.lua)
+- [core keybindings](./lua/core/keys.lua)
+
+### ⌨️ Keybindings
+
+Apart from [core/keys](./lua/core/keys.lua) most keybindings are configured using [which-key](./lua/plugins/tools/which-key.lua)
+
+### 📦 Plugins
+
+You can check out the [plugins list file](./lua/plugins/list.lua) file to see the plugins that are included in keycodex.
+
+- [lang](./lua/plugins/lang/): Plugins related to language features, completions, lsp, editing etc.
+- [tools](./lua/plugins/tools/): Plugins that add tool integrations to the editor.
+- [ui](./lua/plugins/ui/): Plugins that make improve Neovim user experience.
+
+## 🙏 Acknowledgments
+
+This project builds upon [nvim2k](https://github.com/2KAbhishek/nvim2k) by [2KAbhishek](https://github.com/2KAbhishek/), enhancing it with additional features and optimizations.
