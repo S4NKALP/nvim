@@ -242,8 +242,9 @@ local plugins = {
     },
     {
         'iamcco/markdown-preview.nvim',
-        build = function()
-            vim.fn['mkdp#util#install']()
+        build = 'cd app && yarn install',
+        init = function()
+            vim.g.mkdp_filetypes = { 'markdown' }
         end,
         ft = 'markdown',
         cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview' },
