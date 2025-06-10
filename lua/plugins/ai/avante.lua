@@ -13,32 +13,38 @@ local model_names = {
     'o4-mini',
 }
 
+-- Generate provider configurations for each model
+local function generate_providers()
+    local providers_table = {}
+    for _, model_name in ipairs(model_names) do
+        local provider_key = 'copilot-' .. model_name
+        providers_table[provider_key] = {
+            __inherited_from = 'copilot',
+            model = model_name,
+            display_name = provider_key,
+        }
+    end
+    return providers_table
+end
+
 avante.setup({
     mode = 'agentic',
     provider = 'copilot-claude-3.5-sonnet',
     -- cursor_applying_provider = 'copilot-o3-mini',
     -- auto_suggestions_provider = 'copilot-claude-3.7-sonnet',
-    copilot = {
-        endpoint = 'https://api.githubcopilot.com',
-        allow_insecure = false,
-        timeout = 10 * 60 * 1000,
-        temperature = 0,
-        max_completion_tokens = 1000000,
-        reasoning_effort = 'high',
-    },
 
-    vendors = (function()
-        local vendors_table = {}
-        for _, model_name in ipairs(model_names) do
-            local vendor_key = 'copilot-' .. model_name
-            vendors_table[vendor_key] = {
-                __inherited_from = 'copilot',
-                model = model_name,
-                display_name = vendor_key,
-            }
-        end
-        return vendors_table
-    end)(),
+    providers = vim.tbl_extend('force', {
+        copilot = {
+            endpoint = 'https://api.githubcopilot.com',
+            allow_insecure = false,
+            timeout = 10 * 60 * 1000,
+            extra_request_body = {
+                temperature = 0,
+            },
+            max_completion_tokens = 1000000,
+            reasoning_effort = 'high',
+        },
+    }, generate_providers()),
 
     behaviour = {
         auto_suggestions = false,
