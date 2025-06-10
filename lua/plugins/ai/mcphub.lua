@@ -27,7 +27,7 @@ mcphub.setup({
     on_ready = function(hub) end,
     on_error = function(err) end,
 
-    use_bundled_binary = false,
+    use_bundled_binary = true,
 
     -- server_url = nil, -- defaults to `http://localhost:port`
     shutdown_delay = 600000, -- 10 minutes
