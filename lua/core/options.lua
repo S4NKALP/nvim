@@ -21,7 +21,7 @@ local options = {
     inccommand = 'split', -- preview incremental substitute
     laststatus = 3,
     list = true,
-    listchars = { trail = '', tab = '', nbsp = '_', extends = '>', precedes = '<' }, -- highlight
+    -- listchars = { trail = '', tab = '', nbsp = '_', extends = '>', precedes = '<' }, -- highlight
     mouse = 'a', -- allow the mouse to be used in neovim
     number = true, -- set numbered lines
     numberwidth = 4, -- set number column width to 2 {default 4}
