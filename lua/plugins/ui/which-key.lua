@@ -4,7 +4,7 @@ local util = require('lib.util')
 local prompts = require('lib.prompts')
 
 local setup = {
-    preset = 'modern',
+    preset = 'helix',
     plugins = {
         marks = true,
         registers = true,
@@ -30,24 +30,6 @@ local setup = {
             Space = icons.ui.Rocket,
         },
         rules = false, -- enable auto icon rules
-    },
-    win = {
-        no_overlap = true,
-        border = 'rounded',
-        width = 0.8,
-        height = { min = 5, max = 25 },
-        padding = { 1, 2 },
-        title = true,
-        title_pos = 'center',
-        zindex = 1000,
-        wo = {
-            winblend = 10,
-        },
-    },
-    layout = {
-        width = { min = 20 },
-        spacing = 6,
-        align = 'center',
     },
     show_help = false,
     show_keys = true,
@@ -145,7 +127,6 @@ local normal_mappings = {
     { '<leader>i', group = ' Insert' },
     { '<leader>id', ":put =strftime('## %a, %d %b, %Y, %r')<cr>", desc = 'Date' },
     { '<leader>if', ":put =expand('%:t')<cr>", desc = 'File Name' },
-    { '<leader>in', ':Nerdy<cr>', desc = 'Nerd Glyphs' },
     { '<leader>ip', ':put %<cr>', desc = 'Relative Path' },
     { '<leader>iP', ':put %:p<cr>', desc = 'Absolute Path' },
     { '<leader>it', ":put =strftime('## %r')<cr>", desc = 'Time' },
@@ -218,7 +199,6 @@ local normal_mappings = {
     { '<leader>ms', ":lua require('markit').set_next()<cr>", desc = 'Set Next' },
     { '<leader>mt', ":lua require('markit').toggle()<cr>", desc = 'Toggle' },
     { '<leader>mx', ":lua require('markit').delete_bookmark()<cr>", desc = 'Delete Bookmark' },
-
 
     { '<leader>o', group = ' Options' },
     { '<leader>oi', 'vim.show_pos', desc = 'Inspect Position' },
@@ -433,8 +413,6 @@ local visual_mappings = {
         desc = 'Highlight and snapshot selected code into clipboard',
     },
     { '<leader>pi', '<cmd>CodeSnapASCII<cr>', mode = 'x', desc = 'Save ASCII code snapshot into clipboard' },
-
-
 
     { '<leader>y', group = ' Yank' },
     { '<leader>yg', ':lua require"gitlinker".get_buf_range_url("v")<cr>', desc = 'Copy Git URL' },
