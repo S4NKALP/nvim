@@ -12,9 +12,16 @@ local default_setup = function(server)
     if server == 'tailwindcss' then
         lspconfig[server].setup({
             capabilities = capabilities,
-            filetypes = { 
-                'html', 'css', 'scss', 'javascript', 'javascriptreact', 
-                'typescript', 'typescriptreact', 'vue', 'svelte'
+            filetypes = {
+                'html',
+                'css',
+                'scss',
+                'javascript',
+                'javascriptreact',
+                'typescript',
+                'typescriptreact',
+                'vue',
+                'svelte',
             },
             init_options = {
                 userLanguages = {

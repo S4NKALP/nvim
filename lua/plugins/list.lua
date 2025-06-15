@@ -169,7 +169,7 @@ local plugins = {
         'ravitemer/mcphub.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
         cmd = 'MCPHub',
-        -- build = "npm install -g mcp-hub@latest", -- use this if you want to use the global mcp-hub
+        -- build = 'npm install -g mcp-hub@latest', -- use this if you want to use the global mcp-hub
         build = 'bundled_build.lua',
         config = load_config('ai.mcphub'),
     },
@@ -234,6 +234,23 @@ local plugins = {
                 desc = 'Flash Treesitter',
             },
         },
+    },
+    {
+        'gbprod/substitute.nvim',
+        event = { 'BufReadPre', 'BufNewFile' },
+        config = function()
+            local substitute = require('substitute')
+
+            substitute.setup()
+
+            -- set keymaps
+            local keymap = vim.keymap -- for conciseness
+
+            keymap.set('n', 's', substitute.operator, { desc = 'Substitute with motion' })
+            keymap.set('n', 'ss', substitute.line, { desc = 'Substitute line' })
+            keymap.set('n', 'S', substitute.eol, { desc = 'Substitute to end of line' })
+            keymap.set('x', 's', substitute.visual, { desc = 'Substitute in visual mode' })
+        end,
     },
     {
         'numToStr/Navigator.nvim',

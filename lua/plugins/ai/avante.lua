@@ -32,7 +32,7 @@ avante.setup({
     provider = 'copilot-claude-3.5-sonnet',
     -- cursor_applying_provider = 'copilot-o3-mini',
     -- auto_suggestions_provider = 'copilot-claude-3.7-sonnet',
-
+    
     providers = vim.tbl_extend('force', {
         copilot = {
             endpoint = 'https://api.githubcopilot.com',
@@ -43,7 +43,7 @@ avante.setup({
             },
             max_completion_tokens = 1000000,
             reasoning_effort = 'high',
-        },
+        }
     }, generate_providers()),
 
     behaviour = {

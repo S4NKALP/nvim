@@ -59,7 +59,7 @@ Snacks.setup({
     bigfile = {
         enabled = true,
         notify = true,
-        size = 100 * 1024, -- 100 KB
+        size = 1000 * 1024, -- 1 MB instead of 100 KB
     },
     bufdelete = { enabled = true },
     dashboard = {
@@ -288,7 +288,7 @@ Snacks.setup({
     },
     scroll = { enabled = false },
     statuscolumn = {
-        enabled = true,
+        enabled = false, -- Change this to false
         left = { 'mark', 'sign' },
         right = { 'fold', 'git' },
         folds = {

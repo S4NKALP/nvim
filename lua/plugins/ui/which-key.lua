@@ -434,8 +434,8 @@ local no_leader_mappings = {
 
     { '<S-h>', ':bprevious<cr>', desc = 'Previous Buffer' },
     { '<S-l>', ':bnext<cr>', desc = 'Next Buffer' },
-    { '<Tab>', ':bprevious<cr>', desc = 'Previous Buffer' },
-    { '<S-Tab>', ':bnext<cr>', desc = 'Next Buffer' },
+    { '<Tab>', ':bnext<cr>', desc = 'Next Buffer' },
+    { '<S-Tab>', ':bprevious<cr>', desc = 'Previous Buffer' },
 
     { 'K', ':Lspsaga hover_doc<cr>', desc = 'LSP Hover' },
     { 'Q', ':qall!<cr>', desc = 'Force Quit!' },
